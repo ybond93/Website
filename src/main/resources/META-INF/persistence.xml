@@ -5,6 +5,5 @@
              version="3.0">
   <persistence-unit name="default">
     <jta-data-source>jdbc/Restaurang</jta-data-source>
-
   </persistence-unit>
 </persistence>
