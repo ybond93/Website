@@ -10,6 +10,7 @@
   <name>Website</name>
   <packaging>war</packaging>
 
+
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>11</maven.compiler.target>
@@ -44,5 +45,6 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>3.4.0</version>
       </plugin>    </plugins>
+
   </build>
 </project>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Admin Page</title>
+    <!-- Add your CSS links here -->
+    <style type="">
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px 40px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .content {
+            padding-left: 40px;
+            padding-bottom: 40px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        /* Add more styles as needed */
+    </style>
+</h:head>
+<h:body>
+    <h1>Admin Dashboard</h1>
+    <div class="content">
+        <!-- Menu items that have been added -->
+        <h2>Menu items</h2>
+        <!-- <h:outputLabel value="MenuItems"/> -->
+        <h:dataTable value="#{menuItemsBean.menuItems}" var="menuItems">
+            <h:column>#{menuItems.name}</h:column>
+            <h:column>#{menuItems.price}</h:column>
+            <h:column>#{menuItems.type}</h:column>
+            <h:column>#{menuItems.descr}</h:column>
+        </h:dataTable>
+
+        <!-- Form to menu items of the Week -->
+        <h:form id="addLunchForm">
+            <h2>Add Lunches of the Week</h2>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="lunchName" value="Name:" />
+                <h:inputText id="lunchName" value="#{menuItemsBean.menuItem.name}" required="true" />
+
+                <h:outputLabel for="lunchPrice" value="Price:" />
+                <h:inputText id="lunchPrice" value="#{menuItemsBean.menuItem.price}" required="false" />
+
+                <h:outputLabel for="lunchType" value="Type:" />
+                <h:inputText id="lunchType" value="#{menuItemsBean.menuItem.type}" required="false" />
+
+                <h:outputLabel for="lunchDescr" value="Description:" />
+                <h:inputTextarea id="lunchDescr" value="#{menuItemsBean.menuItem.descr}" required="false" />
+
+                <h:outputLabel for="lunchCategory" value="Category:" />
+                <h:inputText id="lunchCategory" value="#{menuItemsBean.menuItem.category}" required="false" />
+            </h:panelGrid>
+            <h:commandButton value="Add Lunch" action="#{menuItemsBean.addMenuItem}" />
+        </h:form>
+
+        <!-- Events that have been added -->
+        <h2>Events</h2>
+        <h:dataTable value="#{eventsBean.events}" var="events">
+            <h:column>#{events.name}</h:column>
+            <h:column>#{events.price}</h:column>
+            <h:column>#{events.eventDate}</h:column>
+            <h:column>#{events.descr}</h:column>
+        </h:dataTable>
+
+        <!-- Form to Add Events -->
+        <h:form id="addEventForm">
+            <h2>Add Event</h2>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="eventName" value="Name:" />
+                <h:inputText id="eventName" value="#{eventsBean.event.name}" required="true" />
+
+                <h:outputLabel for="eventPrice" value="Price:" />
+                <h:inputText id="eventPrice" value="#{eventsBean.event.price}" required="false" />
+
+                <h:outputLabel for="eventDescr" value="Description:" />
+                <h:inputTextarea id="eventDescr" value="#{eventsBean.event.descr}" required="false" />
+
+                <h:outputLabel for="eventDate" value="Date:" />
+                <h:inputTextarea id="eventDate" value="#{eventsBean.event.eventDate}" required="false">
+                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                </h:inputTextarea>
+            </h:panelGrid>
+            <h:commandButton value="Add Event" action="#{eventsBean.addEvent()}" />
+        </h:form>
+
+
+        <!-- Work shifts that have been added -->
+        <h2>Work shifts</h2>
+        <h:dataTable value="#{workShiftsBean.workShifts}" var="work_shifts">
+            <h:column>#{work_shifts.shiftDate}</h:column>
+            <h:column>#{work_shifts.shiftType}</h:column>
+            <h:column>#{work_shifts.shiftStatus}</h:column>
+        </h:dataTable>
+
+        <!-- Form to Add Work Shifts -->
+        <h:form id="addWorkShiftForm">
+            <h2>Add Work Shift</h2>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="shiftType" value="Shift Type:" />
+                <h:selectOneMenu id="shiftType" value="#{workShiftsBean.workShift.shiftType}" required="true">
+                    <f:selectItem itemValue="Morning" itemLabel="Morning" />
+                    <f:selectItem itemValue="Evening" itemLabel="Evening" />
+                </h:selectOneMenu>
+
+                <h:outputLabel for="shiftDate" value="Date:" />
+                <h:inputText id="shiftDate" value="#{workShiftsBean.workShift.shiftDate}" required="true">
+                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                </h:inputText>
+
+                <h:outputLabel for="shiftStatus" value="Status:" />
+                <h:selectOneMenu id="shiftStatus" value="#{workShiftsBean.workShift.shiftStatus}" required="true">
+                    <f:selectItem itemValue="Available" itemLabel="Available" />
+                    <f:selectItem itemValue="Not Available" itemLabel="Not Available" />
+                </h:selectOneMenu>
+            </h:panelGrid>
+            <h:commandButton value="Add Work Shift" action="#{workShiftsBean.addWorkShift()}" />
+        </h:form>
+    </div>
+
+</h:body>
+</html>
