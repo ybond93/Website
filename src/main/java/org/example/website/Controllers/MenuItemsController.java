@@ -1,6 +1,6 @@
 package org.example.website.Controllers;
 
-import org.example.website.Modles.MenuItemsEntity;
+import org.example.website.Models.MenuItemsEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;

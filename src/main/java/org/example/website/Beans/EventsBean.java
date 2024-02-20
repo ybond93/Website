@@ -1,6 +1,6 @@
 package org.example.website.Beans;
 
-import org.example.website.Modles.EventsEntity;
+import org.example.website.Models.EventsEntity;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;

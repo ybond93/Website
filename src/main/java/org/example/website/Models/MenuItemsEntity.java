@@ -1,4 +1,4 @@
-package org.example.website.Modles;
+package org.example.website.Models;
 
 import jakarta.persistence.*;
 

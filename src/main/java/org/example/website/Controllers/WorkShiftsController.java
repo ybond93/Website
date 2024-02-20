@@ -1,6 +1,6 @@
 package org.example.website.Controllers;
 
-import org.example.website.Modles.WorkShiftsEntity;
+import org.example.website.Models.WorkShiftsEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
