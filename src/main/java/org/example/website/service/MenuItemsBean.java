@@ -26,8 +26,6 @@ public class MenuItemsBean implements Serializable {
 
     borttagning och inlägg av arbetspass bör vara @Transactional
      */
-    @PersistenceContext
-    private EntityManager em;
 
     // for fetching
     private List<MenuItemsEntity> menu_items;
