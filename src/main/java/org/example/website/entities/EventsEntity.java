@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 
-
 @NamedQuery(
         name = "EventsEntity.findAll",
         query = "Select l FROM EventsEntity l"

@@ -17,6 +17,7 @@ import java.util.List;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.client.Entity;
 
+
 @Named
 @RequestScoped
 public class ReservationsBean implements Serializable {

@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.example.website.entities.EventsEntity;
+
 import java.util.List;
 
 @Path("/events")
