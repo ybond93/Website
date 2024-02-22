@@ -87,7 +87,6 @@ CREATE TABLE ALACARTE_MENU_ITEMS (
 CREATE TABLE LUNCHES (
                          LUNCH_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                          MENU_ITEM_ID INT NOT NULL,
-                         DATE DATE,
                          DAY VARCHAR(30)
 );
 CREATE TABLE MENU_ITEM_ORDERS (
