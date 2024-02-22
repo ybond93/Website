@@ -90,6 +90,19 @@ CREATE TABLE LUNCHES (
                          DATE DATE,
                          DAY VARCHAR(30)
 );
+CREATE TABLE MENU_ITEM_ORDERS (
+                                  MENU_ITEM_ID INT NOT NULL,
+                                  ORDER_ID INT NOT NULL,
+                                  PRIMARY KEY ( ORDER_ID ,  MENU_ITEM_ID ),
+                                  CONSTRAINT fk_order
+                                      FOREIGN KEY (ORDER_ID)
+                                          REFERENCES ORDERS(ORDER_ID),
+                                  CONSTRAINT fk_menu_item
+                                      FOREIGN KEY (MENU_ITEM_ID)
+                                          REFERENCES MENU_ITEMS(MENU_ITEM_ID)
+
+
+);
 
 
 -- Foreign Key Constraints
@@ -109,7 +122,6 @@ ALTER TABLE ORDERS
     ADD CONSTRAINT orders_fk_2 FOREIGN KEY (TABLE_NUM) REFERENCES TABLES(TABLE_NUM) ON UPDATE CASCADE;
 ALTER TABLE ORDERS
     ADD CONSTRAINT orders_fk_3 FOREIGN KEY (MENU_ITEM_ID) REFERENCES MENU_ITEMS(MENU_ITEM_ID) ON UPDATE CASCADE;
-
 
 
 
