@@ -68,8 +68,8 @@ cookie
                         data-bs-slide-to="3"
                         href="#"
                         class="nav-btn"
-                ><i class="bi bi-moon-stars"></i
-                ></a>
+                ><i class="bi bi-moon-stars"></i>
+                </a>
             </li>
 
 
@@ -87,11 +87,13 @@ cookie
                         <!-- one row contains 12 columns 5 + 7 =12  -->
                         <div class="content col-xl-5 col-md-12">
                             <h1 data-aos="fade-down">Dagens Lunch</h1>
-                            <p data-aos="fade-right" data-aos-delay="300">
-                                Självdagens lunch är grillad kyckling med kryddade grönsaker och citronörtsås.
-                                För vegetarianer finns en fyllig spenat- och fetaostfylld portobellachampinjon
-                                med balsamico. Avsluta måltiden med chokladlavakaka eller en fräsch fruktsallad som efterrätt.
-                            </p>
+                            <h2>Lunches</h2>
+                            <h:dataTable value="#{menuItemsBean.lunchItemsList}" var="lunchItem">
+                                <h:column>#{lunchItem.menuItem.name}</h:column>
+                                <h:column>#{lunchItem.menuItem.price}</h:column>
+                                <h:column>#{lunchItem.menuItem.descr}</h:column>
+                                <h:column>#{lunchItem.day}</h:column>
+                            </h:dataTable>
 
                         </div>
 
