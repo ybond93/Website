@@ -8,7 +8,7 @@ import java.util.Date;
         query = "Select l FROM WorkShiftsEntity l"
 )
 @Entity
-@Table(name = "work_shifts", schema = "restaurang", catalog = "")
+@Table(name = "WORK_SHIFTS", schema = "restaurang", catalog = "")
 public class WorkShiftsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -39,6 +39,10 @@ public class WorkShiftsEntity {
 
     public Date getShiftDate() {
         return shiftDate;
+    }
+
+    public void setShiftDate(java.sql.Date shiftDate) {
+        this.shiftDate = shiftDate;
     }
 
     public void setShiftDate(Date shiftDate) {

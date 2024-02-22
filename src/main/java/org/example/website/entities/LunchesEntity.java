@@ -12,7 +12,7 @@ import java.sql.Date;
         query = "SELECT l FROM LunchesEntity l JOIN FETCH l.menuItem"
 )
 @Entity
-@Table(name = "lunches", schema = "restaurang", catalog = "")
+@Table(name = "LUNCHES", schema = "restaurang", catalog = "")
 public class LunchesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -27,6 +27,15 @@ public class LunchesEntity {
     @OneToOne
     @JoinColumn(name = "menu_item_id", referencedColumnName = "menu_item_id")
     private MenuItemsEntity menuItem;   // Lunches Foreign Key
+
+
+    public int getLunchId() {
+        return lunchId;
+    }
+
+    public void setLunchId(int lunchId) {
+        this.lunchId = lunchId;
+    }
 
     // getting the FK
     public MenuItemsEntity getMenuItem() {
@@ -53,4 +62,5 @@ public class LunchesEntity {
     public void setDay(String day) {
         this.day = day;
     }
+
 }

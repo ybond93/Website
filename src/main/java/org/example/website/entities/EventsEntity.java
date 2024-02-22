@@ -9,7 +9,7 @@ import java.sql.Time;
         query = "Select l FROM EventsEntity l"
 )
 @Entity
-@Table(name = "events", schema = "restaurang", catalog = "")
+@Table(name = "EVENTS", schema = "restaurang", catalog = "")
 public class EventsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -65,6 +65,10 @@ public class EventsEntity {
 
     public Date getEventDate() {
         return eventDate;
+    }
+
+    public void setEventDate(java.sql.Date eventDate) {
+        this.eventDate = eventDate;
     }
 
     public void setEventDate(Date eventDate) {

@@ -13,7 +13,7 @@ import jakarta.persistence.*;
         query = "SELECT a FROM AlacarteMenuItemsEntity a JOIN FETCH a.menuItem WHERE a.category = 'Drink'")
 })
 @Entity
-@Table(name = "alacarte_menu_items", schema = "restaurang", catalog = "")
+@Table(name = "ALACARTE_MENU_ITEMS", schema = "restaurang", catalog = "")
 public class AlacarteMenuItemsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -25,6 +25,15 @@ public class AlacarteMenuItemsEntity {
     @OneToOne
     @JoinColumn(name = "menu_item_id", referencedColumnName = "menu_item_id")
     private MenuItemsEntity menuItem;   // Foreign Key
+
+
+    public int getCarteItemId() {
+        return carteItemId;
+    }
+
+    public void setCarteItemId(int carteItemId) {
+        this.carteItemId = carteItemId;
+    }
 
     // getting the FK
     public MenuItemsEntity getMenuItem() {
@@ -43,4 +52,5 @@ public class AlacarteMenuItemsEntity {
     public void setCategory(String category) {
         this.category = category;
     }
+
 }
