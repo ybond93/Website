@@ -39,7 +39,7 @@ CREATE TABLE LUNCHES (
     DAY VARCHAR(30)
 );
 
-CREATE TABLE A_LA_CARTE_MENU_ITEMS (
+CREATE TABLE ALACARTE_MENU_ITEMS (
     CARTE_ITEM_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     MENU_ITEM_ID INT NOT NULL,
     CATEGORY VARCHAR(40)
@@ -102,7 +102,7 @@ ALTER TABLE MENU_ITEM_ORDERS
 ALTER TABLE LUNCHES
     ADD CONSTRAINT lunches_fk FOREIGN KEY (MENU_ITEM_ID) REFERENCES MENU_ITEMS(MENU_ITEM_ID) ON UPDATE CASCADE;
 
-ALTER TABLE A_LA_CARTE_MENU_ITEMS
+ALTER TABLE ALACARTE_MENU_ITEMS
     ADD CONSTRAINT a_la_carte_fk FOREIGN KEY (MENU_ITEM_ID) REFERENCES MENU_ITEMS(MENU_ITEM_ID) ON UPDATE CASCADE;
 
 ALTER TABLE WORK_SHIFTS
@@ -121,79 +121,95 @@ ALTER TABLE MENU_ITEM_ORDERS
     ADD CONSTRAINT menu_item_orders_fk_2 FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID) ON UPDATE CASCADE;
 
 
--- Inserts for testing purposes
+/*************** Inserts for testing purposes ****************/
 -- -------------------------------------------------------
-INSERT INTO MENU_ITEMS (NAME, PRICE, DESCR) VALUES
-('Classic Cheeseburger', 8.99, 'A juicy beef patty with melted cheese, lettuce, tomato, onions, and pickles on a toasted bun'),
-('Vegetarian Pizza', 12.50, 'Fresh bell peppers, onions, mushrooms, olives, and tomatoes on a classic marinara base with mozzarella'),
-('Spicy Chicken Wings', 7.50,'Ten wings tossed in a fiery buffalo sauce, served with celery sticks and blue cheese dressing'),
-('Tom Yum Soup', 5.99, 'A hot and sour Thai soup with shrimp, mushrooms, lemongrass, and lime leaves'),
-('Caesar Salad', 6.99, 'Crispy romaine lettuce, Parmesan cheese, croutons, and Caesar dressing'),
-('Mushroom Risotto', 11.99, 'Creamy Arborio rice with sautéed mushrooms and a hint of truffle oil'),
-('Fish Tacos', 9.99, 'Grilled white fish, cabbage slaw, and avocado lime dressing in corn tortillas'),
-('Beef Pho', 8.99, 'Vietnamese noodle soup with thinly sliced beef, rice noodles, and herbs'),
-('Falafel Wrap', 7.99, 'Crispy falafel balls, tahini sauce, lettuce, tomatoes, and cucumbers in a pita wrap'),
-('Chocolate Lava Cake', 6.50, 'Warm chocolate cake with a gooey center, served with vanilla ice cream'),
-('Sushi Platter', 14.99, 'An assortment of fresh sushi rolls, including salmon, tuna, and cucumber'),
-('BBQ Pork Ribs', 15.99, 'Slow-cooked ribs smothered in BBQ sauce, served with fries and coleslaw'),
-('Pad Thai', 10.99, 'Stir-fried rice noodles with shrimp, peanuts, egg, and bean sprouts in a tangy sauce'),
-('Quinoa Salad', 8.99, 'Quinoa, arugula, avocado, cherry tomatoes, and feta cheese with a lemon vinaigrette'),
-('Lamb Curry', 13.99, 'Tender lamb pieces in a rich and spicy curry sauce, served with rice'),
-('Chicken Caesar Salad', 10.99, 'Grilled chicken, romaine lettuce, croutons, and Caesar dressing'),
-('Margherita Pizza', 12.99, 'Tomato sauce, mozzarella cheese, and fresh basil on thin crust'),
-('Spaghetti Carbonara', 14.99, 'Spaghetti pasta with creamy carbonara sauce, pancetta, and Parmesan cheese'),
-('Beef Burger', 11.99, 'Grilled beef patty, lettuce, tomato, onion, and pickles on a sesame seed bun'),
-('Vegetable Stir-Fry', 9.99, 'Assorted vegetables stir-fried in a savory sauce, served with steamed rice'),
-('Soup of the Day', 5.99, 'Chef\'s daily selection of homemade soup, served with bread'),
-('Tomato Basil Soup', 4.99, 'Classic tomato soup with fresh basil, served with garlic bread'),
-('Minestrone Soup', 4.99, 'Hearty Italian vegetable soup with pasta, served with bread'),
-('Cream of Mushroom Soup', 5.99, 'Creamy mushroom soup garnished with parsley, served with croutons'),
-('French Onion Soup', 6.99, 'Rich beef broth with caramelized onions, topped with melted cheese and croutons'),
-('Garlic Bread', 3.99, 'Toasted baguette slices brushed with garlic butter and herbs'),
-('Caprese Salad', 8.99, 'Fresh mozzarella, ripe tomatoes, basil leaves, olive oil, and balsamic glaze'),
-('Bruschetta', 6.99, 'Toasted bread topped with diced tomatoes, garlic, basil, and olive oil'),
-('Crispy Calamari', 9.99, 'Lightly battered and fried calamari rings served with marinara sauce'),
-('Spinach and Artichoke Dip', 7.99, 'Creamy spinach and artichoke dip served with tortilla chips'),
-('Grilled Salmon', 16.99, 'Fresh Atlantic salmon fillet grilled to perfection, served with roasted vegetables'),
-('Beef Tenderloin', 22.99, 'Juicy beef tenderloin steak cooked to your liking, served with mashed potatoes'),
-('Chicken Parmesan', 13.99, 'Breaded chicken breast topped with marinara sauce and melted mozzarella, served with spaghetti'),
-('Vegetable Lasagna', 12.99, 'Layers of pasta, marinara sauce, assorted vegetables, and melted cheese'),
-('Shrimp Scampi', 18.99, 'Sautéed shrimp in garlic butter sauce, served over linguine pasta'),
-('New York Cheesecake', 7.99, 'Creamy cheesecake on a graham cracker crust, topped with strawberry sauce'),
-('Chocolate Lava Cake', 8.99, 'Warm chocolate cake with a molten chocolate center, served with vanilla ice cream'),
-('Tiramisu', 6.99, 'Classic Italian dessert made with layers of coffee-soaked ladyfingers and mascarpone cheese'),
-('Apple Pie', 6.99, 'Traditional apple pie with a flaky crust, served with a scoop of vanilla ice cream'),
-('Mojito', 8.99, 'Refreshing cocktail made with rum, lime juice, mint leaves, and soda water'),
-('Margarita', 7.99, 'Classic cocktail made with tequila, lime juice, and triple sec, served with a salt rim'),
-('Cosmopolitan', 9.99, 'Vodka, cranberry juice, triple sec, and lime juice, shaken with ice and strained'),
-('Old Fashioned', 10.99, 'Bourbon whiskey muddled with sugar, bitters, and a twist of orange peel'),
-('Mai Tai', 11.99, 'Rum, lime juice, orgeat syrup, and triple sec, served over crushed ice with a pineapple garnish'),
-('White Russian', 9.99, 'Vodka, coffee liqueur, and cream served over ice in an old-fashioned glass'),
-('Mimosa', 6.99, 'Champagne mixed with orange juice, served in a champagne flute'),
-('Pina Colada', 8.99, 'Rum, coconut cream, and pineapple juice blended with ice, served with a pineapple wedge'),
-('Bellini', 7.99, 'Prosecco mixed with peach purée, served in a champagne flute'),
-('Lemonade', 3.99, 'Freshly squeezed lemon juice sweetened with sugar, served over ice'),
-('Iced Tea', 3.99, 'Chilled black tea served over ice with a slice of lemon'),
-('Orange Juice', 2.99, 'Freshly squeezed orange juice, served cold'),
-('Cappuccino', 4.99, 'Espresso topped with steamed milk and a layer of froth'),
-('Café Latte', 4.99, 'Espresso mixed with steamed milk, topped with a small amount of frothed milk'),
-('Espresso', 3.99, 'Strong black coffee made by forcing hot water through finely-ground coffee beans'),
-('Hot Chocolate', 4.99, 'Rich chocolate drink made with steamed milk and cocoa powder'),
-('Green Salad', 5.99, 'Mixed greens, cucumber, cherry tomatoes, and balsamic vinaigrette'),
-('Fettuccine Alfredo', 15.99, 'Fettuccine pasta with creamy Alfredo sauce, topped with Parmesan cheese'),
-('Grilled Chicken Sandwich', 10.99, 'Grilled chicken breast, lettuce, tomato, and mayo on a toasted bun'),
-('Fish and Chips', 13.99, 'Beer-battered fish fillets served with French fries and tartar sauce'),
-('Caesar Salad', 9.99, 'Romaine lettuce, croutons, Parmesan cheese, and Caesar dressing'),
-('BBQ Ribs', 17.99, 'Slow-cooked pork ribs glazed with barbecue sauce, served with coleslaw and fries'),
-('Key Lime Pie', 7.99, 'Tangy key lime filling in a graham cracker crust, topped with whipped cream'),
-('Banoffee Pie', 8.99, 'Toffee, bananas, and whipped cream in a buttery biscuit crust'),
-('Gelato', 6.99, 'Italian-style ice cream available in various flavors'),
-('Mint Julep', 9.99, 'Bourbon, sugar, water, and mint leaves, served over crushed ice'),
-('Sangria', 10.99, 'Red wine mixed with fruit juice, soda water, and chopped fruit'),
-('Long Island Iced Tea', 12.99, 'Vodka, tequila, rum, gin, triple sec, sour mix, and a splash of cola'),
-('Bloody Mary', 8.99, 'Vodka, tomato juice, Worcestershire sauce, hot sauces, and various spices'),
-('Martini', 11.99, 'Gin and dry vermouth, stirred or shaken with ice, and garnished with an olive or lemon twist');
+-- LUNCHES OF THE WEEK
+INSERT INTO MENU_ITEMS (NAME, PRICE, DESCR)
+VALUES
+-- Monday
+('Tomato Basil Soup', 5.99, 'Creamy tomato soup with fresh basil and a touch of garlic, served with a side of artisan bread.'),
+('Grilled Cheese Sandwich', 6.99, 'Classic grilled cheese sandwich with a mix of cheddar and mozzarella on sourdough bread.'),
+('Caesar Salad', 7.99, 'Crisp romaine lettuce, shaved Parmesan, croutons, and Caesar dressing.'),
+-- Tuesday
+('Chicken Noodle Soup', 6.49, 'Homemade chicken noodle soup with carrots, celery, and egg noodles.'),
+('Turkey Club Wrap', 8.99, 'Sliced turkey, bacon, lettuce, tomato, and ranch dressing in a whole wheat wrap.'),
+('Quinoa Avocado Salad', 9.49, 'Quinoa, avocado, cherry tomatoes, cucumber, and feta cheese with lemon vinaigrette.'),
+-- Wednesday
+('Minestrone Soup', 6.99, 'Italian vegetable soup with beans, zucchini, carrots, and pasta in a tomato broth.'),
+('Italian Panini', 8.99, 'Ham, salami, provolone cheese, and pesto aioli on pressed ciabatta bread.'),
+('Spinach and Goat Cheese Salad', 8.49, 'Fresh spinach, goat cheese, walnuts, strawberries, and balsamic glaze.'),
+-- Thursday
+('Butternut Squash Soup', 7.49, 'Roasted butternut squash soup with a hint of cinnamon and cream, served with toasted pumpkin seeds.'),
+('Chicken Caesar Wrap', 8.99, 'Grilled chicken, romaine lettuce, Parmesan cheese, and Caesar dressing in a spinach wrap.'),
+('Mediterranean Bowl', 10.49, 'Quinoa, hummus, falafel, tomatoes, cucumber, and a dollop of tzatziki.'),
+-- Friday
+('French Onion Soup', 7.99, 'Caramelized onion soup in a beef broth, topped with a toasted baguette and melted Gruyere cheese.'),
+('Beef Brisket Sandwich', 11.99, 'Slow-cooked beef brisket with BBQ sauce on a brioche bun, served with pickles.'),
+('Caprese Salad', 8.99, 'Sliced tomatoes, fresh mozzarella, basil, and balsamic reduction.'),
+-- Saturday
+('Corn Chowder Soup', 6.99, 'Creamy corn chowder with potatoes, bell peppers, and bacon.'),
+('BBQ Pulled Pork Sliders', 9.99, 'BBQ pulled pork on mini buns, served with coleslaw on the side.'),
+('Asian Chicken Salad', 9.99, 'Mixed greens, grilled chicken, mandarin oranges, almonds, and sesame dressing.'),
+-- Sunday
+('Broccoli Cheddar Soup', 7.49, 'Creamy broccoli soup with sharp cheddar cheese.'),
+('BLT Sandwich', 7.99, 'Bacon, lettuce, and tomato on toasted whole grain bread with mayo.'),
+('Greek Salad', 8.99, 'Mixed greens, Kalamata olives, cucumber, tomato, feta cheese, and Greek dressing.');
 
+-- A LA CARTE - DRINKS
+INSERT INTO MENU_ITEMS (NAME, PRICE, DESCR)
+VALUES
+('Fresh Lemonade', 3.99, 'Homemade lemonade made with freshly squeezed lemons and a touch of mint.'),
+('Iced Tea', 2.99, 'Brewed black tea served cold with a lemon wedge.'),
+('Sparkling Water', 1.99, 'Carbonated natural mineral water.'),
+('Chardonnay', 7.99, 'A glass of crisp and refreshing white wine with notes of apple and citrus.'),
+('Cabernet Sauvignon', 8.99, 'Full-bodied red wine with flavors of black currant and dark chocolate.'),
+('Pinot Noir', 9.49, 'Medium-bodied red wine with cherry and raspberry aromas.'),
+('Sauvignon Blanc', 7.99, 'Crisp and elegant white wine with citrus and tropical fruit flavors.'),
+('Craft Beer', 6.99, 'Locally brewed craft beer with a unique blend of hops and malts.'),
+('Pilsner', 5.99, 'Classic pilsner with a crisp and refreshing taste.'),
+('Merlot', 8.49, 'Smooth red wine with plum and black cherry notes.');
+
+-- A LA CARTE - STARTERS
+INSERT INTO MENU_ITEMS (NAME, PRICE, DESCR)
+VALUES
+('Bruschetta', 5.99, 'Grilled bread with tomato, basil, garlic, and olive oil.'),
+('Garlic Bread', 4.99, 'Freshly baked bread with garlic butter and Parmesan cheese.'),
+('Caprese Skewers', 6.49, 'Fresh mozzarella, cherry tomatoes, and basil drizzled with balsamic glaze.'),
+('Stuffed Mushrooms', 7.99, 'Mushrooms filled with a creamy garlic and cheese stuffing.'),
+('Chicken Wings', 8.99, 'Spicy buffalo or BBQ chicken wings served with blue cheese dressing.'),
+('Caesar Salad', 5.99, 'Crisp romaine lettuce, Parmesan, croutons, and Caesar dressing.'),
+('Mozzarella Sticks', 6.99, 'Crispy breaded mozzarella served with marinara sauce.'),
+('Shrimp Cocktail', 9.49, 'Chilled shrimp served with a tangy cocktail sauce.'),
+('Vegetable Spring Rolls', 7.49, 'Crispy spring rolls filled with fresh vegetables and served with sweet chili sauce.'),
+('Nachos', 8.99, 'Tortilla chips topped with cheese, jalapenos, salsa, and sour cream.');
+
+-- A LA CARTE - MAINS
+INSERT INTO MENU_ITEMS (NAME, PRICE, DESCR)
+VALUES
+('Ribeye Steak', 19.99, 'Grilled ribeye steak with herb butter, served with mashed potatoes and asparagus.'),
+('Salmon Fillet', 17.99, 'Oven-baked salmon with a honey glaze, served with quinoa and steamed broccoli.'),
+('Chicken Parmesan', 15.99, 'Breaded chicken breast topped with marinara sauce and mozzarella, served over spaghetti.'),
+('Vegetarian Lasagna', 13.99, 'Layers of pasta, ricotta, mozzarella, spinach, and marinara sauce.'),
+('Duck Confit', 18.99, 'Slow-cooked duck leg with a crispy skin, served with lentils and red wine sauce.'),
+('Beef Bourguignon', 16.99, 'Tender beef stewed in red wine with mushrooms, onions, and carrots, served over mashed potatoes.'),
+('Pork Chop', 14.99, 'Pan-seared pork chop with apple compote and roasted potatoes.'),
+('Shrimp Scampi', 16.49, 'Sautéed shrimp in a garlic lemon butter sauce, served over linguini.'),
+('Mushroom Risotto', 12.99, 'Creamy Arborio rice with wild mushrooms and Parmesan cheese.'),
+('Thai Green Curry', 13.99, 'Spicy green curry with chicken or tofu, eggplant, bell peppers, and basil, served with jasmine rice.');
+
+-- A LA CARTE - DESSERTS
+INSERT INTO MENU_ITEMS (NAME, PRICE, DESCR)
+VALUES
+('Cheesecake', 6.99, 'Creamy cheesecake on a graham cracker crust with a berry compote.'),
+('Chocolate Lava Cake', 7.49, 'Warm chocolate cake with a gooey center, served with vanilla ice cream.'),
+('Tiramisu', 6.49, 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream.'),
+('Apple Pie', 5.99, 'Traditional apple pie with a flaky crust, served with whipped cream.'),
+('Creme Brulee', 6.99, 'Rich custard base topped with a layer of hardened caramelized sugar.'),
+('Lemon Tart', 5.99, 'Tart and refreshing lemon custard in a crisp pastry shell.'),
+('Panna Cotta', 6.49, 'Smooth Italian dessert of sweetened cream thickened with gelatin and molded.'),
+('Fruit Sorbet', 4.99, 'Light and refreshing sorbet made with seasonal fruit.'),
+('Brownie Sundae', 7.99, 'Warm brownie topped with vanilla ice cream, chocolate sauce, and whipped cream.'),
+('Baklava', 5.49, 'Sweet dessert pastry made of layers of filo filled with chopped nuts and sweetened with honey.');
 
 INSERT INTO LUNCHES (MENU_ITEM_ID, DAY) VALUES
 (1, 'Monday'), (2, 'Monday'), (3, 'Monday'),
@@ -204,23 +220,19 @@ INSERT INTO LUNCHES (MENU_ITEM_ID, DAY) VALUES
 (16, 'Saturday'), (17, 'Saturday'), (18, 'Saturday'),
 (19, 'Sunday'), (20, 'Sunday'), (21, 'Sunday');
 
--- Get all lunches
-/*
- SELECT name, price, descr, day FROM menu_items
- JOIN lunches ON
- menu_items.menu_item_id=lunches.menu_item_id;
- */
-
-INSERT INTO A_LA_CARTE_MENU_ITEMS (MENU_ITEM_ID, CATEGORY) VALUES
-(40, 'Drink'), (41, 'Drink'), (47, 'Drink'),
-(38, 'Dessert'), (39, 'Dessert'), (37, 'Dessert'),
-(31, 'Starter'), (35, 'Starter'), (28, 'Starter'),
-(33, 'Main'), (59, 'Main'), (61, 'Main');
-
--- Get the entire a la carte menu
-/*
-
- */
+INSERT INTO ALACARTE_MENU_ITEMS (MENU_ITEM_ID, CATEGORY) VALUES
+(22, 'Drink'), (23, 'Drink'), (24, 'Drink'), (25, 'Drink'),
+(26, 'Drink'), (27, 'Drink'), (28, 'Drink'), (29, 'Drink'),
+(30, 'Drink'), (31, 'Drink'),
+(32, 'Starter'), (33, 'Starter'), (34, 'Starter'), (35, 'Starter'),
+(36, 'Starter'), (37, 'Starter'), (38, 'Starter'), (39, 'Starter'),
+(40, 'Starter'), (41, 'Starter'),
+(42, 'Main'), (43, 'Main'), (44, 'Main'), (45, 'Main'),
+(46, 'Main'), (47, 'Main'), (48, 'Main'), (49, 'Main'),
+(50, 'Main'), (51, 'Main'),
+(52, 'Dessert'), (53, 'Dessert'), (54, 'Dessert'), (55, 'Dessert'),
+(56, 'Dessert'), (57, 'Dessert'), (58, 'Dessert'), (59, 'Dessert'),
+(60, 'Dessert'), (61, 'Dessert');
 
 INSERT INTO EVENTS (NAME, PRICE, DESCR, EVENT_DATE) VALUES
 ('Jazz Night', 15, 'An evening of classic jazz with live performers.', '2024-03-05'),
@@ -260,8 +272,32 @@ INSERT INTO WORK_SHIFTS (EMP_ID, SHIFT_TYPE, SHIFT_DATE) VALUES
 (13, 'Morning', '2024-03-04'),
 (15, 'Evening', '2024-03-04');
 
--- Queries
-/* ---------- get all workshifts and what employee is working --------------
-SELECT F_NAME, L_NAME, SHIFT_TYPE, SHIFT_DATE
-FROM work_shifts JOIN employees ON work_shifts.emp_id=employees.emp_id;
+/***************************** Queries *******************************/
+-- Get all lunches
+/*
+ SELECT name, price, descr, day FROM menu_items
+ JOIN lunches ON
+ menu_items.menu_item_id=lunches.menu_item_id;
+ */
+
+/*************** Get the entire a la carte menu *******************/
+/*
+ -- GET STARTERS
+ select name, price, descr FROM menu_items mi JOIN alacarte_menu_items carte
+ ON mi.menu_item_id=carte.menu_item_id WHERE category="Starter";
+ -- GET MAINS
+ select name, price, descr FROM menu_items mi JOIN alacarte_menu_items carte
+ ON mi.menu_item_id=carte.menu_item_id WHERE category="Main";
+ -- GET DESSERTS
+ select name, price, descr FROM menu_items mi JOIN alacarte_menu_items carte
+ ON mi.menu_item_id=carte.menu_item_id WHERE category="Dessert";
+ -- GET DRINKS
+ select name, price, descr, mi.menu_item_id FROM menu_items mi JOIN alacarte_menu_items carte
+ ON mi.menu_item_id=carte.menu_item_id WHERE category="Drink";
+ */
+
+-- Get all workshifts and which employee is working
+/*
+ SELECT F_NAME, L_NAME, SHIFT_TYPE, SHIFT_DATE
+ FROM work_shifts JOIN employees ON work_shifts.emp_id=employees.emp_id;
 */

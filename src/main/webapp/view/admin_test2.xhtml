@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Admin Page</title>
+    <!-- Add your CSS links here -->
+    <style type="">
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px 40px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .content {
+            padding-left: 40px;
+            padding-bottom: 40px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        /* Add more styles as needed */
+    </style>
+</h:head>
+<h:body>
+    <h1>Admin Dashboard</h1>
+    <div class="content">
+        <!-- Lunches that have been added -->
+        <h2>Lunches</h2>
+        <h:dataTable value="#{menuItemsBean.lunchItemsList}" var="lunchItem">
+            <h:column>#{lunchItem.menuItem.name}</h:column>
+            <h:column>#{lunchItem.menuItem.price}</h:column>
+            <h:column>#{lunchItem.menuItem.descr}</h:column>
+            <h:column>#{lunchItem.day}</h:column>
+        </h:dataTable>
+
+        <!-- Form for adding a new lunch item -->
+        <h2>Add Lunch</h2>
+        <h:form>
+            <h:outputLabel for="lunchName" value="Name:" />
+            <h:inputText id="lunchName" value="#{menuItemsBean.menuItem.name}" required="true" />
+
+            <h:outputLabel for="lunchPrice" value="Price:" />
+            <h:inputText id="lunchPrice" value="#{menuItemsBean.menuItem.price}" required="true" />
+
+            <h:outputLabel for="lunchDescr" value="Description:" />
+            <h:inputTextarea id="lunchDescr" value="#{menuItemsBean.menuItem.descr}" required="true" />
+
+            <h:outputLabel for="lunchDay" value="Day:" />
+            <h:inputText id="lunchDay" value="#{menuItemsBean.lunchItem.day}" required="true" />
+
+            <h:commandButton value="Add Lunch" action="#{menuItemsBean.addLunch}" />
+        </h:form>
+
+        <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+        <!--xxxxxxxxxxxxxxxxxx A La Carte Menu Items xxxxxxxxxxxxxxxx-->
+        <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+        <h2>A La Carte</h2>
+        <!-- ******************* FETCHING STARTERS ******************* -->
+        <h2>Starters</h2>
+        <h:dataTable value="#{menuItemsBean.startersList}" var="starterItem">
+            <h:column>#{starterItem.menuItem.name}</h:column>
+            <h:column>#{starterItem.menuItem.price}</h:column>
+            <h:column>#{starterItem.menuItem.descr}</h:column>
+        </h:dataTable>
+        <!-- ******************* ADDING STARTERS ******************* -->
+        <h2>Add Starter</h2>
+        <h:form>
+            <h:outputLabel for="starterName" value="Name:" />
+            <h:inputText id="starterName" value="#{menuItemsBean.menuItem.name}" required="true" />
+
+            <h:outputLabel for="starterPrice" value="Price:" />
+            <h:inputText id="starterPrice" value="#{menuItemsBean.menuItem.price}" required="true" />
+
+            <h:outputLabel for="starterDescr" value="Description:" />
+            <h:inputTextarea id="starterDescr" value="#{menuItemsBean.menuItem.descr}" required="true" />
+
+            <h:commandButton value="Add Starter" action="#{menuItemsBean.addStarter()}" />
+        </h:form>
+
+
+        <!-- ******************* FETCHING MAIN COURSES ******************* -->
+        <h2>Main Courses</h2>
+        <h:dataTable value="#{menuItemsBean.mainsList}" var="mainItem">
+            <h:column>#{mainItem.menuItem.name}</h:column>
+            <h:column>#{mainItem.menuItem.price}</h:column>
+            <h:column>#{mainItem.menuItem.descr}</h:column>
+        </h:dataTable>
+        <!-- ******************* ADDING MAIN COURSES ******************* -->
+        <h2>Add Main Course</h2>
+        <h:form>
+            <h:outputLabel for="mainCourseName" value="Name:" />
+            <h:inputText id="mainCourseName" value="#{menuItemsBean.menuItem.name}" required="true" />
+
+            <h:outputLabel for="mainCoursePrice" value="Price:" />
+            <h:inputText id="mainCoursePrice" value="#{menuItemsBean.menuItem.price}" required="true" />
+
+            <h:outputLabel for="mainCourseDescr" value="Description:" />
+            <h:inputTextarea id="mainCourseDescr" value="#{menuItemsBean.menuItem.descr}" required="true" />
+
+            <h:commandButton value="Add Main Course" action="#{menuItemsBean.addMain()}" />
+        </h:form>
+
+
+        <!-- ******************* FETCHING DESSERTS ******************* -->
+        <h2>Desserts</h2>
+        <h:dataTable value="#{menuItemsBean.dessertsList}" var="dessertItem">
+            <h:column>#{dessertItem.menuItem.name}</h:column>
+            <h:column>#{dessertItem.menuItem.price}</h:column>
+            <h:column>#{dessertItem.menuItem.descr}</h:column>
+        </h:dataTable>
+        <!-- ******************* ADDING DESSERTS ******************* -->
+        <h2>Add Dessert</h2>
+        <h:form>
+            <h:outputLabel for="dessertName" value="Name:" />
+            <h:inputText id="dessertName" value="#{menuItemsBean.menuItem.name}" required="true" />
+
+            <h:outputLabel for="dessertPrice" value="Price:" />
+            <h:inputText id="dessertPrice" value="#{menuItemsBean.menuItem.price}" required="true" />
+
+            <h:outputLabel for="dessertDescr" value="Description:" />
+            <h:inputTextarea id="dessertDescr" value="#{menuItemsBean.menuItem.descr}" required="true" />
+
+            <h:commandButton value="Add Dessert" action="#{menuItemsBean.addDessert()}" />
+        </h:form>
+
+        <!-- ******************* FETCHING DRINKS ******************* -->
+        <h2>Drinks</h2>
+        <h:dataTable value="#{menuItemsBean.drinksList}" var="drinkItem">
+            <h:column>#{drinkItem.menuItem.name}</h:column>
+            <h:column>#{drinkItem.menuItem.price}</h:column>
+            <h:column>#{drinkItem.menuItem.descr}</h:column>
+        </h:dataTable>
+        <!-- ******************* ADDING DRINKS ******************* -->
+        <h2>Add Drink</h2>
+        <h:form>
+            <h:outputLabel for="drinkName" value="Name:" />
+            <h:inputText id="drinkName" value="#{menuItemsBean.menuItem.name}" required="true" />
+
+            <h:outputLabel for="drinkPrice" value="Price:" />
+            <h:inputText id="drinkPrice" value="#{menuItemsBean.menuItem.price}" required="true" />
+
+            <h:outputLabel for="drinkDescr" value="Description:" />
+            <h:inputTextarea id="drinkDescr" value="#{menuItemsBean.menuItem.descr}" required="true" />
+
+            <h:commandButton value="Add Drink" action="#{menuItemsBean.addDrink()}" />
+        </h:form>
+
+    </div>
+</h:body>
+</html>

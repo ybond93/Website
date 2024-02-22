@@ -37,13 +37,12 @@
 <h:body>
     <h1>Admin Dashboard</h1>
     <div class="content">
+
         <!-- Menu items that have been added -->
         <h2>Menu items</h2>
-        <!-- <h:outputLabel value="MenuItems"/> -->
         <h:dataTable value="#{menuItemsBean.menuItems}" var="menuItems">
             <h:column>#{menuItems.name}</h:column>
             <h:column>#{menuItems.price}</h:column>
-            <h:column>#{menuItems.type}</h:column>
             <h:column>#{menuItems.descr}</h:column>
         </h:dataTable>
 
@@ -57,17 +56,13 @@
                 <h:outputLabel for="lunchPrice" value="Price:" />
                 <h:inputText id="lunchPrice" value="#{menuItemsBean.menuItem.price}" required="false" />
 
-                <h:outputLabel for="lunchType" value="Type:" />
-                <h:inputText id="lunchType" value="#{menuItemsBean.menuItem.type}" required="false" />
-
                 <h:outputLabel for="lunchDescr" value="Description:" />
                 <h:inputTextarea id="lunchDescr" value="#{menuItemsBean.menuItem.descr}" required="false" />
 
-                <h:outputLabel for="lunchCategory" value="Category:" />
-                <h:inputText id="lunchCategory" value="#{menuItemsBean.menuItem.category}" required="false" />
             </h:panelGrid>
             <h:commandButton value="Add Lunch" action="#{menuItemsBean.addMenuItem}" />
         </h:form>
+
 
         <!-- Events that have been added -->
         <h2>Events</h2>
@@ -105,7 +100,6 @@
         <h:dataTable value="#{workShiftsBean.workShifts}" var="work_shifts">
             <h:column>#{work_shifts.shiftDate}</h:column>
             <h:column>#{work_shifts.shiftType}</h:column>
-            <h:column>#{work_shifts.shiftStatus}</h:column>
         </h:dataTable>
 
         <!-- Form to Add Work Shifts -->
@@ -122,12 +116,6 @@
                 <h:inputText id="shiftDate" value="#{workShiftsBean.workShift.shiftDate}" required="true">
                     <f:convertDateTime pattern="yyyy-MM-dd" />
                 </h:inputText>
-
-                <h:outputLabel for="shiftStatus" value="Status:" />
-                <h:selectOneMenu id="shiftStatus" value="#{workShiftsBean.workShift.shiftStatus}" required="true">
-                    <f:selectItem itemValue="Available" itemLabel="Available" />
-                    <f:selectItem itemValue="Not Available" itemLabel="Not Available" />
-                </h:selectOneMenu>
             </h:panelGrid>
             <h:commandButton value="Add Work Shift" action="#{workShiftsBean.addWorkShift()}" />
         </h:form>
