@@ -25,11 +25,14 @@ public class EventsEntity {
     @Column(name = "DESCR")
     private String descr;
     @Basic
-    @Column(name = "EVENT_DATE")
-    private Date eventDate;
+    @Column(name = "EVENT_DAY")
+    private Integer eventDay;
     @Basic
-    @Column(name = "START_TIME")
-    private Time startTime;
+    @Column(name = "EVENT_MONTH")
+    private Integer eventMonth;
+    @Basic
+    @Column(name = "EVENT_YEAR")
+    private Integer eventYear;
 
     public int getEventId() {
         return eventId;
@@ -63,51 +66,29 @@ public class EventsEntity {
         this.descr = descr;
     }
 
-    public Date getEventDate() {
-        return eventDate;
+
+
+    public Integer getEventDay() {
+        return eventDay;
     }
 
-    public void setEventDate(java.sql.Date eventDate) {
-        this.eventDate = eventDate;
+    public void setEventDay(Integer eventDay) {
+        this.eventDay = eventDay;
     }
 
-    public void setEventDate(Date eventDate) {
-        this.eventDate = eventDate;
+    public Integer getEventMonth() {
+        return eventMonth;
     }
 
-    public Time getStartTime() {
-        return startTime;
+    public void setEventMonth(Integer eventMonth) {
+        this.eventMonth = eventMonth;
     }
 
-    public void setStartTime(Time startTime) {
-        this.startTime = startTime;
+    public Integer getEventYear() {
+        return eventYear;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        EventsEntity that = (EventsEntity) o;
-
-        if (eventId != that.eventId) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (price != null ? !price.equals(that.price) : that.price != null) return false;
-        if (descr != null ? !descr.equals(that.descr) : that.descr != null) return false;
-        if (eventDate != null ? !eventDate.equals(that.eventDate) : that.eventDate != null) return false;
-        if (startTime != null ? !startTime.equals(that.startTime) : that.startTime != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = eventId;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (descr != null ? descr.hashCode() : 0);
-        result = 31 * result + (eventDate != null ? eventDate.hashCode() : 0);
-        result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
-        return result;
+    public void setEventYear(Integer eventYear) {
+        this.eventYear = eventYear;
     }
 }

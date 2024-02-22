@@ -157,6 +157,42 @@
 
             <h:commandButton value="Add Drink" action="#{menuItemsBean.addDrink()}" />
         </h:form>
+        <h2>Events</h2>
+        <h:dataTable value="#{eventsBean.events}" var="events">
+            <h:column>#{events.name}</h:column>
+            <h:column>#{events.price}</h:column>
+
+            <h:column>#{events.descr}</h:column>
+            <h:column>#{events.eventDay}</h:column>
+            <h:column>#{events.eventMonth}</h:column>
+            <h:column>#{events.eventYear}</h:column>
+        </h:dataTable>
+        <!-- Form to Add Events -->
+        <h:form id="addEventForm">
+            <h2>Add Event</h2>
+            <h:panelGrid columns="2">
+                <h:outputLabel for="eventName" value="Name:" />
+                <h:inputText id="eventName" value="#{eventsBean.event.name}" required="true" />
+
+                <h:outputLabel for="eventPrice" value="Price:" />
+                <h:inputText id="eventPrice" value="#{eventsBean.event.price}" required="false" />
+
+                <h:outputLabel for="eventDescr" value="Description:" />
+                <h:inputTextarea id="eventDescr" value="#{eventsBean.event.descr}" required="false" />
+
+                <h:outputLabel for="eventDay" value="Day:" />
+                <h:inputTextarea id="eventDay" value="#{eventsBean.event.eventDay}" required="false"/>
+                <h:outputLabel for="eventMonth" value="Month:" />
+                <h:inputTextarea id="eventMonth" value="#{eventsBean.event.eventMonth}" required="false" />
+
+                <h:outputLabel for="eventYear" value="Year:" />
+                <h:inputTextarea id="eventYear" value="#{eventsBean.event.eventYear}" required="false" />
+
+
+            </h:panelGrid>
+            <h:commandButton value="Add Event" action="#{eventsBean.addEvent()}" />
+        </h:form>
+
 
 
     </div>
