@@ -18,9 +18,7 @@ public class LunchesEntity {
     @Id
     @Column(name = "LUNCH_ID")
     private int lunchId;
-    @Basic
-    @Column(name = "DATE")
-    private Date date;
+
     @Basic
     @Column(name = "DAY")
     private String day;
@@ -56,13 +54,7 @@ public class LunchesEntity {
         this.menuItem = menuItem;
     }
 
-    public Date getDate() {
-        return date;
-    }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
 
 }

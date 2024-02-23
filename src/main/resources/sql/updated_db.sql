@@ -75,8 +75,8 @@ CREATE TABLE TABLES (
 CREATE TABLE ORDERS (
     ORDER_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     EMP_ID INT NOT NULL,
-    TABLE_NUM INT NOT NULL, -- dont need to always have number?
-    MENU_ITEM_ID INT NOT NULL
+    TABLE_NUM INT NOT NULL -- dont need to always have number?
+
 
 );
 CREATE TABLE ALACARTE_MENU_ITEMS (
@@ -119,9 +119,6 @@ ALTER TABLE ORDERS
 
 ALTER TABLE ORDERS
     ADD CONSTRAINT orders_fk_2 FOREIGN KEY (TABLE_NUM) REFERENCES TABLES(TABLE_NUM) ON UPDATE CASCADE;
-ALTER TABLE ORDERS
-    ADD CONSTRAINT orders_fk_3 FOREIGN KEY (MENU_ITEM_ID) REFERENCES MENU_ITEMS(MENU_ITEM_ID) ON UPDATE CASCADE;
-
 
 
 /*************** Inserts for testing purposes ****************/
@@ -274,6 +271,12 @@ INSERT INTO WORK_SHIFTS (EMP_ID, SHIFT_TYPE, SHIFT_DATE) VALUES
 (11, 'Evening', '2024-03-03'),
 (13, 'Morning', '2024-03-04'),
 (15, 'Evening', '2024-03-04');
+INSERT INTO ORDERS (EMP_ID, TABLE_NUM ) VALUES
+(1, 2),
+(3, 2),
+(5, 4),
+(7, 5);
+
 
 /***************************** Queries *******************************/
 -- Get all lunches

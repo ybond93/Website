@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@NamedQuery(
+        name = "OrdersEntity.findAll",
+        query = "Select l FROM OrdersEntity l"
+)
 @Entity
 @Table(name = "ORDERS", schema = "restaurang", catalog = "")
 public class OrdersEntity {
