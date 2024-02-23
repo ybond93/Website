@@ -7,10 +7,13 @@ import java.sql.Date;
 /* The named query below effectively fetches all
  * LunchesTestEntity instances along with their
  * associated MenuItemsTestEntity instances. */
-@NamedQuery(
-        name = "LunchesEntity.findAll",
-        query = "SELECT l FROM LunchesEntity l JOIN FETCH l.menuItem"
-)
+@NamedQueries({
+        @NamedQuery(name = "LunchesEntity.findAll",
+                query = "SELECT l FROM LunchesEntity l JOIN FETCH l.menuItem"),
+        @NamedQuery(name = "LunchesEntity.findLunchesByDay",
+        query = "SELECT l FROM LunchesEntity l JOIN FETCH l.menuItem WHERE l.day = :dayOfWeek")
+})
+
 @Entity
 @Table(name = "lunches", schema = "restaurang", catalog = "")
 public class LunchesEntity {

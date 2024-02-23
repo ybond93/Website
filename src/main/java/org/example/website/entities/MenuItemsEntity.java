@@ -9,7 +9,7 @@ public class MenuItemsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "menu_item_id")
-    private Long id;
+    private int id;
 
     @Column(name = "name", nullable = false, length = 50)
     private String name;
