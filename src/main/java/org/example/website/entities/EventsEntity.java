@@ -25,9 +25,6 @@ public class EventsEntity {
     @Column(name = "DESCR")
     private String descr;
     @Basic
-    @Column(name = "EVENT_DATE")
-    private Date eventDate;
-    @Basic
     @Column(name = "START_TIME")
     private Time startTime;
 
@@ -63,14 +60,6 @@ public class EventsEntity {
         this.descr = descr;
     }
 
-    public Date getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(Date eventDate) {
-        this.eventDate = eventDate;
-    }
-
     public Time getStartTime() {
         return startTime;
     }
@@ -90,7 +79,6 @@ public class EventsEntity {
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (price != null ? !price.equals(that.price) : that.price != null) return false;
         if (descr != null ? !descr.equals(that.descr) : that.descr != null) return false;
-        if (eventDate != null ? !eventDate.equals(that.eventDate) : that.eventDate != null) return false;
         if (startTime != null ? !startTime.equals(that.startTime) : that.startTime != null) return false;
 
         return true;
@@ -102,7 +90,6 @@ public class EventsEntity {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         result = 31 * result + (descr != null ? descr.hashCode() : 0);
-        result = 31 * result + (eventDate != null ? eventDate.hashCode() : 0);
         result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
         return result;
     }
