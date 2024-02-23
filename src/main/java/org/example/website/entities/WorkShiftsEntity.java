@@ -1,11 +1,10 @@
 package org.example.website.entities;
 
 import jakarta.persistence.*;
-import java.util.Date;
 
 @NamedQuery(
-        name = "WorkShiftsEntity.findAll",
-        query = "Select l FROM WorkShiftsEntity l"
+        name = "WorkShiftsEntity.findEmployeeShifts",
+        query = "SELECT ws FROM WorkShiftsEntity ws JOIN FETCH ws.employee"
 )
 @Entity
 @Table(name = "work_shifts", schema = "restaurang", catalog = "")
@@ -18,18 +17,25 @@ public class WorkShiftsEntity {
     @Column(name = "SHIFT_TYPE")
     private String shiftType;
     @Basic
-    @Column(name = "SHIFT_DATE")
-    private Date shiftDate;
+    @Column(name = "YEAR")
+    private Integer year;
     @Basic
-    @Column(name = "SHIFT_STATUS")
-    private String shiftStatus;
+    @Column(name = "MONTH")
+    private Integer month;
+    @Basic
+    @Column(name = "DAY")
+    private Integer day;
 
-    public int getShiftId() {
-        return shiftId;
+    @ManyToOne
+    @JoinColumn(name = "EMP_ID")
+    private EmployeesEntity employee;
+
+    public EmployeesEntity getEmployee() {
+        return employee;
     }
 
-    public void setShiftId(int shiftId) {
-        this.shiftId = shiftId;
+    public void setEmployee(EmployeesEntity employee) {
+        this.employee = employee;
     }
 
     public String getShiftType() {
@@ -40,43 +46,27 @@ public class WorkShiftsEntity {
         this.shiftType = shiftType;
     }
 
-    public Date getShiftDate() {
-        return shiftDate;
+    public Integer getYear() {
+        return year;
     }
 
-    public void setShiftDate(Date shiftDate) {
-        this.shiftDate = shiftDate;
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
-    public String getShiftStatus() {
-        return shiftStatus;
+    public Integer getMonth() {
+        return month;
     }
 
-    public void setShiftStatus(String shiftStatus) {
-        this.shiftStatus = shiftStatus;
+    public void setMonth(Integer month) {
+        this.month = month;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        WorkShiftsEntity that = (WorkShiftsEntity) o;
-
-        if (shiftId != that.shiftId) return false;
-        if (shiftType != null ? !shiftType.equals(that.shiftType) : that.shiftType != null) return false;
-        if (shiftDate != null ? !shiftDate.equals(that.shiftDate) : that.shiftDate != null) return false;
-        if (shiftStatus != null ? !shiftStatus.equals(that.shiftStatus) : that.shiftStatus != null) return false;
-
-        return true;
+    public Integer getDay() {
+        return day;
     }
 
-    @Override
-    public int hashCode() {
-        int result = shiftId;
-        result = 31 * result + (shiftType != null ? shiftType.hashCode() : 0);
-        result = 31 * result + (shiftDate != null ? shiftDate.hashCode() : 0);
-        result = 31 * result + (shiftStatus != null ? shiftStatus.hashCode() : 0);
-        return result;
+    public void setDay(Integer day) {
+        this.day = day;
     }
 }

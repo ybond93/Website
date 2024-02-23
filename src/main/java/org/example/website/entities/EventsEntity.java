@@ -1,13 +1,10 @@
 package org.example.website.entities;
 
 import jakarta.persistence.*;
-import java.util.Date;
+
 import java.sql.Time;
 
-@NamedQuery(
-        name = "EventsEntity.findAll",
-        query = "Select l FROM EventsEntity l"
-)
+@NamedQuery(name = "EventsEntity.findAll", query = "SELECT l FROM EventsEntity l")
 @Entity
 @Table(name = "events", schema = "restaurang", catalog = "")
 public class EventsEntity {
@@ -24,6 +21,15 @@ public class EventsEntity {
     @Basic
     @Column(name = "DESCR")
     private String descr;
+    @Basic
+    @Column(name = "EVENT_YEAR")
+    private Integer eventYear;
+    @Basic
+    @Column(name = "EVENT_MONTH")
+    private Integer eventMonth;
+    @Basic
+    @Column(name = "EVENT_DAY")
+    private Integer eventDay;
     @Basic
     @Column(name = "START_TIME")
     private Time startTime;
@@ -60,37 +66,35 @@ public class EventsEntity {
         this.descr = descr;
     }
 
+    public Integer getEventYear() {
+        return eventYear;
+    }
+
+    public void setEventYear(Integer eventYear) {
+        this.eventYear = eventYear;
+    }
+
+    public Integer getEventMonth() {
+        return eventMonth;
+    }
+
+    public void setEventMonth(Integer eventMonth) {
+        this.eventMonth = eventMonth;
+    }
+
+    public Integer getEventDay() {
+        return eventDay;
+    }
+
+    public void setEventDay(Integer eventDay) {
+        this.eventDay = eventDay;
+    }
+
     public Time getStartTime() {
         return startTime;
     }
 
     public void setStartTime(Time startTime) {
         this.startTime = startTime;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        EventsEntity that = (EventsEntity) o;
-
-        if (eventId != that.eventId) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (price != null ? !price.equals(that.price) : that.price != null) return false;
-        if (descr != null ? !descr.equals(that.descr) : that.descr != null) return false;
-        if (startTime != null ? !startTime.equals(that.startTime) : that.startTime != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = eventId;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (descr != null ? descr.hashCode() : 0);
-        result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
-        return result;
     }
 }
