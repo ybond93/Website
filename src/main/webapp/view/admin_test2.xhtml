@@ -205,9 +205,9 @@
         <h:form id="addOrders">
             <h2>Add orders</h2>
             <h:panelGrid columns="3">
-                <h:outputLabel for="orderId" value="ordeid:" />
+              <!--  <h:outputLabel for="orderId" value="ordeid:" />
                 <h:inputText id="orderId" value="#{ordersBean.order.orderId}" required="true" />
-
+-->
                 <h:outputLabel for="orderEmpId" value="orderEmp:" />
                 <h:inputText id="orderEmpId" value="#{ordersBean.order.empId}" required="false" />
                 <h:outputLabel for="orderTable" value="orderTable:" />
@@ -215,6 +215,13 @@
             </h:panelGrid>
             <h:commandButton value="Add Order" action="#{ordersBean.addOrder()}" />
         </h:form>
+        <h2>Menu items </h2>
+        <h:dataTable value="#{menuItemsBean.menuItems}" var="menuItems">
+            <h:column>#{menuItems.name}</h:column>
+            <h:column>#{menuItems.price}</h:column>
+            <h:column>#{menuItem.descr}</h:column>
+            <h:column>#{menuItem.id}</h:column>
+        </h:dataTable>
     </div>
 </h:body>
 </html>

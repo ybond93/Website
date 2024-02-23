@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@NamedQuery(
+        name = "MenuItemsEntity.findAll",
+        query = "Select l FROM MenuItemsEntity l"
+)
 @Entity
 @Table(name = "MENU_ITEMS", schema = "restaurang", catalog = "")
 public class MenuItemsEntity {
@@ -30,6 +33,10 @@ public class MenuItemsEntity {
     private List<OrdersEntity> orders = new ArrayList<>();
 
     // Getters and Setters
+    public int getId() {
+        return id;
+    }
+
     public String getName() { return name; }
 
     public void setName(final String name) { this.name = name; }

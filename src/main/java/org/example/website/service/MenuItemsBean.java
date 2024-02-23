@@ -9,6 +9,7 @@ import jakarta.persistence.PersistenceContext;
 import org.example.website.entities.AlacarteMenuItemsEntity;
 import org.example.website.entities.LunchesEntity;
 import org.example.website.entities.MenuItemsEntity;
+import org.example.website.entities.OrdersEntity;
 
 import java.io.Serializable;
 import java.util.Comparator;
@@ -22,8 +23,9 @@ public class MenuItemsBean implements Serializable {
 
     @PersistenceContext
     private EntityManager em;
-
+    private List<MenuItemsEntity> menuItemList;
     private MenuItemsEntity menuItem = new MenuItemsEntity();
+
     private LunchesEntity lunchItem = new LunchesEntity();
     private List<LunchesEntity> lunchItemsList;
 
@@ -51,6 +53,8 @@ public class MenuItemsBean implements Serializable {
         mainsList = em.createNamedQuery("ALaCarteMenuItems.findMains", AlacarteMenuItemsEntity.class).getResultList();
         dessertsList = em.createNamedQuery("ALaCarteMenuItems.findDesserts", AlacarteMenuItemsEntity.class).getResultList();
         drinksList = em.createNamedQuery("ALaCarteMenuItems.findDrinks", AlacarteMenuItemsEntity.class).getResultList();
+        menuItemList = em.createNamedQuery("MenuItemsEntity.findAll", MenuItemsEntity.class).getResultList();
+
     }
 
     @Transactional
