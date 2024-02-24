@@ -6,7 +6,7 @@ import java.sql.Time;
 
 @NamedQuery(name = "EventsEntity.findAll", query = "SELECT l FROM EventsEntity l")
 @Entity
-@Table(name = "events", schema = "restaurang", catalog = "")
+@Table(name = "EVENTS", schema = "restaurang", catalog = "")
 public class EventsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

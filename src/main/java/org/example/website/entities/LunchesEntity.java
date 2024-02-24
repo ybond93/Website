@@ -15,7 +15,7 @@ import java.sql.Date;
 })
 
 @Entity
-@Table(name = "lunches", schema = "restaurang", catalog = "")
+@Table(name = "LUNCHES", schema = "restaurang", catalog = "")
 public class LunchesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

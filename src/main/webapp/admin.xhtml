@@ -415,23 +415,63 @@
 
         <section id="schema" class="menu-section">
             <h2>Our Schema</h2>
-            <!-- Schema details -->
-            <div class="calendar-container">
-                <div class="month-header">
-                    <h2>March 2024</h2> <!-- Example month and year -->
-                </div>
-                <div class="weekly-calendar" id="workshift-calendar">
-                    <div class="week">
-                        <!-- Example Day with Date -->
-                        <div class="day" id="monday-shifts">
-                            <h3>Monday - Mar 1</h3> <!-- Example date -->
-                            <div class="event shift">Shift: 9 AM - 5 PM</div>
-                            <!-- Dynamically populated shifts -->
-                        </div>
-                        <!-- Repeat for other days with their respective dates -->
-                    </div>
-                </div>
-            </div>
+            <h2>Employee Shifts</h2>
+            <h:dataTable value="#{employeeWorkShiftsBean.employees}" var="employee">
+                <h:column>
+                    <f:facet name="header">Employee Name</f:facet>
+                    #{employee.firstName} #{employee.lastName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Work Shifts</f:facet>
+                    <h:dataTable value="#{employee.workShifts}" var="workShift">
+                        <h:column>
+                            <f:facet name="header">Shift Type</f:facet>
+                            #{workShift.shiftType}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Year</f:facet>
+                            #{workShift.year}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Month</f:facet>
+                            #{workShift.month}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Day</f:facet>
+                            #{workShift.day}
+                        </h:column>
+                    </h:dataTable>
+                </h:column>
+            </h:dataTable>
+
+            <!-- Form to Add Work Shifts -->
+            <h:form id="addWorkShiftForm">
+                <h2>Add Work Shift</h2>
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="employeeId" value="Employee:" />
+                    <h:selectOneMenu id="employeeId" value="#{employeeWorkShiftsBean.employee.empId}" required="true">
+                        <f:selectItems value="#{employeeWorkShiftsBean.employees}" var="emp"
+                                       itemValue="#{emp.empId}" itemLabel="#{emp.firstName} #{emp.lastName}" />
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="shiftType" value="Shift Type:" />
+                    <h:selectOneMenu id="shiftType" value="#{employeeWorkShiftsBean.workShift.shiftType}" required="true">
+                        <f:selectItem itemValue="Morning" itemLabel="Morning" />
+                        <f:selectItem itemValue="Evening" itemLabel="Evening" />
+                    </h:selectOneMenu>
+
+                    <h:outputLabel for="shiftYear" value="Year:" />
+                    <h:inputText id="shiftYear" value="#{employeeWorkShiftsBean.workShift.year}" required="true" />
+
+                    <h:outputLabel for="shiftMonth" value="Month:" />
+                    <h:inputText id="shiftMonth" value="#{employeeWorkShiftsBean.workShift.month}" required="true" />
+
+                    <h:outputLabel for="shiftDay" value="Day:" />
+                    <h:inputText id="shiftDay" value="#{employeeWorkShiftsBean.workShift.day}" required="true" />
+                </h:panelGrid>
+                <h:commandButton value="Add Work Shift" action="#{employeeWorkShiftsBean.addWorkShift()}" />
+            </h:form>
+
         </section>
 
         <!-- *********************** EVENT SECTION ************************* -->

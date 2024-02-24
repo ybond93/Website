@@ -13,7 +13,7 @@ import jakarta.persistence.*;
                 query = "SELECT a FROM AlacarteMenuItemsEntity a JOIN FETCH a.menuItem WHERE a.category = 'Drink'")
 })
 @Entity
-@Table(name = "alacarte_menu_items", schema = "restaurang", catalog = "")
+@Table(name = "ALACARTE_MENU_ITEMS", schema = "restaurang", catalog = "")
 public class AlacarteMenuItemsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

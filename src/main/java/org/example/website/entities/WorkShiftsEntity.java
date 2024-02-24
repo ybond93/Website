@@ -7,7 +7,7 @@ import jakarta.persistence.*;
         query = "SELECT ws FROM WorkShiftsEntity ws JOIN FETCH ws.employee"
 )
 @Entity
-@Table(name = "work_shifts", schema = "restaurang", catalog = "")
+@Table(name = "WORK_SHIFTS", schema = "restaurang", catalog = "")
 public class WorkShiftsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
