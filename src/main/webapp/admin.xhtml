@@ -416,7 +416,7 @@
         <section id="schema" class="menu-section">
             <h2>Our Schema</h2>
             <h2>Employee Shifts</h2>
-            <h:dataTable value="#{employeeWorkShiftsBean.employees}" var="employee">
+            <h:dataTable value="#{employeeWorkShiftsBean.employeesWorkshiftList}" var="employee">
                 <h:column>
                     <f:facet name="header">Employee Name</f:facet>
                     #{employee.firstName} #{employee.lastName}

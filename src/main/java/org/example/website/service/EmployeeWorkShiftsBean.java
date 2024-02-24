@@ -30,9 +30,7 @@ public class EmployeeWorkShiftsBean implements Serializable {
     public void init() {
         employeesWorkshiftList= em.createQuery("SELECT e FROM EmployeesEntity e JOIN FETCH e.workShifts", EmployeesEntity.class).getResultList();
         employeesList = em.createNamedQuery("EmployeesEntity.findEmployees", EmployeesEntity.class).getResultList();
-
     }
-
 
     @Transactional
     public void addWorkShift() {
@@ -49,7 +47,7 @@ public class EmployeeWorkShiftsBean implements Serializable {
         em.persist(workShift);
         workShift = new WorkShiftsEntity(); // Reset for the next entry
         // Depending on your use case, you might not want to call init here as it might be refreshing the list unnecessarily
-        // init();
+        init();
     }
 
     public WorkShiftsEntity getWorkShift() {
@@ -65,6 +63,8 @@ public class EmployeeWorkShiftsBean implements Serializable {
     public List<EmployeesEntity> getEmployees() {
         return employeesList;
     }
+
+    public List<EmployeesEntity> getEmployeesWorkshiftList() { return employeesWorkshiftList; }
 
     public EmployeesEntity getEmployee() {
         return employee;
