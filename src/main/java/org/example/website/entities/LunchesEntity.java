@@ -34,6 +34,7 @@ public class LunchesEntity {
     @JoinColumn(name = "menu_item_id", referencedColumnName = "menu_item_id")
     private MenuItemsEntity menuItem;   // Lunches Foreign Key
 
+
     // getting the FK
     public MenuItemsEntity getMenuItem() {
         return menuItem;
@@ -51,4 +52,6 @@ public class LunchesEntity {
     public void setDay(String day) {
         this.day = day;
     }
+
+    public int getId() { return lunchId; }
 }

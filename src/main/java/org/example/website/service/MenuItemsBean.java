@@ -12,10 +12,7 @@ import org.example.website.entities.LunchesEntity;
 import org.example.website.entities.MenuItemsEntity;
 
 import java.io.Serializable;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Named
 @RequestScoped
@@ -27,6 +24,10 @@ public class MenuItemsBean implements Serializable {
     private MenuItemsEntity menuItem = new MenuItemsEntity();
     private LunchesEntity lunchItem = new LunchesEntity();
     private List<LunchesEntity> lunchItemsList;
+    private String selectedDay; // +getter and setter
+
+    // List or Map to hold weekdays
+    private Map<String, String> weekdays;
 
     private AlacarteMenuItemsEntity aLaCarteItem = new AlacarteMenuItemsEntity();
     private List<AlacarteMenuItemsEntity> aLaCarteItemsList;
@@ -53,6 +54,15 @@ public class MenuItemsBean implements Serializable {
         mainsList = em.createNamedQuery("ALaCarteMenuItems.findMains", AlacarteMenuItemsEntity.class).getResultList();
         dessertsList = em.createNamedQuery("ALaCarteMenuItems.findDesserts", AlacarteMenuItemsEntity.class).getResultList();
         drinksList = em.createNamedQuery("ALaCarteMenuItems.findDrinks", AlacarteMenuItemsEntity.class).getResultList();
+
+        weekdays = new LinkedHashMap<>(); // Preserve insertion order
+        weekdays.put("Monday", "Monday");
+        weekdays.put("Tuesday", "Tuesday");
+        weekdays.put("Wednesday", "Wednesday");
+        weekdays.put("Thursday", "Thursday");
+        weekdays.put("Friday", "Friday");
+        weekdays.put("Saturday", "Saturday");
+        weekdays.put("Sunday", "Sunday");
     }
 
     public List<LunchesEntity> getLunchesBy(String day) {
@@ -70,6 +80,14 @@ public class MenuItemsBean implements Serializable {
         menuItem = new MenuItemsEntity();
         lunchItem = new LunchesEntity();
         init(); // Refresh the events list
+    }
+
+    @Transactional
+    public void deleteLunch(LunchesEntity lunch) {
+        LunchesEntity toDelete = em.find(LunchesEntity.class, lunch.getId());
+        if (toDelete != null) { em.remove(toDelete); }
+        // Refresh the list of lunches to reflect the deletion
+        // init(); // Assuming init() method populates the list of lunches
     }
 
     private void clearEntities() {
@@ -148,4 +166,13 @@ public class MenuItemsBean implements Serializable {
     public List<AlacarteMenuItemsEntity> getDessertsList() { return dessertsList; }
     public List<AlacarteMenuItemsEntity> getDrinksList() { return drinksList; }
 
+    public String getSelectedDay() {
+        return selectedDay;
+    }
+    public void setSelectedDay(String day) {
+        this.selectedDay = day;
+    }
+    public Map<String, String> getWeekDays() {
+        return weekdays;
+    }
 }

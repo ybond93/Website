@@ -1263,3 +1263,122 @@ main {
         padding-top: 4px;
     }
 }
+
+/******************* ADMIN LUNCHES STYLE *******************/
+.week {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Adds space between the day boxes */
+}
+
+.day {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1; /* Each day box will take up equal width */
+    margin-bottom: 20px; /* Adds space below each day */
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+}
+
+.day h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.lunch-table {
+    width: 100%;
+    border-collapse: collapse; /* Remove any default spacing */
+}
+
+.lunch-table th,
+.lunch-table td {
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.event.lunch {
+    background-color: #fff;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column; /* Stack the name, price, and description */
+    gap: 8px; /* Adds space between name, price, and description */
+}
+
+.commandButton {
+    background-color: #d9534f;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    margin: 10px auto 0;
+}
+
+.commandButton:hover {
+    background-color: #c9302c;
+}
+
+#add_lunch_form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: fit-content;
+}
+
+#add_lunch_form input,
+#add_lunch_form textarea,
+#add_lunch_form select {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#add_lunch_form .commandButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: auto;
+    margin-top: 20px;
+}
+
+#add_lunch_form .commandButton:hover {
+    background-color: #45a049;
+}
+
+.chooseDay {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Ensure each 'day' div takes up equal height */
+.week .day {
+    flex: 1 1 calc(33.333% - 40px); /* Assuming there are 3 columns */
+    display: flex;
+    flex-direction: column;
+}
+
+/* To ensure the days have equal height, we set them to stretch the same */
+.day {
+    align-self: stretch;
+}
+
+/* The button will be placed at the bottom of the event lunch container */
+.deleteButton {
+    margin-top: auto;
+}
