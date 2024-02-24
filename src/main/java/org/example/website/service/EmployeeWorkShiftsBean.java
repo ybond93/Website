@@ -24,11 +24,15 @@ public class EmployeeWorkShiftsBean implements Serializable {
     private WorkShiftsEntity workShift = new WorkShiftsEntity();
     private EmployeesEntity employee = new EmployeesEntity();
     private List<EmployeesEntity> employeesList;
+    private List<EmployeesEntity> employeesWorkshiftList;
 
     @PostConstruct
     public void init() {
-        employeesList = em.createQuery("SELECT e FROM EmployeesEntity e JOIN FETCH e.workShifts", EmployeesEntity.class).getResultList();
+        employeesWorkshiftList= em.createQuery("SELECT e FROM EmployeesEntity e JOIN FETCH e.workShifts", EmployeesEntity.class).getResultList();
+        employeesList = em.createNamedQuery("EmployeesEntity.findEmployees", EmployeesEntity.class).getResultList();
+
     }
+
 
     @Transactional
     public void addWorkShift() {

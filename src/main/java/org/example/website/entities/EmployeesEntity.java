@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(
+        name = "EmployeesEntity.findEmployees",
+        query = "SELECT l from  EmployeesEntity l"
+)
 @Entity
 @Table(name = "EMPLOYEES", schema = "restaurang", catalog = "")
 public class EmployeesEntity {
