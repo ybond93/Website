@@ -90,6 +90,15 @@ public class MenuItemsBean implements Serializable {
         // init(); // Assuming init() method populates the list of lunches
     }
 
+    @Transactional
+    public void deleteALaCarteItem(AlacarteMenuItemsEntity item) {
+        AlacarteMenuItemsEntity toDelete = em.find(AlacarteMenuItemsEntity.class, item.getId());
+        if (!em.contains(item)) { item = em.merge(item);}
+        em.remove(item);
+        // Refresh the list of lunches to reflect the deletion
+        init(); // Assuming init() method populates the list of lunches
+    }
+
     private void clearEntities() {
         menuItem = new MenuItemsEntity();
         aLaCarteItem = new AlacarteMenuItemsEntity();

@@ -262,31 +262,155 @@
             </div>
         </section>
 
+        <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+        <!--xxxxxxxxxxxxxxxxxx A La Carte Menu Items xxxxxxxxxxxxxxxx-->
+        <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
         <section id="a-la-carte" class="menu-section">
-            <h2>A la Carte Menu</h2>
-            <!-- A la Carte menu items -->
-            <h:form id="addAlcarteForm">
-                <h2>Add Alcarte</h2>
-                <h:panelGrid columns="2">
-                    <h:outputLabel for="alcarteName" value="Name:" />
-                    <h:inputText id="alcarteName" value="#{menu.alcarte.name}" required="true" />
+            <h2>A La Carte</h2>
+            <!-- ******************* FETCHING STARTERS ******************* -->
+            <div class="aLaCarteSubMenu">
+                <h2>Starters</h2>
+                <div class="getALaCarteItems">
+                    <h:form>
+                        <h:dataTable value="#{menuItemsBean.startersList}" var="starterItem" styleClass="alacarte-table">
+                            <h:column>
+                                <div class="menu-item">
+                                    <span class="menu-name">#{starterItem.menuItem.name}</span>
+                                    <span class="menu-price">#{starterItem.menuItem.price} kr</span>
+                                    <span class="menu-descr">#{starterItem.menuItem.descr}</span>
+                                    <h:commandButton value="Delete" action="#{menuItemsBean.deleteALaCarteItem(starterItem)}" styleClass="delete-button" />
+                                </div>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <!-- Add Starter Form -->
+                <h2>Add Starter</h2>
+                <div class="addALaCarteItem">
+                    <h:form class="alacarte-form">
+                        <h:panelGrid columns="2" styleClass="alacarte-form-grid">
+                            <h:outputLabel for="starterName" value="Name:" styleClass="output-label" />
+                            <h:inputText id="starterName" value="#{menuItemsBean.menuItem.name}" required="true" styleClass="input-text" />
 
-                    <h:outputLabel for="alcartePrice" value="Price:" />
-                    <h:inputText id="alcartePrice" value="#{alcarteBean.alcarte.price}" required="false" />
+                            <h:outputLabel for="starterPrice" value="Price:" styleClass="output-label" />
+                            <h:inputText id="starterPrice" value="#{menuItemsBean.menuItem.price}" required="true" styleClass="input-text" />
 
-                    <h:outputLabel for="alcarteDescr" value="Description:" />
-                    <h:inputTextarea id="alcarteDescr" value="#{alcarteBean.alcarte.descr}" required="false" />
+                            <h:outputLabel for="starterDescr" value="Description:" styleClass="output-label" />
+                            <h:inputTextarea id="starterDescr" value="#{menuItemsBean.menuItem.descr}" required="true" styleClass="input-textarea" />
+                        </h:panelGrid>
+                        <h:commandButton value="Add Starter" action="#{menuItemsBean.addStarter()}" styleClass="command-button" />
+                    </h:form>
+                </div>
+            </div>
 
-                    <h:outputLabel for="alcarteDate" value="Date:" />
-                    <h:inputTextarea id="alcarteDate" value="#{alcarteBean.alcarte.date}" required="false">
-                        <f:convertDateTime pattern="yyyy-MM-dd" />
-                    </h:inputTextarea>
+            <!-- ******************* FETCHING MAIN COURSES ******************* -->
+            <div class="aLaCarteSubMenu">
+                <h2>Main Courses</h2>
+                <div class="getALaCarteItems">
+                    <h:form>
+                        <h:dataTable value="#{menuItemsBean.mainsList}" var="mainItem" styleClass="alacarte-table">
+                            <h:column>
+                                <div class="menu-item">
+                                    <span class="menu-name">#{mainItem.menuItem.name}</span>
+                                    <span class="menu-price">#{mainItem.menuItem.price} kr</span>
+                                    <span class="menu-descr">#{mainItem.menuItem.descr}</span>
+                                    <h:commandButton value="Delete" action="#{menuItemsBean.deleteALaCarteItem(mainItem)}" styleClass="delete-button" />
+                                </div>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <!-- ******************* ADDING MAIN COURSES ******************* -->
+                <h2>Add Main Course</h2>
+                <div class="addALaCarteItem">
+                    <h:form class="alacarte-form">
+                        <h:panelGrid columns="2" styleClass="alacarte-form-grid">
+                            <h:outputLabel for="mainCourseName" value="Name:" styleClass="output-label" />
+                            <h:inputText id="mainCourseName" value="#{menuItemsBean.menuItem.name}" required="true" styleClass="input-text" />
 
-                    <h:outputLabel for="alcarteAllocate" value="Allocate:" />
-                    <h:inputText id="alcarteAllocate" value="#{alcarteBean.alcarte.allocate}" required="true" />
-                </h:panelGrid>
-                <h:commandButton value="Add Alcarte" action="#{alcarteBean.addAlcarte()}" />
-            </h:form>
+                            <h:outputLabel for="mainCoursePrice" value="Price:" styleClass="output-label" />
+                            <h:inputText id="mainCoursePrice" value="#{menuItemsBean.menuItem.price}" required="true" styleClass="input-text" />
+
+                            <h:outputLabel for="mainCourseDescr" value="Description:" styleClass="output-label" />
+                            <h:inputTextarea id="mainCourseDescr" value="#{menuItemsBean.menuItem.descr}" required="true" styleClass="input-textarea" />
+                        </h:panelGrid>
+                        <h:commandButton value="Add Main Course" action="#{menuItemsBean.addMain()}" styleClass="command-button" />
+                    </h:form>
+                </div>
+            </div>
+
+
+            <!-- ******************* FETCHING DESSERTS ******************* -->
+            <div class="aLaCarteSubMenu">
+                <h2>Desserts</h2>
+                <div class="getALaCarteItems">
+                    <h:form>
+                        <h:dataTable value="#{menuItemsBean.dessertsList}" var="dessertItem" styleClass="alacarte-table">
+                            <h:column>
+                                <div class="menu-item">
+                                    <span class="menu-name">#{dessertItem.menuItem.name}</span>
+                                    <span class="menu-price">#{dessertItem.menuItem.price} kr</span>
+                                    <span class="menu-descr">#{dessertItem.menuItem.descr}</span>
+                                    <h:commandButton value="Delete" action="#{menuItemsBean.deleteALaCarteItem(dessertItem)}" styleClass="delete-button" />
+                                </div>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <!-- ******************* ADDING DESSERTS ******************* -->
+                <h2>Add Dessert</h2>
+                <div class="addALaCarteItem">
+                    <h:form class="alacarte-form">
+                        <h:panelGrid columns="2" styleClass="alacarte-form-grid">
+                            <h:outputLabel for="dessertName" value="Name:" styleClass="output-label" />
+                            <h:inputText id="dessertName" value="#{menuItemsBean.menuItem.name}" required="true" styleClass="input-text" />
+
+                            <h:outputLabel for="dessertPrice" value="Price:" styleClass="output-label" />
+                            <h:inputText id="dessertPrice" value="#{menuItemsBean.menuItem.price}" required="true" styleClass="input-text" />
+
+                            <h:outputLabel for="dessertDescr" value="Description:" styleClass="output-label" />
+                            <h:inputTextarea id="dessertDescr" value="#{menuItemsBean.menuItem.descr}" required="true" styleClass="input-textarea" />
+                        </h:panelGrid>
+                        <h:commandButton value="Add Dessert" action="#{menuItemsBean.addDessert()}" styleClass="command-button" />
+                    </h:form>
+                </div>
+            </div>
+
+            <!-- ******************* FETCHING DRINKS ******************* -->
+            <div class="aLaCarteSubMenu">
+                <h2>Drinks</h2>
+                <div class="getALaCarteItems">
+                    <h:form>
+                        <h:dataTable value="#{menuItemsBean.drinksList}" var="drinkItem" styleClass="alacarte-table">
+                            <h:column>
+                                <div class="menu-item">
+                                    <span class="menu-name">#{drinkItem.menuItem.name}</span>
+                                    <span class="menu-price">#{drinkItem.menuItem.price} kr</span>
+                                    <span class="menu-descr">#{drinkItem.menuItem.descr}</span>
+                                    <h:commandButton value="Delete" action="#{menuItemsBean.deleteALaCarteItem(drinkItem)}" styleClass="delete-button" />
+                                </div>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <!-- ******************* ADDING DRINKS ******************* -->
+                <h2>Add Drink</h2>
+                <div class="addALaCarteItem">
+                    <h:form class="alacarte-form">
+                        <h:panelGrid columns="2" styleClass="alacarte-form-grid">
+                            <h:outputLabel for="drinkName" value="Name:" styleClass="output-label" />
+                            <h:inputText id="drinkName" value="#{menuItemsBean.menuItem.name}" required="true" styleClass="input-text" />
+
+                            <h:outputLabel for="drinkPrice" value="Price:" styleClass="output-label" />
+                            <h:inputText id="drinkPrice" value="#{menuItemsBean.menuItem.price}" required="true" styleClass="input-text" />
+
+                            <h:outputLabel for="drinkDescr" value="Description:" styleClass="output-label" />
+                            <h:inputTextarea id="drinkDescr" value="#{menuItemsBean.menuItem.descr}" required="true" styleClass="input-textarea" />
+                        </h:panelGrid>
+                        <h:commandButton value="Add Dessert" action="#{menuItemsBean.addDrink()}" styleClass="command-button" />
+                    </h:form>
+                </div>
+            </div>
         </section>
 
         <section id="schema" class="menu-section">
@@ -308,8 +432,6 @@
                     </div>
                 </div>
             </div>
-
-
         </section>
 
         <section id="events" class="menu-section">

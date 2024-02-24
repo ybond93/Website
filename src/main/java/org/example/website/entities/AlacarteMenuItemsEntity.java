@@ -43,4 +43,6 @@ public class AlacarteMenuItemsEntity {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public int getId() { return carteItemId; }
 }
