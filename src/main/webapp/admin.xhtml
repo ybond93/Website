@@ -434,32 +434,51 @@
             </div>
         </section>
 
+        <!-- *********************** EVENT SECTION ************************* -->
         <section id="events" class="menu-section">
-            <h2>Upcoming Events</h2>
-            <!-- Events details -->
-            <!-- Events that have been added -->
-            <h2>Events</h2>
-            <h:dataTable value="#{eventsBean.events}" var="events">
-                <h:column>#{events.name}</h:column>
-                <h:column>#{events.price}</h:column>
-                <h:column>#{events.descr}</h:column>
-            </h:dataTable>
-
-            <!-- Form to Add Events -->
-            <h:form id="addEventForm">
+            <div class="EventsSection">
+                <h2>Upcoming Events</h2>
+                <div class="getEvents">
+                    <h:form>
+                        <h:dataTable value="#{eventsBean.events}" var="event" styleClass="event-table">
+                            <h:column>
+                                <div class="event_attributes">
+                                    <div class="eventName">
+                                        <h:outputText value="#{event.name}" />
+                                    </div>
+                                    <div class="eventPrice">
+                                        <h:outputText value="#{event.price} kr" />
+                                    </div>
+                                    <div class="eventDescr">
+                                        <h:outputText value="#{event.descr}" />
+                                    </div>
+                                    <!-- Delete Button -->
+                                    <div class="deleteButton">
+                                        <h:commandButton styleClass="commandButton" value="Delete" action="#{eventsBean.deleteEvent(event)}" />
+                                    </div>
+                                </div>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <!-- Form to Add Events -->
                 <h2>Add Event</h2>
-                <h:panelGrid columns="2">
-                    <h:outputLabel for="eventName" value="Name:" />
-                    <h:inputText id="eventName" value="#{eventsBean.event.name}" required="true" />
+                <div class="addEvent">
+                    <h:form id="addEventForm">
+                        <h:panelGrid columns="2">
+                            <h:outputLabel for="eventName" value="Name:" />
+                            <h:inputText id="eventName" value="#{eventsBean.event.name}" required="true" />
 
-                    <h:outputLabel for="eventPrice" value="Price:" />
-                    <h:inputText id="eventPrice" value="#{eventsBean.event.price}" required="false" />
+                            <h:outputLabel for="eventPrice" value="Price:" />
+                            <h:inputText id="eventPrice" value="#{eventsBean.event.price}" required="false" />
 
-                    <h:outputLabel for="eventDescr" value="Description:" />
-                    <h:inputTextarea id="eventDescr" value="#{eventsBean.event.descr}" required="false" />
-                </h:panelGrid>
-                <h:commandButton value="Add Event" action="#{eventsBean.addEvent()}" />
-            </h:form>
+                            <h:outputLabel for="eventDescr" value="Description:" />
+                            <h:inputTextarea id="eventDescr" value="#{eventsBean.event.descr}" required="false" />
+                        </h:panelGrid>
+                        <h:commandButton value="Add Event" action="#{eventsBean.addEvent()}" />
+                    </h:form>
+                </div>
+            </div>
         </section>
     </main>
 

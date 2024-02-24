@@ -97,4 +97,6 @@ public class EventsEntity {
     public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
+
+    public int getId() { return eventId; }
 }

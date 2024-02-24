@@ -6,6 +6,7 @@ import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import org.example.website.entities.AlacarteMenuItemsEntity;
 import org.example.website.entities.EventsEntity;
 
 import java.io.Serializable;
@@ -38,6 +39,15 @@ public class EventsBean implements Serializable {
         event = new EventsEntity();
         // Refresh the events list
         init();
+    }
+
+    @Transactional
+    public void deleteEvent(EventsEntity event) {
+        EventsEntity toDelete = em.find(EventsEntity.class, event.getId());
+        if (!em.contains(event)) { event = em.merge(event);}
+        em.remove(event);
+        // Refresh the list of lunches to reflect the deletion
+        init(); // Assuming init() method populates the list of lunches
     }
 
     public EventsEntity getEvent() {
