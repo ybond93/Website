@@ -1,7 +1,7 @@
 package org.example.website.entities;
 
 import jakarta.persistence.*;
-
+import java.time.LocalTime;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -23,7 +23,7 @@ public class ReservationsEntity {
 
     @Basic
     @Column(name = "RES_TIME")
-    private Time resTime;
+    private String resTime; //byter till string
     @Basic
     @Column(name = "CUST_NAME")
     private String custName;
@@ -52,7 +52,7 @@ public class ReservationsEntity {
     public void setNumOfGuests(int numOfGuests) {
         this.numOfGuests = numOfGuests;
     }
-
+/*
     public Time getResTime() {
         return resTime;
     }
@@ -60,7 +60,14 @@ public class ReservationsEntity {
     public void setResTime(Time resTime) {
         this.resTime = resTime;
     }
+*/
+    public String getResTime() {
+        return resTime;
+    }
 
+    public void setResTime(String resTime) {
+        this.resTime = resTime;
+    }
     public String getCustName() {
         return custName;
     }

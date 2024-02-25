@@ -346,49 +346,27 @@ cookie
             >
                 <div class="booking">
                     <h2>Reservation</h2>
-                    <form>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="name">Your Name</label>
-                                <input
-                                        type="text"
-                                        name="name"
-                                        class="form-control"
-                                        required="true"
-                                />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="email">Your Email</label>
-                                <input
-                                        type="email"
-                                        name="email"
-                                        class="form-control"
-                                        required="true"
-                                />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="date">Booking Date</label>
-                            <input
-                                    type="date"
-                                    name="date"
-                                    class="form-control"
-                                    required="true"
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea
-                                    class="form-control"
-                                    name="message"
-                                    rows="6"
-                                    required="true"
-                            ></textarea>
-                            <div class="text-center">
-                                <button type="submit">Book Table Now</button>
-                            </div>
-                        </div>
-                    </form>
+                    <h:form>
+                        <h:panelGrid>
+                            <h:outputLabel for="reservationsName" value="Name:" />
+                            <h:inputText id="reservationsName" value="#{reservationsBean.reservation.custName}" required="true" />
+
+                            <h:outputLabel for="reservationsNum" value="num:" />
+                            <h:inputText id="reservationsNum" value="#{reservationsBean.reservation.numOfGuests}" required="true" />
+                            <h:outputLabel for="reservationsTime" value="Time:" />
+                            <h:inputText id="reservationsTime" value="#{reservationsBean.reservation.resTime}" type="time" required="true" />
+
+                            <h:outputLabel for="reservationsDay" value="Day:" />
+                            <h:inputText id="reservationsDay" value="#{reservationsBean.reservation.resDay}"  required="true" />
+                            <h:outputLabel for="reservationsMonth" value="Month:" />
+                            <h:inputText id="reservationsMonth" value="#{reservationsBean.reservation.resMonth}" required="true" />
+
+
+
+                        </h:panelGrid>
+                        <h:commandButton value="book" action="#{reservationsBean.addReservation()}" />
+                    </h:form>
+
                 </div>
             </div>
             <!--login form-->

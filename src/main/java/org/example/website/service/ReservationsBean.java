@@ -11,6 +11,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.core.GenericType;
+import org.example.website.entities.EventsEntity;
 import org.example.website.entities.ReservationsEntity;
 import java.io.Serializable;
 import java.util.List;
@@ -20,7 +21,8 @@ import jakarta.ws.rs.client.Entity;
 @Named
 @RequestScoped
 public class ReservationsBean implements Serializable {
-
+    @PersistenceContext
+    private EntityManager em;
     // for fetching
     private List<ReservationsEntity> reservationsList;
 
@@ -29,12 +31,7 @@ public class ReservationsBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        try (Client client = ClientBuilder.newClient()) {
-            this.reservationsList = client.target("http://localhost:8080/Website-1.0-SNAPSHOT/api/reservations")
-                    .request()
-                    .get(new GenericType<List<ReservationsEntity>>() {
-                    });
-        }
+        reservationsList = em.createNamedQuery("ReservationsEntity.findAll", ReservationsEntity.class).getResultList();
     }
 
     public ReservationsEntity getReservation() { return reservation; }
@@ -43,21 +40,11 @@ public class ReservationsBean implements Serializable {
         return reservationsList;
     }
 
+    @Transactional
     public void addReservation() {
-        try (Client client = ClientBuilder.newClient()) {
-            try (Response response = client.target("http://localhost:8080/Website-1.0-SNAPSHOT/api/reservations")
-                    .request()
-                    .post(Entity.json(reservation))) {
-
-                if (response.getStatus() == Response.Status.OK.getStatusCode()) {
-                    // Handle success (e.g., adding to the local list, showing success message)
-                    reservationsList.add(reservation);
-                } else {
-                    // Handle error
-                }
-            }
-        }
+        em.persist(reservation);
         // Reset the newMenuItem for the next entry
         reservation = new ReservationsEntity();
+        init();
     }
 }
