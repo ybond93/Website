@@ -347,25 +347,35 @@ cookie
                 <div class="booking">
                     <h2>Reservation</h2>
                     <h:form>
+                        <div class="row">
+                        <div class="form-group col-md-6">
                         <h:panelGrid>
                             <h:outputLabel for="reservationsName" value="Name:" />
                             <h:inputText id="reservationsName" value="#{reservationsBean.reservation.custName}" required="true" />
 
                             <h:outputLabel for="reservationsNum" value="num:" />
-                            <h:inputText id="reservationsNum" value="#{reservationsBean.reservation.numOfGuests}" required="true" />
+                            <h:inputText id="reservationsNum" value="#{reservationsBean.reservation.numOfGuests}" required="true">
+                                <f:convertNumber integerOnly="true"/>
+                            </h:inputText>
                             <h:outputLabel for="reservationsTime" value="Time:" />
                             <h:inputText id="reservationsTime" value="#{reservationsBean.reservation.resTime}" type="time" required="true" />
 
                             <h:outputLabel for="reservationsDay" value="Day:" />
-                            <h:inputText id="reservationsDay" value="#{reservationsBean.reservation.resDay}"  required="true" />
+                            <h:inputText id="reservationsDay" value="#{reservationsBean.reservation.resDay}"  required="true">
+                                <f:convertNumber integerOnly="true"/>
+                            </h:inputText>
                             <h:outputLabel for="reservationsMonth" value="Month:" />
                             <h:inputText id="reservationsMonth" value="#{reservationsBean.reservation.resMonth}" required="true" />
 
 
 
                         </h:panelGrid>
+
                         <h:commandButton value="book" action="#{reservationsBean.addReservation()}" />
+                        </div>
+                        </div>
                     </h:form>
+
 
                 </div>
             </div>
@@ -382,7 +392,7 @@ cookie
             <div
                     data-aos="fade-left"
                     data-aos-delay="500"
-                    class="col-xl-3 col-md-6 app-download"
+                        class="col-xl-3 col-md-6 app-download"
             >
                 <h2>Admin ONLY</h2>
                 <h4>Log In</h4>
