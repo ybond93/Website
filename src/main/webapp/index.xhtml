@@ -185,8 +185,23 @@ cookie
                 <button type="meny" class="page-btn" onclick="openPopup()">Meny and Veckans Meny<i class="bi bi-arrow-right"></i></button>
                 <div class="popup" id="popup">
                     <img src="./resources/images/lunch.png" alt="Tick"/>
-                    <h2>Meny</h2>
-                    <p>Maträtt1</p>
+                    <h2>Weeks Lunches</h2>
+                    <div class="aLaCarteSubMenu">
+                        <div class="getALaCarteItems">
+                            <h:form>
+                                <h:dataTable value="#{menuItemsBean.lunchItemsList}" var="lunchItem" styleClass="alacarte-table">
+                                    <h:column>
+                                        <div class="menu-item">
+                                            <span class="menu-name">#{lunchItem.day}</span>
+                                            <span class="menu-name">#{lunchItem.menuItem.name}</span>
+                                            <span class="menu-price">#{lunchItem.menuItem.price}:-</span>
+                                            <span class="menu-descr">#{lunchItem.menuItem.descr}</span>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </div>
+                    </div>
                     <button type="button" onclick="closePopup()">OK</button>
                 </div>
             </div>
