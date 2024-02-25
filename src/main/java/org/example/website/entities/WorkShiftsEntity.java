@@ -21,7 +21,7 @@ public class WorkShiftsEntity {
     private Integer year;
     @Basic
     @Column(name = "MONTH")
-    private Integer month;
+    private String month;
     @Basic
     @Column(name = "DAY")
     private Integer day;
@@ -54,11 +54,11 @@ public class WorkShiftsEntity {
         this.year = year;
     }
 
-    public Integer getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public void setMonth(Integer month) {
+    public void setMonth(String month) {
         this.month = month;
     }
 

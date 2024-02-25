@@ -26,77 +26,77 @@ USE restaurang;
 
 -- Creates
 CREATE TABLE MENU_ITEMS (
-                            MENU_ITEM_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            NAME VARCHAR(50) NOT NULL,
-                            PRICE DOUBLE,
-                            DESCR VARCHAR(200)
+    MENU_ITEM_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NAME VARCHAR(50) NOT NULL,
+    PRICE DOUBLE,
+    DESCR VARCHAR(200)
 );
 
 CREATE TABLE LUNCHES (
-                         LUNCH_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                         MENU_ITEM_ID INT NOT NULL,
-                         YEAR VARCHAR(30),
-                         MONTH VARCHAR(30),
-                         DAY VARCHAR(30)
+    LUNCH_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    MENU_ITEM_ID INT NOT NULL,
+    YEAR VARCHAR(30),
+    MONTH VARCHAR(30),
+    DAY VARCHAR(30)
 );
 
 CREATE TABLE ALACARTE_MENU_ITEMS (
-                                     CARTE_ITEM_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                                     MENU_ITEM_ID INT NOT NULL,
-                                     CATEGORY VARCHAR(40)
+    CARTE_ITEM_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    MENU_ITEM_ID INT NOT NULL,
+    CATEGORY VARCHAR(40)
 );
 
 CREATE TABLE EVENTS (
-                        EVENT_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        NAME VARCHAR(50) NOT NULL,
-                        PRICE INT,
-                        DESCR VARCHAR(200),
-                        EVENT_YEAR INT,
-                        EVENT_MONTH INT,
-                        EVENT_DAY INT,
-                        START_TIME TIME -- dont need startTime can be special day
+    EVENT_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NAME VARCHAR(50) NOT NULL,
+    PRICE INT,
+    DESCR VARCHAR(200),
+    EVENT_YEAR INT,
+    EVENT_MONTH VARCHAR(30),
+    EVENT_DAY INT,
+    START_TIME TIME -- dont need startTime can be special day
 );
 
 CREATE TABLE RESERVATIONS (
-                              RES_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                              NUM_OF_GUESTS INT NOT NULL,
-                              RES_DATE DATE NOT NULL,
-                              RES_TIME TIME NOT NULL,
-                              CUST_NAME VARCHAR(40) NOT NULL
+    RES_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NUM_OF_GUESTS INT NOT NULL,
+    RES_DATE DATE NOT NULL,
+    RES_TIME TIME NOT NULL,
+    CUST_NAME VARCHAR(40) NOT NULL
 );
 
 CREATE TABLE EMPLOYEES (
-                           EMP_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                           F_NAME VARCHAR(40) NOT NULL,
-                           L_NAME VARCHAR(40) NOT NULL
+    EMP_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    F_NAME VARCHAR(40) NOT NULL,
+    L_NAME VARCHAR(40) NOT NULL
 );
 
 CREATE TABLE WORK_SHIFTS (
-                             SHIFT_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                             EMP_ID INT NOT NULL,
-                             SHIFT_TYPE VARCHAR(20) NOT NULL, -- morning or evening shift?
-                             YEAR INT,
-                             MONTH INT,
-                             DAY INT
+    SHIFT_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    EMP_ID INT NOT NULL,
+    SHIFT_TYPE VARCHAR(20) NOT NULL, -- morning or evening shift?
+    YEAR INT,
+    MONTH VARCHAR(30),
+    DAY INT
 );
 
 CREATE TABLE TABLES (
-                        TABLE_NUM INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        CAPACITY INT,
-                        STATUS VARCHAR(20)
+    TABLE_NUM INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    CAPACITY INT,
+    STATUS VARCHAR(20)
 );
 
 CREATE TABLE ORDERS (
-                        ORDER_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        EMP_ID INT NOT NULL,
-                        TABLE_NUM INT NOT NULL -- dont need to always have number?
+    ORDER_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    EMP_ID INT NOT NULL,
+    TABLE_NUM INT NOT NULL -- dont need to always have number?
 );
 
 CREATE TABLE MENU_ITEM_ORDERS (
-                                  MENU_ITEM_ID INT NOT NULL,
-                                  ORDER_ID INT NOT NULL,
-                                  ORDER_DATE DATE NOT NULL,
-                                  ORDER_QUANTITY INT NOT NULL
+    MENU_ITEM_ID INT NOT NULL,
+    ORDER_ID INT NOT NULL,
+    ORDER_DATE DATE NOT NULL,
+    ORDER_QUANTITY INT NOT NULL
 );
 
 -- Primary Key Constraints
@@ -226,30 +226,30 @@ INSERT INTO LUNCHES (MENU_ITEM_ID, DAY) VALUES
                                             (19, 'Sunday'), (20, 'Sunday'), (21, 'Sunday');
 
 INSERT INTO ALACARTE_MENU_ITEMS (MENU_ITEM_ID, CATEGORY) VALUES
-                                                             (22, 'Drink'), (23, 'Drink'), (24, 'Drink'), (25, 'Drink'),
-                                                             (26, 'Drink'), (27, 'Drink'), (28, 'Drink'), (29, 'Drink'),
-                                                             (30, 'Drink'), (31, 'Drink'),
-                                                             (32, 'Starter'), (33, 'Starter'), (34, 'Starter'), (35, 'Starter'),
-                                                             (36, 'Starter'), (37, 'Starter'), (38, 'Starter'), (39, 'Starter'),
-                                                             (40, 'Starter'), (41, 'Starter'),
-                                                             (42, 'Main'), (43, 'Main'), (44, 'Main'), (45, 'Main'),
-                                                             (46, 'Main'), (47, 'Main'), (48, 'Main'), (49, 'Main'),
-                                                             (50, 'Main'), (51, 'Main'),
-                                                             (52, 'Dessert'), (53, 'Dessert'), (54, 'Dessert'), (55, 'Dessert'),
-                                                             (56, 'Dessert'), (57, 'Dessert'), (58, 'Dessert'), (59, 'Dessert'),
-                                                             (60, 'Dessert'), (61, 'Dessert');
+(22, 'Drink'), (23, 'Drink'), (24, 'Drink'), (25, 'Drink'),
+(26, 'Drink'), (27, 'Drink'), (28, 'Drink'), (29, 'Drink'),
+(30, 'Drink'), (31, 'Drink'),
+(32, 'Starter'), (33, 'Starter'), (34, 'Starter'), (35, 'Starter'),
+(36, 'Starter'), (37, 'Starter'), (38, 'Starter'), (39, 'Starter'),
+(40, 'Starter'), (41, 'Starter'),
+(42, 'Main'), (43, 'Main'), (44, 'Main'), (45, 'Main'),
+(46, 'Main'), (47, 'Main'), (48, 'Main'), (49, 'Main'),
+(50, 'Main'), (51, 'Main'),
+(52, 'Dessert'), (53, 'Dessert'), (54, 'Dessert'), (55, 'Dessert'),
+(56, 'Dessert'), (57, 'Dessert'), (58, 'Dessert'), (59, 'Dessert'),
+(60, 'Dessert'), (61, 'Dessert');
 
 INSERT INTO EVENTS (NAME, PRICE, DESCR, EVENT_YEAR, EVENT_MONTH, EVENT_DAY) VALUES
-                                                                                ('Jazz Night', 15, 'An evening of classic jazz with live performers.', 2024, 3, 5),
-                                                                                ('Wine Tasting', 30, 'Sample a variety of wines from local vineyards.', 2024, 3, 12),
-                                                                                ('Salsa Dance Workshop', 25, 'Learn to salsa from professional dancers in a 3-hour workshop.', 2024, 4, 9),
-                                                                                ('Italian Cooking Class', 40, 'Hands-on cooking class featuring regional Italian dishes.', 2024, 4, 22),
-                                                                                ('Summer Solstice Yoga', 20, 'Sunrise yoga session to celebrate the longest day of the year.', 2024, 6, 21),
-                                                                                ('Open Mic Comedy Night', 10, 'Laugh out loud with local comedians.', 2024, 7, 14),
-                                                                                ('Indie Film Screening', 12, 'Exclusive screening of a new indie film.', 2024, 8, 18),
-                                                                                ('Outdoor Rock Festival', 50, 'Spend the day rocking out to the biggest bands.', 2024, 9, 5),
-                                                                                ('Halloween Haunted House', 18, 'Explore our spooky haunted house if you dare!', 2024, 10, 31),
-                                                                                ('New Year’s Eve Bash', 100, 'Ring in the new year with a grand celebration.', 2024, 12, 31);
+    ('Jazz Night', 15, 'An evening of classic jazz with live performers.', 2024, 'March', 5),
+    ('Wine Tasting', 30, 'Sample a variety of wines from local vineyards.', 2024, 'March', 12),
+    ('Salsa Dance Workshop', 25, 'Learn to salsa from professional dancers in a 3-hour workshop.', 2024, 'April', 9),
+    ('Italian Cooking Class', 40, 'Hands-on cooking class featuring regional Italian dishes.', 2024, 'April', 22),
+    ('Summer Solstice Yoga', 20, 'Sunrise yoga session to celebrate the longest day of the year.', 2024, 'June', 21),
+    ('Open Mic Comedy Night', 10, 'Laugh out loud with local comedians.', 2024, 'July', 14),
+    ('Indie Film Screening', 12, 'Exclusive screening of a new indie film.', 2024, 'August', 18),
+    ('Outdoor Rock Festival', 50, 'Spend the day rocking out to the biggest bands.', 2024, 'September', 5),
+    ('Halloween Haunted House', 18, 'Explore our spooky haunted house if you dare!', 2024, 'October', 31),
+    ('New Year’s Eve Bash', 100, 'Ring in the new year with a grand celebration.', 2024, 'December', 31);
 
 INSERT INTO EMPLOYEES (F_NAME, L_NAME) VALUES ('Mark', 'Dillon');
 INSERT INTO EMPLOYEES (F_NAME, L_NAME) VALUES ('Sandra', 'Roman');
@@ -268,14 +268,14 @@ INSERT INTO EMPLOYEES (F_NAME, L_NAME) VALUES ('Collin', 'Jones');
 INSERT INTO EMPLOYEES (F_NAME, L_NAME) VALUES ('Maurice', 'Harris');
 
 INSERT INTO WORK_SHIFTS (EMP_ID, SHIFT_TYPE, YEAR, MONTH, DAY) VALUES
-                                                                   (1, 'Morning', 2024, 3, 1),
-                                                                   (3, 'Evening', 2024, 3, 1),
-                                                                   (5, 'Morning', 2024, 3, 2),
-                                                                   (7, 'Evening', 2024, 3, 2),
-                                                                   (9, 'Morning', 2024, 3, 3),
-                                                                   (11, 'Evening', 2024, 3, 3),
-                                                                   (13, 'Morning', 2024, 3, 4),
-                                                                   (15, 'Evening', 2024, 3, 4);
+(1, 'Morning', 2024, 'March', 1),
+(3, 'Evening', 2024, 'March', 1),
+(5, 'Morning', 2024, 'March', 2),
+(7, 'Evening', 2024, 'March', 2),
+(9, 'Morning', 2024, 'April', 3),
+(11, 'Evening', 2024, 'April', 3),
+(13, 'Morning', 2024, 'April', 4),
+(15, 'Evening', 2024, 'April', 4);
 
 /***************************** Queries *******************************/
 -- Get all lunches

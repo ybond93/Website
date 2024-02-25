@@ -26,7 +26,7 @@ public class EventsEntity {
     private Integer eventYear;
     @Basic
     @Column(name = "EVENT_MONTH")
-    private Integer eventMonth;
+    private String eventMonth;
     @Basic
     @Column(name = "EVENT_DAY")
     private Integer eventDay;
@@ -74,11 +74,11 @@ public class EventsEntity {
         this.eventYear = eventYear;
     }
 
-    public Integer getEventMonth() {
+    public String getEventMonth() {
         return eventMonth;
     }
 
-    public void setEventMonth(Integer eventMonth) {
+    public void setEventMonth(String eventMonth) {
         this.eventMonth = eventMonth;
     }
 
