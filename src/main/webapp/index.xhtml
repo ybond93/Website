@@ -304,36 +304,25 @@ cookie
                 <!-- Event Carousel Content -->
                 <div id="carouselEvents" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        <!-- Event 1 -->
-                        <div class="carousel-item active">
-                            <div class="row align-items-center">
-                                <div class="col-md-7">
-                                    <h3>Event 1: Smakupplevelse under stjärnorna</h3>
-                                    <p>Beskrivning: Kom och delta i vår speciella evenemangsnatt, "Smakupplevelse under stjärnorna." Vi bjuder på en oförglömlig kväll med utsökt mat, live-musik och underhållning.</p>
-                                    <p><strong>Datum:</strong> [Datum]</p>
-                                    <p><strong>Tid:</strong> [Tid]</p>
-                                    <p><strong>Pris:</strong> [Pris] per person</p>
-                                </div>
-                                <div class="col-md-5">
-                                    <img src="./resources/images/event.png" class="d-block w-100" alt="Event Image"/>
+                        <!-- Use JSF to iterate through events -->
+                        <ui:repeat var="event" value="#{eventsBean.events}" varStatus="status">
+                            <div class="#{status.first ? 'carousel-item active' : 'carousel-item'}">
+                                <div class="row align-items-center">
+                                    <div class="col-md-7">
+                                        <h3>#{event.name}</h3>
+                                        <p>#{event.descr}</p>
+                                        <p><strong>Date:</strong> #{event.eventYear}-#{event.eventMonth}-#{event.eventDay}</p>
+                                        <p><strong>Price:</strong> #{event.price} per person</p>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <img src="./resources/images/event.png" class="d-block w-100" alt="Event Image"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Event 2 -->
-                        <div class="carousel-item">
-                            <!-- Event 2 content goes here -->
-                        </div>
-
-                        <!-- Event 3 -->
-                        <div class="carousel-item">
-                            <!-- Event 3 content goes here -->
-                        </div>
-
-                        <!-- Add more events as needed -->
+                        </ui:repeat>
                     </div>
 
-                    <!-- Carousel controls (if needed) -->
+                    <!-- Carousel controls -->
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselEvents" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
