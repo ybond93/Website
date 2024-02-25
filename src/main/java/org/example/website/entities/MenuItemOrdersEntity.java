@@ -1,7 +1,10 @@
 package org.example.website.entities;
 
 import jakarta.persistence.*;
-
+@NamedQuery(
+        name = "MenuItemOrdersEntity.findAll",
+        query = "SELECT l FROM MenuItemOrdersEntity l"
+)
 @Entity
 @jakarta.persistence.Table(name = "MENU_ITEM_ORDERS", schema = "restaurang", catalog = "")
 @jakarta.persistence.IdClass(org.example.website.entities.MenuItemOrdersEntityPK.class)

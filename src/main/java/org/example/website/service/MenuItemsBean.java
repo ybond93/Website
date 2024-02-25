@@ -116,6 +116,11 @@ public class MenuItemsBean implements Serializable {
     /****** Getters and Setters *******/
     // Menu items
     public MenuItemsEntity getMenuItem() { return menuItem; }
+
+    public List<MenuItemsEntity> getMenuItemList() {
+        return menuItemList;
+    }
+
     public void setMenuItem(MenuItemsEntity menuItem) {
         this.menuItem = menuItem;
     }

@@ -216,11 +216,11 @@
             <h:commandButton value="Add Order" action="#{ordersBean.addOrder()}" />
         </h:form>
         <h2>Menu items </h2>
-        <h:dataTable value="#{menuItemsBean.menuItems}" var="menuItems">
+        <h:dataTable value="#{menuItemsBean.menuItemList}" var="menuItems">
             <h:column>#{menuItems.name}</h:column>
-            <h:column>#{menuItems.price}</h:column>
-            <h:column>#{menuItem.descr}</h:column>
-            <h:column>#{menuItem.id}</h:column>
+            <h:column>#{menuItems.price}</h:column>//
+            <h:column>#{menuItems.descr}</h:column>
+            <h:column>#{menuItems.id}</h:column>
         </h:dataTable>
     </div>
 </h:body>
