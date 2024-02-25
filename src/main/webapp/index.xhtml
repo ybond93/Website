@@ -87,11 +87,16 @@ cookie
                         <!-- one row contains 12 columns 5 + 7 =12  -->
                         <div class="content col-xl-5 col-md-12">
                             <h1 data-aos="fade-down">Dagens Lunch</h1>
-                            <p data-aos="fade-right" data-aos-delay="300">
-                                Självdagens lunch är grillad kyckling med kryddade grönsaker och citronörtsås.
-                                För vegetarianer finns en fyllig spenat- och fetaostfylld portobellachampinjon
-                                med balsamico. Avsluta måltiden med chokladlavakaka eller en fräsch fruktsallad som efterrätt.
-                            </p>
+                            <h:dataTable value="#{menuItemsBean.getLunchesBy(menuItemsBean.currentDay, 'BUFFET')}" var="lunchItem" styleClass="lunch-table">
+                                <h:column>
+
+                                    <p data-aos="fade-right" data-aos-delay="300">
+                                        <h:outputText value="#{lunchItem.menuItem.name}" />
+                                        <br />
+                                        <h:outputText value="#{lunchItem.menuItem.descr}" />
+                                    </p>
+                                </h:column>
+                            </h:dataTable>
 
                         </div>
 
@@ -114,10 +119,15 @@ cookie
                         <div class="content col-xl-5 col-md-12">
                             <h1>Soppa</h1>
                             <p>
-                                Sopplunchen idag är en krämig och värmande potatis- och purjolökssoppa
-                                toppad med färsk persilja. För den som föredrar något lättare finns en
-                                fräsch grönsakssoppa med en touch av ingefära och lime. Komplettera din
-                                måltid med nybakat bröd och en sallad på sidan.
+                                <h:dataTable value="#{menuItemsBean.getLunchesBy(menuItemsBean.currentDay, 'SOUP')}" var="lunchItem" styleClass="lunch-table">
+                                    <h:column>
+                                        <p data-aos="fade-right" data-aos-delay="300">
+                                            <h:outputText value="#{lunchItem.menuItem.name}" />
+                                            <br />
+                                            <h:outputText value="#{lunchItem.menuItem.descr}" />
+                                        </p>
+                                    </h:column>
+                                </h:dataTable>
                             </p>
 
                         </div>
@@ -366,9 +376,6 @@ cookie
                             </h:inputText>
                             <h:outputLabel for="reservationsMonth" value="Month:" />
                             <h:inputText id="reservationsMonth" value="#{reservationsBean.reservation.resMonth}" required="true" />
-
-
-
                         </h:panelGrid>
 
                         <h:commandButton value="book" action="#{reservationsBean.addReservation()}" />

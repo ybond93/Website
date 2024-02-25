@@ -26,77 +26,80 @@ USE restaurang;
 
 -- Creates
 CREATE TABLE MENU_ITEMS (
-                            MENU_ITEM_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            NAME VARCHAR(50) NOT NULL,
-                            PRICE DOUBLE,
-                            DESCR VARCHAR(200)
+    MENU_ITEM_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NAME VARCHAR(50) NOT NULL,
+    PRICE DOUBLE,
+    DESCR VARCHAR(200)
 );
 
 CREATE TABLE LUNCHES (
-                         LUNCH_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                         MENU_ITEM_ID INT NOT NULL,
-                         YEAR VARCHAR(30),
-                         MONTH VARCHAR(30),
-                         DAY VARCHAR(30)
+    LUNCH_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    MENU_ITEM_ID INT NOT NULL,
+    YEAR VARCHAR(30),
+    MONTH VARCHAR(30),
+    TYPE VARCHAR(30),
+    DAY VARCHAR(30)
 );
 
 CREATE TABLE ALACARTE_MENU_ITEMS (
-                                     CARTE_ITEM_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                                     MENU_ITEM_ID INT NOT NULL,
-                                     CATEGORY VARCHAR(40)
+    CARTE_ITEM_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    MENU_ITEM_ID INT NOT NULL,
+    CATEGORY VARCHAR(40)
 );
 
 CREATE TABLE EVENTS (
-                        EVENT_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        NAME VARCHAR(50) NOT NULL,
-                        PRICE INT,
-                        DESCR VARCHAR(200),
-                        EVENT_YEAR INT,
-                        EVENT_MONTH INT,
-                        EVENT_DAY INT,
-                        START_TIME TIME -- dont need startTime can be special day
+    EVENT_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NAME VARCHAR(50) NOT NULL,
+    PRICE INT,
+    DESCR VARCHAR(200),
+    EVENT_YEAR INT,
+    EVENT_MONTH INT,
+    EVENT_DAY INT,
+    START_TIME TIME -- dont need startTime can be special day
 );
 
 CREATE TABLE RESERVATIONS (
-                              RES_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                              NUM_OF_GUESTS INT NOT NULL,
-                              RES_DATE DATE NOT NULL,
-                              RES_TIME TIME NOT NULL,
-                              CUST_NAME VARCHAR(40) NOT NULL
+    RES_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NUM_OF_GUESTS INT NOT NULL,
+    RES_YEAR INT,
+    RES_MONTH VARCHAR(30),
+    RES_DAY INT,
+    RES_TIME TIME NOT NULL,
+    CUST_NAME VARCHAR(40) NOT NULL
 );
 
 CREATE TABLE EMPLOYEES (
-                           EMP_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                           F_NAME VARCHAR(40) NOT NULL,
-                           L_NAME VARCHAR(40) NOT NULL
+    EMP_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    F_NAME VARCHAR(40) NOT NULL,
+    L_NAME VARCHAR(40) NOT NULL
 );
 
 CREATE TABLE WORK_SHIFTS (
-                             SHIFT_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                             EMP_ID INT NOT NULL,
-                             SHIFT_TYPE VARCHAR(20) NOT NULL, -- morning or evening shift?
-                             YEAR INT,
-                             MONTH INT,
-                             DAY INT
+    SHIFT_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    EMP_ID INT NOT NULL,
+    SHIFT_TYPE VARCHAR(20) NOT NULL, -- morning or evening shift?
+    YEAR INT,
+    MONTH INT,
+    DAY INT
 );
 
 CREATE TABLE TABLES (
-                        TABLE_NUM INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        CAPACITY INT,
-                        STATUS VARCHAR(20)
+    TABLE_NUM INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    CAPACITY INT,
+    STATUS VARCHAR(20)
 );
 
 CREATE TABLE ORDERS (
-                        ORDER_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        EMP_ID INT NOT NULL,
-                        TABLE_NUM INT NOT NULL -- dont need to always have number?
+    ORDER_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    EMP_ID INT NOT NULL,
+    TABLE_NUM INT NOT NULL -- dont need to always have number?
 );
 
 CREATE TABLE MENU_ITEM_ORDERS (
-                                  MENU_ITEM_ID INT NOT NULL,
-                                  ORDER_ID INT NOT NULL,
-                                  ORDER_DATE DATE NOT NULL,
-                                  ORDER_QUANTITY INT NOT NULL
+    MENU_ITEM_ID INT NOT NULL,
+    ORDER_ID INT NOT NULL,
+    ORDER_DATE DATE NOT NULL,
+    ORDER_QUANTITY INT NOT NULL
 );
 
 -- Primary Key Constraints
@@ -205,51 +208,51 @@ VALUES
 -- A LA CARTE - DESSERTS
 INSERT INTO MENU_ITEMS (NAME, PRICE, DESCR)
 VALUES
-    ('Cheesecake', 6.99, 'Creamy cheesecake on a graham cracker crust with a berry compote.'),
-    ('Chocolate Lava Cake', 7.49, 'Warm chocolate cake with a gooey center, served with vanilla ice cream.'),
-    ('Tiramisu', 6.49, 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream.'),
-    ('Apple Pie', 5.99, 'Traditional apple pie with a flaky crust, served with whipped cream.'),
-    ('Creme Brulee', 6.99, 'Rich custard base topped with a layer of hardened caramelized sugar.'),
-    ('Lemon Tart', 5.99, 'Tart and refreshing lemon custard in a crisp pastry shell.'),
-    ('Panna Cotta', 6.49, 'Smooth Italian dessert of sweetened cream thickened with gelatin and molded.'),
-    ('Fruit Sorbet', 4.99, 'Light and refreshing sorbet made with seasonal fruit.'),
-    ('Brownie Sundae', 7.99, 'Warm brownie topped with vanilla ice cream, chocolate sauce, and whipped cream.'),
-    ('Baklava', 5.49, 'Sweet dessert pastry made of layers of filo filled with chopped nuts and sweetened with honey.');
+('Cheesecake', 6.99, 'Creamy cheesecake on a graham cracker crust with a berry compote.'),
+('Chocolate Lava Cake', 7.49, 'Warm chocolate cake with a gooey center, served with vanilla ice cream.'),
+('Tiramisu', 6.49, 'Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream.'),
+('Apple Pie', 5.99, 'Traditional apple pie with a flaky crust, served with whipped cream.'),
+('Creme Brulee', 6.99, 'Rich custard base topped with a layer of hardened caramelized sugar.'),
+('Lemon Tart', 5.99, 'Tart and refreshing lemon custard in a crisp pastry shell.'),
+('Panna Cotta', 6.49, 'Smooth Italian dessert of sweetened cream thickened with gelatin and molded.'),
+('Fruit Sorbet', 4.99, 'Light and refreshing sorbet made with seasonal fruit.'),
+('Brownie Sundae', 7.99, 'Warm brownie topped with vanilla ice cream, chocolate sauce, and whipped cream.'),
+('Baklava', 5.49, 'Sweet dessert pastry made of layers of filo filled with chopped nuts and sweetened with honey.');
 
-INSERT INTO LUNCHES (MENU_ITEM_ID, DAY) VALUES
-                                            (1, 'Monday'), (2, 'Monday'), (3, 'Monday'),
-                                            (4, 'Tuesday'), (5, 'Tuesday'), (6, 'Tuesday'),
-                                            (7, 'Wednesday'), (8, 'Wednesday'), (9, 'Wednesday'),
-                                            (10, 'Thursday'), (11, 'Thursday'), (12, 'Thursday'),
-                                            (13, 'Friday'), (14, 'Friday'), (15, 'Friday'),
-                                            (16, 'Saturday'), (17, 'Saturday'), (18, 'Saturday'),
-                                            (19, 'Sunday'), (20, 'Sunday'), (21, 'Sunday');
+INSERT INTO LUNCHES (MENU_ITEM_ID, TYPE, DAY) VALUES
+(1, 'SOUP', 'Monday'), (2, 'BUFFET', 'Monday'), (3, 'BUFFET', 'Monday'),
+(4, 'SOUP', 'Tuesday'), (5, 'BUFFET', 'Tuesday'), (6, 'BUFFET', 'Tuesday'),
+(7, 'SOUP', 'Wednesday'), (8, 'BUFFET', 'Wednesday'), (9, 'BUFFET', 'Wednesday'),
+(10, 'SOUP', 'Thursday'), (11, 'BUFFET', 'Thursday'), (12, 'BUFFET', 'Thursday'),
+(13, 'SOUP', 'Friday'), (14, 'BUFFET', 'Friday'), (15, 'BUFFET', 'Friday'),
+(16, 'SOUP', 'Saturday'), (17, 'BUFFET', 'Saturday'), (18, 'BUFFET', 'Saturday'),
+(19, 'SOUP', 'Sunday'), (20, 'BUFFET', 'Sunday'), (21, 'BUFFET', 'Sunday');
 
 INSERT INTO ALACARTE_MENU_ITEMS (MENU_ITEM_ID, CATEGORY) VALUES
-                                                             (22, 'Drink'), (23, 'Drink'), (24, 'Drink'), (25, 'Drink'),
-                                                             (26, 'Drink'), (27, 'Drink'), (28, 'Drink'), (29, 'Drink'),
-                                                             (30, 'Drink'), (31, 'Drink'),
-                                                             (32, 'Starter'), (33, 'Starter'), (34, 'Starter'), (35, 'Starter'),
-                                                             (36, 'Starter'), (37, 'Starter'), (38, 'Starter'), (39, 'Starter'),
-                                                             (40, 'Starter'), (41, 'Starter'),
-                                                             (42, 'Main'), (43, 'Main'), (44, 'Main'), (45, 'Main'),
-                                                             (46, 'Main'), (47, 'Main'), (48, 'Main'), (49, 'Main'),
-                                                             (50, 'Main'), (51, 'Main'),
-                                                             (52, 'Dessert'), (53, 'Dessert'), (54, 'Dessert'), (55, 'Dessert'),
-                                                             (56, 'Dessert'), (57, 'Dessert'), (58, 'Dessert'), (59, 'Dessert'),
-                                                             (60, 'Dessert'), (61, 'Dessert');
+(22, 'Drink'), (23, 'Drink'), (24, 'Drink'), (25, 'Drink'),
+(26, 'Drink'), (27, 'Drink'), (28, 'Drink'), (29, 'Drink'),
+(30, 'Drink'), (31, 'Drink'),
+(32, 'Starter'), (33, 'Starter'), (34, 'Starter'), (35, 'Starter'),
+(36, 'Starter'), (37, 'Starter'), (38, 'Starter'), (39, 'Starter'),
+(40, 'Starter'), (41, 'Starter'),
+(42, 'Main'), (43, 'Main'), (44, 'Main'), (45, 'Main'),
+(46, 'Main'), (47, 'Main'), (48, 'Main'), (49, 'Main'),
+(50, 'Main'), (51, 'Main'),
+(52, 'Dessert'), (53, 'Dessert'), (54, 'Dessert'), (55, 'Dessert'),
+(56, 'Dessert'), (57, 'Dessert'), (58, 'Dessert'), (59, 'Dessert'),
+(60, 'Dessert'), (61, 'Dessert');
 
 INSERT INTO EVENTS (NAME, PRICE, DESCR, EVENT_YEAR, EVENT_MONTH, EVENT_DAY) VALUES
-                                                                                ('Jazz Night', 15, 'An evening of classic jazz with live performers.', 2024, 3, 5),
-                                                                                ('Wine Tasting', 30, 'Sample a variety of wines from local vineyards.', 2024, 3, 12),
-                                                                                ('Salsa Dance Workshop', 25, 'Learn to salsa from professional dancers in a 3-hour workshop.', 2024, 4, 9),
-                                                                                ('Italian Cooking Class', 40, 'Hands-on cooking class featuring regional Italian dishes.', 2024, 4, 22),
-                                                                                ('Summer Solstice Yoga', 20, 'Sunrise yoga session to celebrate the longest day of the year.', 2024, 6, 21),
-                                                                                ('Open Mic Comedy Night', 10, 'Laugh out loud with local comedians.', 2024, 7, 14),
-                                                                                ('Indie Film Screening', 12, 'Exclusive screening of a new indie film.', 2024, 8, 18),
-                                                                                ('Outdoor Rock Festival', 50, 'Spend the day rocking out to the biggest bands.', 2024, 9, 5),
-                                                                                ('Halloween Haunted House', 18, 'Explore our spooky haunted house if you dare!', 2024, 10, 31),
-                                                                                ('New Year’s Eve Bash', 100, 'Ring in the new year with a grand celebration.', 2024, 12, 31);
+('Jazz Night', 15, 'An evening of classic jazz with live performers.', 2024, 3, 5),
+('Wine Tasting', 30, 'Sample a variety of wines from local vineyards.', 2024, 3, 12),
+('Salsa Dance Workshop', 25, 'Learn to salsa from professional dancers in a 3-hour workshop.', 2024, 4, 9),
+('Italian Cooking Class', 40, 'Hands-on cooking class featuring regional Italian dishes.', 2024, 4, 22),
+('Summer Solstice Yoga', 20, 'Sunrise yoga session to celebrate the longest day of the year.', 2024, 6, 21),
+('Open Mic Comedy Night', 10, 'Laugh out loud with local comedians.', 2024, 7, 14),
+('Indie Film Screening', 12, 'Exclusive screening of a new indie film.', 2024, 8, 18),
+('Outdoor Rock Festival', 50, 'Spend the day rocking out to the biggest bands.', 2024, 9, 5),
+('Halloween Haunted House', 18, 'Explore our spooky haunted house if you dare!', 2024, 10, 31),
+('New Year’s Eve Bash', 100, 'Ring in the new year with a grand celebration.', 2024, 12, 31);
 
 INSERT INTO EMPLOYEES (F_NAME, L_NAME) VALUES ('Mark', 'Dillon');
 INSERT INTO EMPLOYEES (F_NAME, L_NAME) VALUES ('Sandra', 'Roman');
@@ -268,19 +271,19 @@ INSERT INTO EMPLOYEES (F_NAME, L_NAME) VALUES ('Collin', 'Jones');
 INSERT INTO EMPLOYEES (F_NAME, L_NAME) VALUES ('Maurice', 'Harris');
 
 INSERT INTO WORK_SHIFTS (EMP_ID, SHIFT_TYPE, YEAR, MONTH, DAY) VALUES
-                                                                   (1, 'Morning', 2024, 3, 1),
-                                                                   (3, 'Evening', 2024, 3, 1),
-                                                                   (5, 'Morning', 2024, 3, 2),
-                                                                   (7, 'Evening', 2024, 3, 2),
-                                                                   (9, 'Morning', 2024, 3, 3),
-                                                                   (11, 'Evening', 2024, 3, 3),
-                                                                   (13, 'Morning', 2024, 3, 4),
-                                                                   (15, 'Evening', 2024, 3, 4);
+(1, 'Morning', 2024, 3, 1),
+(3, 'Evening', 2024, 3, 1),
+(5, 'Morning', 2024, 3, 2),
+(7, 'Evening', 2024, 3, 2),
+(9, 'Morning', 2024, 3, 3),
+(11, 'Evening', 2024, 3, 3),
+(13, 'Morning', 2024, 3, 4),
+(15, 'Evening', 2024, 3, 4);
 
 /***************************** Queries *******************************/
 -- Get all lunches
 /*
- SELECT name, price, descr, menu_items.menu_item_id, lunches.menu_item_id day FROM menu_items
+ SELECT name, price, descr, day, type, menu_items.menu_item_id FROM menu_items
  JOIN lunches ON
  menu_items.menu_item_id=lunches.menu_item_id;
  */

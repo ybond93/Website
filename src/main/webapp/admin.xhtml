@@ -252,6 +252,11 @@
                         <h:outputLabel for="lunchDescr" value="Description:" />
                         <h:inputTextarea id="lunchDescr" value="#{menuItemsBean.menuItem.descr}" required="true" />
 
+                        <h:selectOneMenu id="lunchType" value="#{menuItemsBean.lunchItem.type}" required="true" styleClass="chooseDay">
+                            <f:selectItem itemValue="" itemLabel="Select Type" noSelectionOption="true"/>
+                            <f:selectItems value="#{menuItemsBean.types}" />
+                        </h:selectOneMenu>
+
                         <h:selectOneMenu id="dayOfWeek" value="#{menuItemsBean.lunchItem.day}" required="true" styleClass="chooseDay">
                             <f:selectItem itemValue="" itemLabel="Select Day" noSelectionOption="true"/>
                             <f:selectItems value="#{menuItemsBean.weekDays}" />

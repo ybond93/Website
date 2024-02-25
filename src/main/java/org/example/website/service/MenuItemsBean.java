@@ -12,6 +12,9 @@ import org.example.website.entities.LunchesEntity;
 import org.example.website.entities.MenuItemsEntity;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.*;
 
 @Named
@@ -28,6 +31,9 @@ public class MenuItemsBean implements Serializable {
 
     // List or Map to hold weekdays
     private Map<String, String> weekdays;
+    private String selectedType;
+    private ArrayList<String> types = new ArrayList<>();
+
 
     private AlacarteMenuItemsEntity aLaCarteItem = new AlacarteMenuItemsEntity();
     private List<AlacarteMenuItemsEntity> aLaCarteItemsList;
@@ -35,6 +41,12 @@ public class MenuItemsBean implements Serializable {
     private List<AlacarteMenuItemsEntity> mainsList;
     private List<AlacarteMenuItemsEntity> dessertsList;
     private List<AlacarteMenuItemsEntity> drinksList;
+
+    // Method to get the current day of the week
+    public String getCurrentDay() {
+        LocalDate today = LocalDate.now();
+        return today.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH); // Or any Locale you need
+    }
 
     private static final Map<String, Integer> DAY_ORDER = new HashMap<>(); //this is for saying what day is first
     static {
@@ -63,11 +75,23 @@ public class MenuItemsBean implements Serializable {
         weekdays.put("Friday", "Friday");
         weekdays.put("Saturday", "Saturday");
         weekdays.put("Sunday", "Sunday");
+
+        types.add("Soup");
+        types.add("Buffet");
     }
+
+    public List<String> getTypes() { return types; }
 
     public List<LunchesEntity> getLunchesBy(String day) {
         TypedQuery<LunchesEntity> query = em.createNamedQuery("LunchesEntity.findLunchesByDay", LunchesEntity.class);
         query.setParameter("dayOfWeek", day);
+        return query.getResultList();
+    }
+
+    public List<LunchesEntity> getLunchesBy(String day, String type) {
+        TypedQuery<LunchesEntity> query = em.createNamedQuery("LunchesEntity.findLunchByDayAndType", LunchesEntity.class);
+        query.setParameter("dayOfWeek", day);
+        query.setParameter("type", type);
         return query.getResultList();
     }
 
