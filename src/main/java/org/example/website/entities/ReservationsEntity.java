@@ -11,7 +11,7 @@ import java.sql.Time;
         query = "Select l FROM ReservationsEntity l"
 )
 @Entity
-@Table(name = "reservations", schema = "restaurang", catalog = "")
+@Table(name = "RESERVATIONS", schema = "restaurang", catalog = "")
 public class ReservationsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -20,15 +20,22 @@ public class ReservationsEntity {
     @Basic
     @Column(name = "NUM_OF_GUESTS")
     private int numOfGuests;
-    @Basic
-    @Column(name = "RES_DATE")
-    private Date resDate;
+
     @Basic
     @Column(name = "RES_TIME")
     private Time resTime;
     @Basic
     @Column(name = "CUST_NAME")
     private String custName;
+    @Basic
+    @Column(name = "RES_YEAR")
+    private Integer resYear;
+    @Basic
+    @Column(name = "RES_MONTH")
+    private String resMonth;
+    @Basic
+    @Column(name = "RES_DAY")
+    private Integer resDay;
 
     public int getResId() {
         return resId;
@@ -44,14 +51,6 @@ public class ReservationsEntity {
 
     public void setNumOfGuests(int numOfGuests) {
         this.numOfGuests = numOfGuests;
-    }
-
-    public Date getResDate() {
-        return resDate;
-    }
-
-    public void setResDate(Date resDate) {
-        this.resDate = resDate;
     }
 
     public Time getResTime() {
@@ -79,7 +78,7 @@ public class ReservationsEntity {
 
         if (resId != that.resId) return false;
         if (numOfGuests != that.numOfGuests) return false;
-        if (resDate != null ? !resDate.equals(that.resDate) : that.resDate != null) return false;
+
         if (resTime != null ? !resTime.equals(that.resTime) : that.resTime != null) return false;
         if (custName != null ? !custName.equals(that.custName) : that.custName != null) return false;
 
@@ -90,9 +89,32 @@ public class ReservationsEntity {
     public int hashCode() {
         int result = resId;
         result = 31 * result + numOfGuests;
-        result = 31 * result + (resDate != null ? resDate.hashCode() : 0);
         result = 31 * result + (resTime != null ? resTime.hashCode() : 0);
         result = 31 * result + (custName != null ? custName.hashCode() : 0);
         return result;
+    }
+
+    public Integer getResYear() {
+        return resYear;
+    }
+
+    public void setResYear(Integer resYear) {
+        this.resYear = resYear;
+    }
+
+    public String getResMonth() {
+        return resMonth;
+    }
+
+    public void setResMonth(String resMonth) {
+        this.resMonth = resMonth;
+    }
+
+    public Integer getResDay() {
+        return resDay;
+    }
+
+    public void setResDay(Integer resDay) {
+        this.resDay = resDay;
     }
 }
