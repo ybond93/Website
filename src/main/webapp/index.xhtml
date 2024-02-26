@@ -290,6 +290,59 @@ cookie
                     och preferenser. Från läckra förrätter och huvudrätter till lockande desserter,
                     finns det något för alla. Vår mångsidiga meny är noggrant sammansatt för att garantera en minnesvärd matupplevelse.
                 </p>
+                <div class="popup-background" id="popup-background2"></div>
+                <button type="meny" class="page-btn" onclick="openPopup2()">aLaCarte<i class="bi bi-arrow-right"></i></button>
+                <div class="popup" id="popup2">
+                    <img src="./resources/images/lunch.png" alt="Tick"/>
+                    <h2>A La Carte</h2>
+                    <div class="aLaCarteSubMenu">
+                        <div class="getALaCarteItems">
+                            <h:form>
+                                <h2>Starters</h2>
+                                <h:dataTable value="#{menuItemsBean.startersList}" var="starters" styleClass="alacarte-table">
+                                    <h:column>
+                                        <div class="menu-item">
+                                            <span class="menu-name">#{starters.menuItem.name}</span>
+                                            <span class="menu-price">#{starters.menuItem.price}:-</span>
+                                            <span class="menu-descr">#{starters.menuItem.descr}</span>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                                <h2>Main courses</h2>
+                                <h:dataTable value="#{menuItemsBean.mainsList}" var="mains" styleClass="alacarte-table">
+                                    <h:column>
+                                        <div class="menu-item">
+                                            <span class="menu-name">#{mains.menuItem.name}</span>
+                                            <span class="menu-price">#{mains.menuItem.price}:-</span>
+                                            <span class="menu-descr">#{mains.menuItem.descr}</span>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                                <h2>Desserts</h2>
+                                <h:dataTable value="#{menuItemsBean.dessertsList}" var="dessert" styleClass="alacarte-table">
+                                    <h:column>
+                                        <div class="menu-item">
+                                            <span class="menu-name">#{dessert.menuItem.name}</span>
+                                            <span class="menu-price">#{dessert.menuItem.price}:-</span>
+                                            <span class="menu-descr">#{dessert.menuItem.descr}</span>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                                <h2>Drinks</h2>
+                                <h:dataTable value="#{menuItemsBean.drinksList}" var="drink" styleClass="alacarte-table">
+                                    <h:column>
+                                        <div class="menu-item">
+                                            <span class="menu-name">#{drink.menuItem.name}</span>
+                                            <span class="menu-price">#{drink.menuItem.price}:-</span>
+                                            <span class="menu-descr">#{drink.menuItem.descr}</span>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </div>
+                    </div>
+                    <button type="button" onclick="closePopup2()">OK</button>
+                </div>
 
             </div>
         </div>
