@@ -252,11 +252,6 @@
                         <h:outputLabel for="lunchDescr" value="Description:" />
                         <h:inputTextarea id="lunchDescr" value="#{menuItemsBean.menuItem.descr}" required="true" />
 
-                        <h:selectOneMenu id="lunchType" value="#{menuItemsBean.lunchItem.type}" required="true" styleClass="chooseDay">
-                            <f:selectItem itemValue="" itemLabel="Select Type" noSelectionOption="true"/>
-                            <f:selectItems value="#{menuItemsBean.types}" />
-                        </h:selectOneMenu>
-
                         <h:selectOneMenu id="dayOfWeek" value="#{menuItemsBean.lunchItem.day}" required="true" styleClass="chooseDay">
                             <f:selectItem itemValue="" itemLabel="Select Day" noSelectionOption="true"/>
                             <f:selectItems value="#{menuItemsBean.weekDays}" />
@@ -489,6 +484,12 @@
                                     <div class="eventDescr">
                                         <h:outputText value="#{event.descr}" />
                                     </div>
+                                    <div class="eventMonth">
+                                        <h:outputText value="#{event.eventMonth}" />
+                                    </div>
+                                    <div class="eventDay">
+                                        <h:outputText value="#{event.eventDay}" />
+                                    </div>
                                     <!-- Delete Button -->
                                     <div class="deleteButton">
                                         <h:commandButton styleClass="commandButton" value="Delete" action="#{eventsBean.deleteEvent(event)}" />
@@ -511,6 +512,12 @@
 
                             <h:outputLabel for="eventDescr" value="Description:" />
                             <h:inputTextarea id="eventDescr" value="#{eventsBean.event.descr}" required="false" />
+
+                            <h:outputLabel for="eventDay" value="Day:" />
+                            <h:inputTextarea id="eventDay" value="#{eventsBean.event.eventDay}" required="false" />
+                            <h:outputLabel for="eventMonth" value="Month:" />
+                            <h:inputTextarea id="eventMonth" value="#{eventsBean.event.eventMonth}" required="false" />
+
                         </h:panelGrid>
                         <h:commandButton value="Add Event" action="#{eventsBean.addEvent()}" />
                     </h:form>

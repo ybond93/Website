@@ -119,3 +119,23 @@ function closePopup() {
         overlay.style.display = 'none'; // Hide the overlay
     }
 }
+
+function openPopup2() {
+    let popup2 = document.getElementById('popup2'); // Assuming 'popup' is the ID of your single popup
+    let overlay2 = document.getElementById('popup-background2');
+
+    if (popup2 && overlay2) {
+        popup2.classList.add("open-popup"); // This class should handle visibility and transform
+        overlay2.style.display = 'block'; // Show the overlay
+    }
+}
+
+function closePopup2() {
+    let popup2 = document.getElementById('popup2'); // Assuming 'popup' is the ID of your single popup
+    let overlay2 = document.getElementById('popup-background2');
+
+    if (popup2 && overlay2) {
+        popup2.classList.remove("open-popup"); // This class should handle hiding the popup
+        overlay2.style.display = 'none'; // Hide the overlay
+    }
+}
