@@ -25,6 +25,7 @@ public class MenuItemsBean implements Serializable {
     private EntityManager em;
 
     private MenuItemsEntity menuItem = new MenuItemsEntity();
+    private List<MenuItemsEntity> menuItemList;
     private LunchesEntity lunchItem = new LunchesEntity();
     private List<LunchesEntity> lunchItemsList;
     private String selectedDay; // +getter and setter
@@ -66,6 +67,7 @@ public class MenuItemsBean implements Serializable {
         mainsList = em.createNamedQuery("ALaCarteMenuItems.findMains", AlacarteMenuItemsEntity.class).getResultList();
         dessertsList = em.createNamedQuery("ALaCarteMenuItems.findDesserts", AlacarteMenuItemsEntity.class).getResultList();
         drinksList = em.createNamedQuery("ALaCarteMenuItems.findDrinks", AlacarteMenuItemsEntity.class).getResultList();
+        menuItemList = em.createNamedQuery("MenuItemsEntity.findAll", MenuItemsEntity.class).getResultList();
 
         weekdays = new LinkedHashMap<>(); // Preserve insertion order
         weekdays.put("Monday", "Monday");
@@ -187,6 +189,12 @@ public class MenuItemsBean implements Serializable {
         return lunchItemsList;
     }
 
+    public List<MenuItemsEntity> getMenuItemList() {
+        return menuItemList;
+    }
+    public MenuItemsEntity getItem(){
+        return  menuItem;
+    }
     // A La Carte items
     public AlacarteMenuItemsEntity getaLaCarteItem() { return aLaCarteItem; }
     public void setaLaCarteItem(AlacarteMenuItemsEntity aLaCarteItem) {
