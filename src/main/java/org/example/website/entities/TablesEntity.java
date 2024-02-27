@@ -3,13 +3,13 @@ package org.example.website.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Tables", schema = "restaurang", catalog = "")
+@Table(name = "TABLES", schema = "restaurang", catalog = "")
 public class TablesEntity {
     @Id
-    @Column(name = "table_num")
+    @Column(name = "TABLE_NUM")
     private int tableNum;
     @Basic
-    @Column(name = "status")
+    @Column(name = "STATUS")
     private String status;
 
     public int getTableNum() {
