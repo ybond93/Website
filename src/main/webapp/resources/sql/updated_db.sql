@@ -83,9 +83,9 @@ CREATE TABLE WORK_SHIFTS (
     DAY INT
 );
 
-CREATE TABLE Tables (
-                        table_num INT NOT NULL PRIMARY KEY,
-                        status VARCHAR(20) NOT NULL
+CREATE TABLE TABLES (
+                        TABLE_NUM INT NOT NULL PRIMARY KEY,
+                        STATUS VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE ORDERS (
