@@ -116,7 +116,7 @@ public class MenuItemsBean implements Serializable {
 
     @Transactional
     public void deleteALaCarteItem(AlacarteMenuItemsEntity item) {
-        AlacarteMenuItemsEntity toDelete = em.find(AlacarteMenuItemsEntity.class, item.getId());
+        AlacarteMenuItemsEntity toDelete = em.find(AlacarteMenuItemsEntity.class, item.getCarteItemId());
         if (!em.contains(item)) { item = em.merge(item);}
         em.remove(item);
         // Refresh the list of lunches to reflect the deletion
