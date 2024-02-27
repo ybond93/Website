@@ -417,54 +417,226 @@
         <section id="schema" class="menu-section">
             <h2>Our Schema</h2>
             <h2>Employee Shifts</h2>
-            <div class="getEmployeeWorkShifts">
-                <ui:repeat value="#{employeeWorkShiftsBean.employeesWorkshiftList}" var="employee" varStatus="status">
-                    <div class="employeeShiftCard">
-                        <div class="employeeName">
-                            <span class="nameLabel">Employee Name:</span>
-                            <span class="nameValue">#{employee.firstName} #{employee.lastName}</span>
-                        </div>
-                        <div class="employeeWorkShifts">
-                            <ui:repeat value="#{employee.workShifts}" var="workShift">
-                                <div class="workShiftDetails">
-                                    <span class="shiftType">#{workShift.shiftType}</span>
-                                    <span class="shiftMonth">#{workShift.month}</span>
-                                    <span class="shiftDay">#{workShift.day}</span>
-                                </div>
-                            </ui:repeat>
-                        </div>
+            <div class="weekly-calendar" id="workshift-calendar">
+                <div class="week">
+                    <!-- Repeat this div block for each day of the week -->
+                    <div class="day" id="monday-shifts">
+                        <h3>Monday</h3>
+                        <h:form>
+                            <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('Monday')}" var="workShift" styleClass="workshift-table">
+                                <h:column>
+                                    <div class="event workshift">
+                                        <div class="employeeName">
+                                            <h:outputText value="#{workShift.employee.firstName} #{workShift.employee.lastName}" />
+                                        </div>
+                                        <div class="shiftType">
+                                            <h:outputText value="#{workShift.shiftType}" />
+                                        </div>
+                                        <div class="shiftDate">
+                                            <!-- Assuming you have a method that formats the date into a readable form -->
+                                            <h:outputText value="#{workShift.day}/#{workShift.month}/#{workShift.year}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{employeeWorkShiftsBean.deleteWorkShift(workShift)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
                     </div>
-                </ui:repeat>
+                    <!-- Repeat for Tuesday, -->
+                    <div class="day" id="tuesday-shifts">
+                        <h3>Tuesday</h3>
+                        <h:form>
+                            <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('TUESDAY')}" var="workShift" styleClass="workshift-table">
+                                <h:column>
+                                    <div class="event workshift">
+                                        <div class="employeeName">
+                                            <h:outputText value="#{workShift.employee.firstName} #{workShift.employee.lastName}" />
+                                        </div>
+                                        <div class="shiftType">
+                                            <h:outputText value="#{workShift.shiftType}" />
+                                        </div>
+                                        <div class="shiftDate">
+                                            <!-- Assuming you have a method that formats the date into a readable form -->
+                                            <h:outputText value="#{workShift.day}/#{workShift.month}/#{workShift.year}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{employeeWorkShiftsBean.deleteWorkShift(workShift)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                    <!-- Wednesday-->
+                    <div class="day" id="wednsday-shifts">
+                        <h3>Wedsnsday</h3>
+                        <h:form>
+                            <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('WEDNESDAY')}" var="workShift" styleClass="workshift-table">
+                                <h:column>
+                                    <div class="event workshift">
+                                        <div class="employeeName">
+                                            <h:outputText value="#{workShift.employee.firstName} #{workShift.employee.lastName}" />
+                                        </div>
+                                        <div class="shiftType">
+                                            <h:outputText value="#{workShift.shiftType}" />
+                                        </div>
+                                        <div class="shiftDate">
+                                            <!-- Assuming you have a method that formats the date into a readable form -->
+                                            <h:outputText value="#{workShift.day}/#{workShift.month}/#{workShift.year}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{employeeWorkShiftsBean.deleteWorkShift(workShift)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                    <!--Thursday-->
+                    <div class="day" id="thursday-shifts">
+                        <h3>Thursday</h3>
+                        <h:form>
+                            <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('THURSDAY')}" var="workShift" styleClass="workshift-table">
+                                <h:column>
+                                    <div class="event workshift">
+                                        <div class="employeeName">
+                                            <h:outputText value="#{workShift.employee.firstName} #{workShift.employee.lastName}" />
+                                        </div>
+                                        <div class="shiftType">
+                                            <h:outputText value="#{workShift.shiftType}" />
+                                        </div>
+                                        <div class="shiftDate">
+                                            <!-- Assuming you have a method that formats the date into a readable form -->
+                                            <h:outputText value="#{workShift.day}/#{workShift.month}/#{workShift.year}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{employeeWorkShiftsBean.deleteWorkShift(workShift)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                    <!--Firday-->
+                    <div class="day" id="friday-shifts">
+                        <h3>Friday</h3>
+                        <h:form>
+                            <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('FRIDAY')}" var="workShift" styleClass="workshift-table">
+                                <h:column>
+                                    <div class="event workshift">
+                                        <div class="employeeName">
+                                            <h:outputText value="#{workShift.employee.firstName} #{workShift.employee.lastName}" />
+                                        </div>
+                                        <div class="shiftType">
+                                            <h:outputText value="#{workShift.shiftType}" />
+                                        </div>
+                                        <div class="shiftDate">
+                                            <!-- Assuming you have a method that formats the date into a readable form -->
+                                            <h:outputText value="#{workShift.day}/#{workShift.month}/#{workShift.year}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{employeeWorkShiftsBean.deleteWorkShift(workShift)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                    <!--SATURDAY-->
+                    <div class="day" id="saturday-shifts">
+                        <h3>Saturday</h3>
+                        <h:form>
+                            <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('SATURDAY')}" var="workShift" styleClass="workshift-table">
+                                <h:column>
+                                    <div class="event workshift">
+                                        <div class="employeeName">
+                                            <h:outputText value="#{workShift.employee.firstName} #{workShift.employee.lastName}" />
+                                        </div>
+                                        <div class="shiftType">
+                                            <h:outputText value="#{workShift.shiftType}" />
+                                        </div>
+                                        <div class="shiftDate">
+                                            <!-- Assuming you have a method that formats the date into a readable form -->
+                                            <h:outputText value="#{workShift.day}/#{workShift.month}/#{workShift.year}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{employeeWorkShiftsBean.deleteWorkShift(workShift)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                    <!--Sunday-->
+                    <div class="day" id="sunday-shifts">
+                        <h3>Sundsay</h3>
+                        <h:form>
+                            <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('SUNDAY')}" var="workShift" styleClass="workshift-table">
+                                <h:column>
+                                    <div class="event workshift">
+                                        <div class="employeeName">
+                                            <h:outputText value="#{workShift.employee.firstName} #{workShift.employee.lastName}" />
+                                        </div>
+                                        <div class="shiftType">
+                                            <h:outputText value="#{workShift.shiftType}" />
+                                        </div>
+                                        <div class="shiftDate">
+                                            <!-- Assuming you have a method that formats the date into a readable form -->
+                                            <h:outputText value="#{workShift.day}/#{workShift.month}/#{workShift.year}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{employeeWorkShiftsBean.deleteWorkShift(workShift)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                </div>
             </div>
 
 
-            <!-- Form to Add Work Shifts -->
-            <div class="addWorkShift">
-                <h:form id="addWorkShiftForm">
-                    <h2>Add Work Shift</h2>
+            <h2>Add Work Shift</h2>
+            <div id="add_work_shift_form">
+                <h:form>
                     <h:panelGrid columns="2">
                         <h:outputLabel for="employeeId" value="Employee:" />
                         <h:selectOneMenu id="employeeId" value="#{employeeWorkShiftsBean.employee.empId}" required="true">
+                            <f:selectItem itemValue="" itemLabel="Select Employee" noSelectionOption="true"/>
                             <f:selectItems value="#{employeeWorkShiftsBean.employees}" var="emp"
                                            itemValue="#{emp.empId}" itemLabel="#{emp.firstName} #{emp.lastName}" />
                         </h:selectOneMenu>
 
                         <h:outputLabel for="shiftType" value="Shift Type:" />
                         <h:selectOneMenu id="shiftType" value="#{employeeWorkShiftsBean.workShift.shiftType}" required="true">
-                            <f:selectItem itemValue="Morning" itemLabel="Morning" />
-                            <f:selectItem itemValue="Evening" itemLabel="Evening" />
+                            <f:selectItem itemValue="Morning" itemLabel="Morning"/>
+                            <f:selectItem itemValue="Evening" itemLabel="Evening"/>
                         </h:selectOneMenu>
 
-                        <h:outputLabel for="shiftMonth" value="Month:" />
-                        <h:inputText id="shiftMonth" value="#{employeeWorkShiftsBean.workShift.month}" required="true" />
+                        <h:selectOneMenu id="WorkshiftDay" value="#{employeeWorkShiftsBean.selectedDay}" required="true" styleClass="chooseDay">
+                            <f:selectItem itemValue="" itemLabel="Select Day" noSelectionOption="true"/>
+                            <f:selectItems value="#{employeeWorkShiftsBean.weekDays.entrySet()}" var="entry"
+                                           itemValue="#{entry.value}" itemLabel="#{entry.key}" />
+                        </h:selectOneMenu>
 
-                        <h:outputLabel for="shiftDay" value="Day:" />
-                        <h:inputText id="shiftDay" value="#{employeeWorkShiftsBean.workShift.day}" required="true" />
+                        <!-- Include additional fields for month and year if necessary -->
                     </h:panelGrid>
-                    <h:commandButton value="Add Work Shift" action="#{employeeWorkShiftsBean.addWorkShift()}" />
+                    <h:commandButton value="Add Work Shift" action="#{employeeWorkShiftsBean.addWorkShift}" />
                 </h:form>
             </div>
+
         </section>
+
+
 
         <!-- *********************** EVENT SECTION ************************* -->
         <section id="events" class="menu-section">
