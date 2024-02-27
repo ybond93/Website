@@ -34,7 +34,6 @@ public class MenuItemsBean implements Serializable {
     private String selectedType;
     private ArrayList<String> types = new ArrayList<>();
 
-
     private AlacarteMenuItemsEntity aLaCarteItem = new AlacarteMenuItemsEntity();
     private List<AlacarteMenuItemsEntity> aLaCarteItemsList;
     private List<AlacarteMenuItemsEntity> startersList;

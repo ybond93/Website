@@ -1,14 +1,17 @@
 package org.example.website.entities;
 
+import jakarta.inject.Named;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedQuery(
-        name = "EmployeesEntity.findEmployees",
-        query = "SELECT l from  EmployeesEntity l"
-)
+@NamedQueries({
+    @NamedQuery(
+            name = "EmployeesEntity.findEmployees",
+            query = "SELECT l from  EmployeesEntity l"
+    ),
+})
 @Entity
 @Table(name = "EMPLOYEES", schema = "restaurang", catalog = "")
 public class EmployeesEntity {
@@ -57,5 +60,9 @@ public class EmployeesEntity {
 
     public void setLastName(String lName) {
         this.lastName = lName;
+    }
+
+    public Integer getId() {
+        return empId;
     }
 }

@@ -2,10 +2,16 @@ package org.example.website.entities;
 
 import jakarta.persistence.*;
 
-@NamedQuery(
-        name = "WorkShiftsEntity.findEmployeeShifts",
-        query = "SELECT ws FROM WorkShiftsEntity ws JOIN FETCH ws.employee"
-)
+@NamedQueries({
+        @NamedQuery(
+                name = "WorkShiftsEntity.findEmployeeShifts",
+                query = "SELECT ws FROM WorkShiftsEntity ws JOIN FETCH ws.employee"
+        ),
+        @NamedQuery(
+                name = "WorkShiftsEntity.findWorkShiftsByDay",
+                query = "SELECT ws FROM WorkShiftsEntity ws JOIN FETCH ws.employee WHERE ws.day = :dayOfWeek"
+        )
+})
 @Entity
 @Table(name = "WORK_SHIFTS", schema = "restaurang", catalog = "")
 public class WorkShiftsEntity {
@@ -24,7 +30,7 @@ public class WorkShiftsEntity {
     private String month;
     @Basic
     @Column(name = "DAY")
-    private Integer day;
+    private String day;
 
     @ManyToOne
     @JoinColumn(name = "EMP_ID")
@@ -62,11 +68,15 @@ public class WorkShiftsEntity {
         this.month = month;
     }
 
-    public Integer getDay() {
+    public String getDay() {
         return day;
     }
 
-    public void setDay(Integer day) {
+    public void setDay(String day) {
         this.day = day;
+    }
+
+    public Integer getId() {
+        return shiftId;
     }
 }

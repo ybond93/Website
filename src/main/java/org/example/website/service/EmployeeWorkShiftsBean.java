@@ -7,14 +7,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.example.website.entities.EmployeesEntity;
+import org.example.website.entities.LunchesEntity;
 import org.example.website.entities.WorkShiftsEntity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 @Named
 @RequestScoped
 public class EmployeeWorkShiftsBean implements Serializable {
@@ -27,10 +26,10 @@ public class EmployeeWorkShiftsBean implements Serializable {
     private EmployeesEntity employee = new EmployeesEntity();
     private List<EmployeesEntity> employeesList;
     private List<EmployeesEntity> employeesWorkshiftList;
-    private Integer selectedDay; // Added for selecting day in addWorkShift form
+    private String selectedDay; // Added for selecting day in addWorkShift form
 
     // Initialize this in @PostConstruct
-    private Map<String, Integer> weekDays;
+    private Map<String, String> weekDays;
     @PostConstruct
     public void init() {
         prepareWeekDays();
@@ -39,15 +38,16 @@ public class EmployeeWorkShiftsBean implements Serializable {
     }
 
     private void prepareWeekDays() {
-        weekDays = new HashMap<>();
-        weekDays.put("MONDAY", 1);
-        weekDays.put("TUESDAY", 2);
-        weekDays.put("WEDNESDAY", 3);
-        weekDays.put("THURSDAY", 4);
-        weekDays.put("FRIDAY", 5);
-        weekDays.put("SATURDAY", 6);
-        weekDays.put("SUNDAY", 7);
+        weekDays = new LinkedHashMap<>(); // Preserve insertion order
+        weekDays.put("Monday", "Monday");
+        weekDays.put("Tuesday", "Tuesday");
+        weekDays.put("Wednesday", "Wednesday");
+        weekDays.put("Thursday", "Thursday");
+        weekDays.put("Friday", "Friday");
+        weekDays.put("Saturday", "Saturday");
+        weekDays.put("Sunday", "Sunday");
     }
+
     @Transactional
     public void addWorkShift() {
         // Set the day for the work shift from the selectedDay, assuming selectedDay is of a compatible type.
@@ -77,13 +77,17 @@ public class EmployeeWorkShiftsBean implements Serializable {
         // init();
     }
 
+    @Transactional
+    public void deleteWorkShift(WorkShiftsEntity ws) {
+        WorkShiftsEntity toDelete = em.find(WorkShiftsEntity.class, ws.getId());
+        if (toDelete != null) { em.remove(toDelete); }
+        // Refresh the list of lunches to reflect the deletion
+        // init(); // Assuming init() method populates the list of lunches
+    }
+
     public List<WorkShiftsEntity> getShiftsByDay(String dayOfWeek) {
-        Integer dayInt = weekDays.get(dayOfWeek.toUpperCase());
-        if (dayInt == null) {
-            return new ArrayList<>();
-        }
-        return em.createQuery("SELECT ws FROM WorkShiftsEntity ws WHERE ws.day = :dayInt", WorkShiftsEntity.class)
-                .setParameter("dayInt", dayInt)
+        return em.createQuery("SELECT ws FROM WorkShiftsEntity ws WHERE ws.day = :dayOfWeek", WorkShiftsEntity.class)
+                .setParameter("dayOfWeek", dayOfWeek)
                 .getResultList();
     }
 
@@ -101,17 +105,15 @@ public class EmployeeWorkShiftsBean implements Serializable {
         this.workShift = workShift;
     }
 
-    public Integer getSelectedDay() {
+    public String getSelectedDay() {
         return selectedDay;
     }
 
-    public void setSelectedDay(Integer selectedDay) {
+    public void setSelectedDay(String selectedDay) {
         this.selectedDay = selectedDay;
     }
 
-
-
-    public Map<String, Integer> getWeekDays() {
+    public Map<String, String> getWeekDays() {
         return weekDays;
     }
     public List<EmployeesEntity> getEmployees() {

@@ -473,7 +473,7 @@
                     </div>
                     <!-- Wednesday-->
                     <div class="day" id="wednsday-shifts">
-                        <h3>Wedsnsday</h3>
+                        <h3>Wednesday</h3>
                         <h:form>
                             <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('WEDNESDAY')}" var="workShift" styleClass="workshift-table">
                                 <h:column>
@@ -577,7 +577,7 @@
                     </div>
                     <!--Sunday-->
                     <div class="day" id="sunday-shifts">
-                        <h3>Sundsay</h3>
+                        <h3>Sunday</h3>
                         <h:form>
                             <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('SUNDAY')}" var="workShift" styleClass="workshift-table">
                                 <h:column>
@@ -604,7 +604,6 @@
                 </div>
             </div>
 
-
             <h2>Add Work Shift</h2>
             <div id="add_work_shift_form">
                 <h:form>
@@ -622,6 +621,7 @@
                             <f:selectItem itemValue="Evening" itemLabel="Evening"/>
                         </h:selectOneMenu>
 
+                        <h:outputLabel for="WorkshiftDay" value="Day: " styleClass="workshift-day-label" />
                         <h:selectOneMenu id="WorkshiftDay" value="#{employeeWorkShiftsBean.selectedDay}" required="true" styleClass="chooseDay">
                             <f:selectItem itemValue="" itemLabel="Select Day" noSelectionOption="true"/>
                             <f:selectItems value="#{employeeWorkShiftsBean.weekDays.entrySet()}" var="entry"
@@ -633,10 +633,7 @@
                     <h:commandButton value="Add Work Shift" action="#{employeeWorkShiftsBean.addWorkShift}" />
                 </h:form>
             </div>
-
         </section>
-
-
 
         <!-- *********************** EVENT SECTION ************************* -->
         <section id="events" class="menu-section">
