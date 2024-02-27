@@ -1,11 +1,10 @@
 package org.example.website.entities;
 
 import jakarta.persistence.*;
-import java.util.Date;
 
 @NamedQuery(
-        name = "WorkShiftsEntity.findAll",
-        query = "Select l FROM WorkShiftsEntity l"
+        name = "WorkShiftsEntity.findEmployeeShifts",
+        query = "SELECT ws FROM WorkShiftsEntity ws JOIN FETCH ws.employee"
 )
 @Entity
 @Table(name = "WORK_SHIFTS", schema = "restaurang", catalog = "")
@@ -18,15 +17,25 @@ public class WorkShiftsEntity {
     @Column(name = "SHIFT_TYPE")
     private String shiftType;
     @Basic
-    @Column(name = "SHIFT_DATE")
-    private Date shiftDate;
+    @Column(name = "YEAR")
+    private Integer year;
+    @Basic
+    @Column(name = "MONTH")
+    private String month;
+    @Basic
+    @Column(name = "DAY")
+    private Integer day;
 
-    public int getShiftId() {
-        return shiftId;
+    @ManyToOne
+    @JoinColumn(name = "EMP_ID")
+    private EmployeesEntity employee;
+
+    public EmployeesEntity getEmployee() {
+        return employee;
     }
 
-    public void setShiftId(int shiftId) {
-        this.shiftId = shiftId;
+    public void setEmployee(EmployeesEntity employee) {
+        this.employee = employee;
     }
 
     public String getShiftType() {
@@ -37,15 +46,27 @@ public class WorkShiftsEntity {
         this.shiftType = shiftType;
     }
 
-    public Date getShiftDate() {
-        return shiftDate;
+    public Integer getYear() {
+        return year;
     }
 
-    public void setShiftDate(java.sql.Date shiftDate) {
-        this.shiftDate = shiftDate;
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
-    public void setShiftDate(Date shiftDate) {
-        this.shiftDate = shiftDate;
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public Integer getDay() {
+        return day;
+    }
+
+    public void setDay(Integer day) {
+        this.day = day;
     }
 }

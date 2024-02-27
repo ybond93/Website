@@ -1,13 +1,10 @@
 package org.example.website.entities;
 
 import jakarta.persistence.*;
-import java.util.Date;
+
 import java.sql.Time;
 
-@NamedQuery(
-        name = "EventsEntity.findAll",
-        query = "Select l FROM EventsEntity l"
-)
+@NamedQuery(name = "EventsEntity.findAll", query = "SELECT l FROM EventsEntity l")
 @Entity
 @Table(name = "EVENTS", schema = "restaurang", catalog = "")
 public class EventsEntity {
@@ -25,14 +22,17 @@ public class EventsEntity {
     @Column(name = "DESCR")
     private String descr;
     @Basic
+    @Column(name = "EVENT_YEAR")
+    private Integer eventYear;
+    @Basic
+    @Column(name = "EVENT_MONTH")
+    private String eventMonth;
+    @Basic
     @Column(name = "EVENT_DAY")
     private Integer eventDay;
     @Basic
-    @Column(name = "EVENT_MONTH")
-    private Integer eventMonth;
-    @Basic
-    @Column(name = "EVENT_YEAR")
-    private Integer eventYear;
+    @Column(name = "START_TIME")
+    private Time startTime;
 
     public int getEventId() {
         return eventId;
@@ -66,7 +66,21 @@ public class EventsEntity {
         this.descr = descr;
     }
 
+    public Integer getEventYear() {
+        return eventYear;
+    }
 
+    public void setEventYear(Integer eventYear) {
+        this.eventYear = eventYear;
+    }
+
+    public String getEventMonth() {
+        return eventMonth;
+    }
+
+    public void setEventMonth(String eventMonth) {
+        this.eventMonth = eventMonth;
+    }
 
     public Integer getEventDay() {
         return eventDay;
@@ -76,19 +90,13 @@ public class EventsEntity {
         this.eventDay = eventDay;
     }
 
-    public Integer getEventMonth() {
-        return eventMonth;
+    public Time getStartTime() {
+        return startTime;
     }
 
-    public void setEventMonth(Integer eventMonth) {
-        this.eventMonth = eventMonth;
+    public void setStartTime(Time startTime) {
+        this.startTime = startTime;
     }
 
-    public Integer getEventYear() {
-        return eventYear;
-    }
-
-    public void setEventYear(Integer eventYear) {
-        this.eventYear = eventYear;
-    }
+    public int getId() { return eventId; }
 }

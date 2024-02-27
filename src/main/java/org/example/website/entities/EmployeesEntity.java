@@ -2,6 +2,13 @@ package org.example.website.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@NamedQuery(
+        name = "EmployeesEntity.findEmployees",
+        query = "SELECT l from  EmployeesEntity l"
+)
 @Entity
 @Table(name = "EMPLOYEES", schema = "restaurang", catalog = "")
 public class EmployeesEntity {
@@ -11,10 +18,22 @@ public class EmployeesEntity {
     private int empId;
     @Basic
     @Column(name = "F_NAME")
-    private String fName;
+    private String firstName;
     @Basic
     @Column(name = "L_NAME")
-    private String lName;
+    private String lastName;
+
+    // maps to WorkShiftsEntity's "employee" property
+    @OneToMany(mappedBy = "employee")
+    private List<WorkShiftsEntity> workShifts = new ArrayList<>();
+
+    public List<WorkShiftsEntity> getWorkShifts() {
+        return workShifts;
+    }
+
+    public void setWorkShifts(List<WorkShiftsEntity> workShifts) {
+        this.workShifts = workShifts;
+    }
 
     public int getEmpId() {
         return empId;
@@ -24,41 +43,19 @@ public class EmployeesEntity {
         this.empId = empId;
     }
 
-    public String getfName() {
-        return fName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setfName(String fName) {
-        this.fName = fName;
+    public void setFirstName(String fName) {
+        this.firstName = fName;
     }
 
-    public String getlName() {
-        return lName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setlName(String lName) {
-        this.lName = lName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        EmployeesEntity that = (EmployeesEntity) o;
-
-        if (empId != that.empId) return false;
-        if (fName != null ? !fName.equals(that.fName) : that.fName != null) return false;
-        if (lName != null ? !lName.equals(that.lName) : that.lName != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = empId;
-        result = 31 * result + (fName != null ? fName.hashCode() : 0);
-        result = 31 * result + (lName != null ? lName.hashCode() : 0);
-        return result;
+    public void setLastName(String lName) {
+        this.lastName = lName;
     }
 }

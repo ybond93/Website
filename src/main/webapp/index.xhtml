@@ -53,22 +53,12 @@ lunch_dining
                 </a>
             </li>
             <li data-aos="fade-up" data-aos-delay="200">
-                <a
-                        data-bs-target="#carouselIndicators"
-                        data-bs-slide-to="2"
-                        href="#"
-                        class="nav-btn"
-                ><span class="material-symbols-outlined">
-cookie
-</span></a>
+                <a data-bs-target="#carouselIndicators" data-bs-slide-to="2" href="#" class="nav-btn">
+                    <span class="material-symbols-outlined"> cookie</span></a>
             </li>
             <li data-aos="fade-up" data-aos-delay="300">
-                <a
-                        data-bs-target="#carouselIndicators"
-                        data-bs-slide-to="3"
-                        href="#"
-                        class="nav-btn"
-                ><i class="bi bi-moon-stars"></i>
+                <a data-bs-target="#carouselIndicators" data-bs-slide-to="3" href="#" class="nav-btn">
+                    <i class="bi bi-moon-stars"></i>
                 </a>
             </li>
 
@@ -81,45 +71,44 @@ cookie
                 <!-- index is 0 -->
 
                 <div class="carousel-item active">
-                    <div
-                            class="row d-flex flex-xl-row flex-md-column-reverse align-items-center justify-content-between"
-                    >
+                    <div class="row d-flex flex-xl-row flex-md-column-reverse align-items-center justify-content-between">
                         <!-- one row contains 12 columns 5 + 7 =12  -->
                         <div class="content col-xl-5 col-md-12">
                             <h1 data-aos="fade-down">Dagens Lunch</h1>
-                            <h2>Lunches</h2>
-                            <h:dataTable value="#{menuItemsBean.lunchItemsList}" var="lunchItem">
-                                <h:column>#{lunchItem.menuItem.name}</h:column>
-                                <h:column>#{lunchItem.menuItem.price}</h:column>
-                                <h:column>#{lunchItem.menuItem.descr}</h:column>
-                                <h:column>#{lunchItem.day}</h:column>
-                            </h:dataTable>
+                            <h:dataTable value="#{menuItemsBean.getLunchesBy(menuItemsBean.currentDay, 'BUFFET')}" var="lunchItem" styleClass="lunch-table">
+                                <h:column>
 
+                                    <p data-aos="fade-right" data-aos-delay="300">
+                                        <h:outputText value="#{lunchItem.menuItem.name}" />
+                                        <br />
+                                        <h:outputText value="#{lunchItem.menuItem.descr}" />
+                                    </p>
+                                </h:column>
+                            </h:dataTable>
                         </div>
 
-                        <div
-                                data-aos="zoom-in"
-                                data-aos-delay="300"
-                                class="food-image col-xl-7 col-md-12"
-                        >
-                            <img src="./resources/images/food-1.png" alt="" class="img-fluid" />
+                        <div data-aos="zoom-in" data-aos-delay="300" class="food-image col-xl-7 col-md-12">
+                            <img src="./resources/images/food-1.png" alt="" class="img-fluid"/>
 
                         </div>
                     </div>
                 </div>
                 <!-- index is 1 -->
                 <div class="carousel-item">
-                    <div
-                            class="row d-flex flex-xl-row flex-md-column-reverse align-items-center justify-content-between"
-                    >
+                    <div class="row d-flex flex-xl-row flex-md-column-reverse align-items-center justify-content-between">
                         <!-- one row contains 12 columns 5 + 7 =12  -->
                         <div class="content col-xl-5 col-md-12">
                             <h1>Soppa</h1>
                             <p>
-                                Sopplunchen idag är en krämig och värmande potatis- och purjolökssoppa
-                                toppad med färsk persilja. För den som föredrar något lättare finns en
-                                fräsch grönsakssoppa med en touch av ingefära och lime. Komplettera din
-                                måltid med nybakat bröd och en sallad på sidan.
+                                <h:dataTable value="#{menuItemsBean.getLunchesBy(menuItemsBean.currentDay, 'SOUP')}" var="lunchItem" styleClass="lunch-table">
+                                    <h:column>
+                                        <p data-aos="fade-right" data-aos-delay="300">
+                                            <h:outputText value="#{lunchItem.menuItem.name}" />
+                                            <br />
+                                            <h:outputText value="#{lunchItem.menuItem.descr}" />
+                                        </p>
+                                    </h:column>
+                                </h:dataTable>
                             </p>
 
                         </div>
@@ -131,8 +120,7 @@ cookie
                 <!-- index is 2 -->
                 <div class="carousel-item">
                     <div
-                            class="row d-flex flex-xl-row flex-md-column-reverse align-items-center justify-content-between"
-                    >
+                            class="row d-flex flex-xl-row flex-md-column-reverse align-items-center justify-content-between">
                         <!-- one row contains 12 columns 5 + 7 =12  -->
                         <div class="content col-xl-5 col-md-12">
                             <h1>Dessert</h1>
@@ -151,9 +139,7 @@ cookie
                 </div>
                 <!-- index is 3 -->
                 <div class="carousel-item">
-                    <div
-                            class="row d-flex flex-xl-row flex-md-column-reverse align-items-center justify-content-between"
-                    >
+                    <div class="row d-flex flex-xl-row flex-md-column-reverse align-items-center justify-content-between">
                         <!-- one row contains 12 columns 5 + 7 =12  -->
                         <div class="content col-xl-5 col-md-12">
                             <h1>Healthy Food</h1>
@@ -177,8 +163,23 @@ cookie
                 <button type="meny" class="page-btn" onclick="openPopup()">Meny and Veckans Meny<i class="bi bi-arrow-right"></i></button>
                 <div class="popup" id="popup">
                     <img src="./resources/images/lunch.png" alt="Tick"/>
-                    <h2>Meny</h2>
-                    <p>Maträtt1</p>
+                    <h2>Weeks Lunches</h2>
+                    <div class="aLaCarteSubMenu">
+                        <div class="getALaCarteItems">
+                            <h:form>
+                                <h:dataTable value="#{menuItemsBean.lunchItemsList}" var="lunchItem" styleClass="alacarte-table">
+                                    <h:column>
+                                        <div class="menu-item">
+                                            <span class="menu-name">#{lunchItem.day}</span>
+                                            <span class="menu-name">#{lunchItem.menuItem.name}</span>
+                                            <span class="menu-price">#{lunchItem.menuItem.price}:-</span>
+                                            <span class="menu-descr">#{lunchItem.menuItem.descr}</span>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </div>
+                    </div>
                     <button type="button" onclick="closePopup()">OK</button>
                 </div>
             </div>
@@ -229,13 +230,9 @@ cookie
                         <div class="card">
                             <img src="./resources/images/food-1.png" alt="" class="item-img" />
                             <div class="item-content">
-
                                 <h4>Maträtt 3</h4>
-                                <p>
-                                    Beskrivning
-                                </p>
+                                <p>Beskrivning </p>
                                 <span class="price">SEK 120</span>
-
                             </div>
                         </div>
                     </div>
@@ -245,9 +242,7 @@ cookie
                             <div class="item-content">
 
                                 <h4>Maträtt 5</h4>
-                                <p>
-                                    Beskrivning
-                                </p>
+                                <p> Beskrivning</p>
                                 <span class="price">SEK 200</span>
 
                             </div>
@@ -255,11 +250,8 @@ cookie
                     </div>
                 </div>
             </div>
-            <div
-                    data-aos="fade-down"
-                    data-aos-delay="100"
-                    class="description col-xl-6 col-md-12 d-flex flex-column justify-content-center align-items-end"
-            >
+            <div data-aos="fade-down" data-aos-delay="100"
+                    class="description col-xl-6 col-md-12 d-flex flex-column justify-content-center align-items-end">
                 <h2>Meny</h2>
                 <h4>Smakfull resa sammanfattad i ord och bilder</h4>
                 <p>
@@ -267,6 +259,59 @@ cookie
                     och preferenser. Från läckra förrätter och huvudrätter till lockande desserter,
                     finns det något för alla. Vår mångsidiga meny är noggrant sammansatt för att garantera en minnesvärd matupplevelse.
                 </p>
+                <div class="popup-background" id="popup-background2"></div>
+                <button type="meny" class="page-btn" onclick="openPopup2()">aLaCarte<i class="bi bi-arrow-right"></i></button>
+                <div class="popup" id="popup2">
+                    <img src="./resources/images/lunch.png" alt="Tick"/>
+                    <h2>A La Carte</h2>
+                    <div class="aLaCarteSubMenu">
+                        <div class="getALaCarteItems">
+                            <h:form>
+                                <h2>Starters</h2>
+                                <h:dataTable value="#{menuItemsBean.startersList}" var="starters" styleClass="alacarte-table">
+                                    <h:column>
+                                        <div class="menu-item">
+                                            <span class="menu-name">#{starters.menuItem.name}</span>
+                                            <span class="menu-price">#{starters.menuItem.price}:-</span>
+                                            <span class="menu-descr">#{starters.menuItem.descr}</span>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                                <h2>Main courses</h2>
+                                <h:dataTable value="#{menuItemsBean.mainsList}" var="mains" styleClass="alacarte-table">
+                                    <h:column>
+                                        <div class="menu-item">
+                                            <span class="menu-name">#{mains.menuItem.name}</span>
+                                            <span class="menu-price">#{mains.menuItem.price}:-</span>
+                                            <span class="menu-descr">#{mains.menuItem.descr}</span>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                                <h2>Desserts</h2>
+                                <h:dataTable value="#{menuItemsBean.dessertsList}" var="dessert" styleClass="alacarte-table">
+                                    <h:column>
+                                        <div class="menu-item">
+                                            <span class="menu-name">#{dessert.menuItem.name}</span>
+                                            <span class="menu-price">#{dessert.menuItem.price}:-</span>
+                                            <span class="menu-descr">#{dessert.menuItem.descr}</span>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                                <h2>Drinks</h2>
+                                <h:dataTable value="#{menuItemsBean.drinksList}" var="drink" styleClass="alacarte-table">
+                                    <h:column>
+                                        <div class="menu-item">
+                                            <span class="menu-name">#{drink.menuItem.name}</span>
+                                            <span class="menu-price">#{drink.menuItem.price}:-</span>
+                                            <span class="menu-descr">#{drink.menuItem.descr}</span>
+                                        </div>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </div>
+                    </div>
+                    <button type="button" onclick="closePopup2()">OK</button>
+                </div>
 
             </div>
         </div>
@@ -294,7 +339,25 @@ cookie
                 </div>
 
                 <!-- Event Carousel Content -->
-
+                <div id="carouselEvents" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <!-- Use JSF to iterate through events -->
+                        <ui:repeat var="event" value="#{eventsBean.events}" varStatus="status">
+                            <div class="#{status.first ? 'carousel-item active' : 'carousel-item'}">
+                                <div class="row align-items-center">
+                                    <div class="col-md-7">
+                                        <h3>#{event.name}</h3>
+                                        <p>#{event.descr}</p>
+                                        <p><strong>Date:</strong> #{event.eventYear}-#{event.eventMonth}-#{event.eventDay}</p>
+                                        <p><strong>Price:</strong> #{event.price} per person</p>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <img src="./resources/images/event.png" class="d-block w-100" alt="Event Image"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </ui:repeat>
+                    </div>
 
                     <!-- Carousel controls -->
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselEvents" data-bs-slide="prev">
@@ -306,10 +369,9 @@ cookie
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-
-
             </div>
 
+        </div>
         <!-- Third Menu Section -->
         <div class="row menu-third">
             <!-- 3 + 3 + 6 = 12 -->
@@ -320,101 +382,35 @@ cookie
             >
                 <div class="booking">
                     <h2>Reservation</h2>
-                    <form>
+                    <h:form>
                         <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="name">Your Name</label>
-                                <input
-                                        type="text"
-                                        name="name"
-                                        class="form-control"
-                                        required="true"
-                                />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="email">Your Email</label>
-                                <input
-                                        type="email"
-                                        name="email"
-                                        class="form-control"
-                                        required="true"
-                                />
-                            </div>
+                        <div class="form-group col-md-6">
+                        <h:panelGrid>
+                            <h:outputLabel for="reservationsName" value="Name:" />
+                            <h:inputText id="reservationsName" value="#{reservationsBean.reservation.custName}" required="true" />
+
+                            <h:outputLabel for="reservationsNum" value="num:" />
+                            <h:inputText id="reservationsNum" value="#{reservationsBean.reservation.numOfGuests}" required="true">
+                                <f:convertNumber integerOnly="true"/>
+                            </h:inputText>
+                            <h:outputLabel for="reservationsTime" value="Time:" />
+                            <h:inputText id="reservationsTime" value="#{reservationsBean.reservation.resTime}" type="time" required="true" />
+
+                            <h:outputLabel for="reservationsDay" value="Day:" />
+                            <h:inputText id="reservationsDay" value="#{reservationsBean.reservation.resDay}"  required="true">
+                                <f:convertNumber integerOnly="true"/>
+                            </h:inputText>
+                            <h:outputLabel for="reservationsMonth" value="Month:" />
+                            <h:inputText id="reservationsMonth" value="#{reservationsBean.reservation.resMonth}" required="true" />
+                        </h:panelGrid>
+
+                        <h:commandButton value="book" action="#{reservationsBean.addReservation()}" />
                         </div>
-                        <div class="form-group">
-                            <label for="date">Booking Date</label>
-                            <input
-                                    type="date"
-                                    name="date"
-                                    class="form-control"
-                                    required="true"
-                            />
                         </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea
-                                    class="form-control"
-                                    name="message"
-                                    rows="6"
-                                    required="true"
-                            ></textarea>
-                            <div class="text-center">
-                                <button type="submit">Book Table Now</button>
-                            </div>
-                        </div>
-                    </form>
+                    </h:form>
                 </div>
             </div>
 
-            <!--login form-->
-            <div
-                    data-aos="fade-left"
-                    data-aos-delay="300"
-                    class="col-xl-3 col-md-6"
-            >
-
-
-
-            </div>
-            <div
-                    data-aos="fade-left"
-                    data-aos-delay="500"
-                    class="col-xl-3 col-md-6 app-download"
-            >
-                <h2>Admin ONLY</h2>
-                <h4>Log In</h4>
-                <div class="container">
-                    <div>
-                        <form class="form" id="login">
-                            <div class="form__message form__message--error"></div>
-                            <div class="form__input-group">
-                                <input type="text" class="form__input" autofocus="true" placeholder="Username or email" />
-                                <div class="form__input-error-message"></div>
-                            </div>
-                            <div class="form__input-group">
-                                <input type="password" class="form__input" autofocus="true" placeholder="Password" />
-                                <div class="form__input-error-message"></div>
-                            </div>
-                            <button class="form__button" type="submit">Continue</button>
-                        </form>
-                    </div>
-
-                    <!-- Coupon Section -->
-                    <div class="coupon row" data-aos="fade-up" data-aos-delay="100">
-                        <!-- 9 + 3 = 12 -->
-                        <div class="col-xl-9">
-                            <h3>Would you like to get a discount coupon?</h3>
-                        </div>
-                        <div class="col-xl-3">
-                            <a href="#" class="page-btn">
-                                get our coupon <i class="bi bi-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div> <!-- Assuming this closes a parent <div> not shown in your snippet -->
-                    <div class="coupon-content row" data-aos="fade-up" data-aos-delay="200">
-                    </div>
-                </div>
-            </div>
         </div>
     </main>
 
@@ -434,46 +430,6 @@ cookie
                             <strong>Email:</strong> info@youremail.com <br />
                         </p>
                     </div>
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li>
-                                <i class="bi bi-chevron-double-right"></i>
-                                <a href="#">Home</a>
-                            </li>
-                            <li>
-                                <i class="bi bi-chevron-double-right"></i>
-                                <a href="#">About</a>
-                            </li>
-                            <li>
-                                <i class="bi bi-chevron-double-right"></i>
-                                <a href="#">Our Menu</a>
-                            </li>
-                            <li>
-                                <i class="bi bi-chevron-double-right"></i>
-                                <a href="#">Terms of service</a>
-                            </li>
-                            <li>
-                                <i class="bi bi-chevron-double-right"></i>
-                                <a href="#">Privacy policy</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Our Social Networks</h4>
-                        <p>
-                            Follow us for daily information
-                        </p>
-                        <!-- mt-3 means margin to top -->
-                        <div class="social-links mt-3">
-                            <a href="#"><i class="bi bi-twitter"></i></a>
-                            <a href="#"><i class="bi bi-facebook"></i></a>
-                            <a href="#"><i class="bi bi-instagram"></i></a>
-                            <a href="#"><i class="bi bi-youtube"></i></a>
-                            <a href="#"><i class="bi bi-linkedin"></i></a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -487,16 +443,11 @@ cookie
     </footer>
 </div>
 <!-- Back to Top Button -->
-<a
-        class="back-to-top active d-flex justify-content-center align-items-center"
-        onclick="scrollToTop();"
-><i class="bi bi-arrow-up-short"></i
-></a>
-<script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+<a class="back-to-top active d-flex justify-content-center align-items-center" onclick="scrollToTop();">
+    <i class="bi bi-arrow-up-short"></i></a>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"
-></script>
+        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="./resources/js/swiper.js"></script>

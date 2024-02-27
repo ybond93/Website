@@ -134,6 +134,73 @@ body {
 .form__link:hover {
     text-decoration: underline;
 }
+
+
+/* Navbar Customization */
+.navbar {
+    background-color: var(--primary); /* Use the primary color for the navbar background */
+    padding: 1rem 0; /* Adjust padding to increase/decrease the navbar height */
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #ffffff; /* Adjust the color to fit the theme */
+    font-weight: 500; /* Make the navbar links bold */
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: var(--second); /* Change color on hover */
+}
+
+/* Adjustments for the navbar toggler icon */
+.navbar-toggler {
+    border-color: var(--third); /* Change the toggler icon color */
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+}
+
+/* Section Styling */
+.menu-section {
+    padding: 2rem 0; /* Add padding to each section for spacing */
+    border-bottom: 2px solid var(--primary); /* Add a border to separate sections */
+}
+
+.menu-section h2 {
+    color: var(--primary-darker); /* Title color for each section */
+    font-weight: 700; /* Make section titles bold */
+    margin-bottom: 1rem; /* Add space below the title */
+    text-align: center; /* Center-align the section titles */
+}
+
+/* Ensure the footer adheres to the new styles */
+#footer {
+    color: #ffffff; /* Light text color for contrast */
+    padding: 2rem 0; /* Padding for top and bottom */
+    text-align: center; /* Center-align footer content */
+}
+
+#footer a {
+    color: var(--primary); /* Primary color for links */
+    transition: color 0.3s ease-in-out;
+}
+
+#footer a:hover {
+    color: var(--third); /* Lighter color on hover */
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.5rem 0; /* Reduce padding on smaller screens */
+    }
+    .menu-section h2 {
+        font-size: 1.5rem; /* Adjust section title size for readability on small devices */
+    }
+}
+
+
 /* Page Container */
 .page {
     position: relative;
@@ -986,3 +1053,598 @@ main {
         padding-top: 4px;
     }
 }
+
+
+
+
+
+
+/******************* ADMIN LUNCHES STYLE *******************/
+
+/* Simple calendar layout */
+.calendar-container {
+    width: 100%;
+    margin: auto;
+    font-family: Arial, sans-serif;
+}
+
+.month-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Existing CSS for .weekly-calendar and children */
+
+.weekly-calendar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    flex-wrap: wrap; /* Allows for wrapping if the screen is too narrow */
+}
+
+.day {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: white;
+    margin: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    align-items: center;
+    min-width: 120px; /* Ensure days don't become too narrow */
+}
+
+
+.day h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.event {
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 14px;
+    width: 100%; /* Ensures events take up full width of the day container */
+    text-align: center; /* Centers text within the event */
+}
+
+.lunch {
+    background-color: #ffecd1;
+}
+
+.shift {
+    background-color: #d1eaff;
+}
+
+
+
+
+
+
+
+.week {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Adds space between the day boxes */
+}
+
+.day {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1; /* Each day box will take up equal width */
+    margin-bottom: 20px; /* Adds space below each day */
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+}
+
+.day h3 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.lunch-table {
+    width: 100%;
+    border-collapse: collapse; /* Remove any default spacing */
+}
+
+.lunch-table th,
+.lunch-table td {
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.event.lunch {
+    background-color: #fff;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column; /* Stack the name, price, and description */
+    gap: 8px; /* Adds space between name, price, and description */
+}
+
+.commandButton {
+    background-color: #d9534f;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    margin: 10px auto 0;
+}
+
+.commandButton:hover {
+    background-color: #c9302c;
+}
+
+#add_lunch_form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: fit-content;
+}
+
+#add_lunch_form input,
+#add_lunch_form textarea,
+#add_lunch_form select {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#add_lunch_form .commandButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: auto;
+    margin-top: 20px;
+}
+
+#add_lunch_form .commandButton:hover {
+    background-color: #45a049;
+}
+
+.chooseDay {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Ensure each 'day' div takes up equal height */
+.week .day {
+    flex: 1 1 calc(33.333% - 40px); /* Assuming there are 3 columns */
+    display: flex;
+    flex-direction: column;
+}
+
+/* To ensure the days have equal height, we set them to stretch the same */
+.day {
+    align-self: stretch;
+}
+
+/* The button will be placed at the bottom of the event lunch container */
+.deleteButton {
+    margin-top: auto;
+}
+
+/* A La Carte Menu Section Styling */
+.aLaCarteSubMenu {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.aLaCarteSubMenu h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.getALaCarteItems, .addALaCarteItem {
+    margin-bottom: 20px;
+}
+
+/* Styling for displaying a la carte items */
+.alacarte-table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+
+.alacarte-table th, .alacarte-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+}
+
+.menu-name, .menu-price, .menu-descr {
+    margin-right: 10px;
+}
+
+.delete-button {
+    padding: 5px 10px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #c9302c;
+}
+
+/* Styling for the form to add new a la carte items */
+.alacarte-form-grid {
+    width: 100%;
+}
+
+.output-label, .input-text, .input-textarea {
+    margin-bottom: 10px;
+}
+
+.command-button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block; /* Centers the button in the form */
+    margin-top: 20px; /* Additional spacing above the button */
+    width: auto; /* Adjust based on content width */
+}
+
+.command-button:hover {
+    background-color: #4cae4c;
+}
+
+/* Ensures form elements are visually consistent */
+.input-text, .input-textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Adjusts layout for responsive design */
+@media (max-width: 768px) {
+    .menu-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .delete-button {
+        margin-top: 10px;
+    }
+
+    .alacarte-form-grid {
+        display: block;
+    }
+
+    .command-button {
+        width: 100%;
+    }
+}
+
+/* ********************** EVENTS STYLE ********************* */
+/* Events Section Styling *//* General Styles for Event Sections */
+.EventsSection,
+.addEvent {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+}
+
+/* Header Styles */
+.EventsSection h2,
+.add-event-form h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Table Styles */
+.getEvents .event-table,
+.events-list .dataTable {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+
+/* Event Attribute Styles */
+.event_attributes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+/* Event Description Styles */
+.eventName, .eventPrice, .eventDescr {
+    flex: 1;
+    margin-right: 10px;
+}
+
+/* Button Styles */
+.commandButton,
+.add-event-form button {
+    background-color: #5cb85c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    margin: 10px 0;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.commandButton:hover,
+.add-event-form button:hover {
+    background-color: #4cae4c;
+}
+
+/* Form Styles */
+#addEventForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(20px);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: var(--border-radius);
+}
+
+#addEventForm label,
+.add-event-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 18px;
+    width: 80%;
+    text-align: left;
+}
+
+#addEventForm input,
+#addEventForm textarea,
+#addEventForm button,
+.add-event-form input,
+.add-event-form textarea {
+    background: transparent;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    width: 80%;
+    padding: 15px;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+#addEventForm input[type='submit'],
+#addEventForm button {
+    position: relative;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #ffffff;
+    background: #000000;
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.2);
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 20px;
+    align-self: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #addEventForm label,
+    #addEventForm input,
+    #addEventForm textarea,
+    #addEventForm button,
+    .add-event-form label,
+    .add-event-form input,
+    .add-event-form textarea,
+    .add-event-form button {
+        width: 100%;
+    }
+}
+
+/* Table Headers and Cells */
+.events-list .dataTable th,
+.events-list .dataTable td,
+.dataTable th,
+.dataTable td {
+    padding: 0.5rem;
+    border: 1px solid var(--second); /* Assuming var(--second) is defined in your CSS */
+    text-align: left;
+}
+
+
+/********************* EMPLOYEE SCHEDULE SECTION STYLE **********************/
+/* Schema Section Styles */
+#schema {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#schema h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Employee Work Shifts Grid */
+.getEmployeeWorkShifts .h-dataTable {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.getEmployeeWorkShifts .h-column {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.getEmployeeWorkShifts .h-column .h-dataTable {
+    width: 100%;
+}
+
+/* Form Styles */
+.addWorkShift {
+    background: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.addWorkShift .h-panelGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.addWorkShift .h-panelGrid > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.addWorkShift .h-panelGrid label {
+    margin-bottom: 5px;
+}
+
+.addWorkShift .h-panelGrid input,
+.addWorkShift .h-panelGrid select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.addWorkShift .h-commandButton {
+    grid-column: span 4;
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}
+
+.addWorkShift .h-commandButton:hover {
+    background-color: #4cae4c;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .getEmployeeWorkShifts .h-dataTable {
+        grid-template-columns: 1fr;
+    }
+
+    .addWorkShift .h-panelGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .addWorkShift .h-commandButton {
+        grid-column: 1;
+    }
+}
+
+.getEmployeeWorkShifts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.employeeShiftCard {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.employeeName {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.nameLabel {
+    display: block;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.nameValue {
+    font-size: 1.1em;
+    color: #333;
+}
+
+.employeeWorkShifts {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+.workShiftDetails {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.shiftType, .shiftMonth, .shiftDay {
+    flex: 1;
+    text-align: center;
+}
+
+
+
+

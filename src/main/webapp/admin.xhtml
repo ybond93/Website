@@ -1,227 +1,710 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title>Admin Page</title>
-    <!-- Add your CSS links here -->
-    <style type="">
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px 40px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .content {
-            padding-left: 40px;
-            padding-bottom: 40px;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        /* Add more styles as needed */
-    </style>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./resources/css/style1.css" /> <!-- Link to your CSS file -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>New Website</title>
 </h:head>
-<h:body>
-    <h1>Admin Dashboard</h1>
-    <div class="content">
-        <!-- Lunches that have been added -->
-        <h2>Lunches</h2>
-        <h:dataTable value="#{menuItemsBean.lunchItemsList}" var="lunchItem">
-            <h:column>#{lunchItem.menuItem.name}</h:column>
-            <h:column>#{lunchItem.menuItem.price}</h:column>
-            <h:column>#{lunchItem.menuItem.descr}</h:column>
-            <h:column>#{lunchItem.day}</h:column>
-        </h:dataTable>
+<body>
 
-        <!-- Form for adding a new lunch item -->
-        <h2>Add Lunch</h2>
-        <h:form>
-            <h:outputLabel for="lunchName" value="Name:" />
-            <h:inputText id="lunchName" value="#{menuItemsBean.menuItem.name}" required="true" />
+<div class="container page">
+    <header id="header">
+        <a href="/" class="logo">Admin</a>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupported" aria-controls="navbarSupported" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupported">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#lunch">Lunch</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#a-la-carte">A la Carte</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#schema">Schema</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#events">Events</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-            <h:outputLabel for="lunchPrice" value="Price:" />
-            <h:inputText id="lunchPrice" value="#{menuItemsBean.menuItem.price}" required="true" />
+    <main>
+        <!-- **************** LUNCHES THAT HAVE BEEN ADDED **************** -->
+        <section id="lunch" class="menu-section">
+            <h2>Lunch Menu</h2>
+            <!-- Lunch menu items -->
+            <div class="weekly-calendar" id="lunch-calendar">
+                <div class="week">
+                    <div class="day" id="monday-lunch">
+                        <h3>Monday</h3>
+                        <h:form>
+                            <h:dataTable value="#{menuItemsBean.getLunchesBy('Monday')}" var="lunchItem" styleClass="lunch-table">
+                                <h:column>
+                                    <div class="event lunch">
+                                        <div class="lunchName">
+                                            <h:outputText value="#{lunchItem.menuItem.name}" />
+                                        </div>
+                                        <div class="lunchPrice">
+                                            <h:outputText value="#{lunchItem.menuItem.price} kr" />
+                                        </div>
+                                        <div class="lunchDescr">
+                                            <h:outputText value="#{lunchItem.menuItem.descr}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{menuItemsBean.deleteLunch(lunchItem)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
 
-            <h:outputLabel for="lunchDescr" value="Description:" />
-            <h:inputTextarea id="lunchDescr" value="#{menuItemsBean.menuItem.descr}" required="true" />
+                    <div class="day" id="tuesday">
+                        <h3>Tuesday</h3>
+                        <h:form>
+                            <h:dataTable value="#{menuItemsBean.getLunchesBy('Tuesday')}" var="lunchItem" styleClass="lunch-table">
+                                <h:column>
+                                    <div class="event lunch">
+                                        <div class="lunchName">
+                                            <h:outputText value="#{lunchItem.menuItem.name}" />
+                                        </div>
+                                        <br/>
+                                        <br/>
+                                        <div class="lunchPrice">
+                                            <h:outputText value="#{lunchItem.menuItem.price} kr" />
+                                        </div>
+                                        <br/>
+                                        <br/>
+                                        <div class="lunchDescr">
+                                            <h:outputText value="#{lunchItem.menuItem.descr}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{menuItemsBean.deleteLunch(lunchItem)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
 
-            <h:outputLabel for="lunchDay" value="Day:" />
-            <h:inputText id="lunchDay" value="#{menuItemsBean.lunchItem.day}" required="true" />
+                    <div class="day" id="wednesday">
+                        <h3>Wednesday</h3>
+                        <h:form>
+                            <h:dataTable value="#{menuItemsBean.getLunchesBy('Wednesday')}" var="lunchItem" styleClass="lunch-table">
+                                <h:column>
+                                    <div class="event lunch">
+                                        <div class="lunchName">
+                                            <h:outputText value="#{lunchItem.menuItem.name}" />
+                                        </div>
+                                        <br/>
+                                        <br/>
+                                        <div class="lunchPrice">
+                                            <h:outputText value="#{lunchItem.menuItem.price} kr" />
+                                        </div>
+                                        <br/>
+                                        <br/>
+                                        <div class="lunchDescr">
+                                            <h:outputText value="#{lunchItem.menuItem.descr}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{menuItemsBean.deleteLunch(lunchItem)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
 
-            <h:commandButton value="Add Lunch" action="#{menuItemsBean.addLunch}" />
-        </h:form>
+                    <div class="day" id="thursday">
+                        <h3>Thursday</h3>
+                        <h:form>
+                            <h:dataTable value="#{menuItemsBean.getLunchesBy('Thursday')}" var="lunchItem" styleClass="lunch-table">
+                                <h:column>
+                                    <div class="event lunch">
+                                        <div class="lunchName">
+                                            <h:outputText value="#{lunchItem.menuItem.name}" />
+                                        </div>
+                                        <div class="lunchPrice">
+                                            <h:outputText value="#{lunchItem.menuItem.price} kr" />
+                                        </div>
+                                        <div class="lunchDescr">
+                                            <h:outputText value="#{lunchItem.menuItem.descr}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{menuItemsBean.deleteLunch(lunchItem)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                        <!-- Repeat for other days -->
+                    </div>
+
+                    <div class="day" id="friday">
+                        <h3>Friday</h3>
+                        <h:form>
+                            <h:dataTable value="#{menuItemsBean.getLunchesBy('Friday')}" var="lunchItem" styleClass="lunch-table">
+                                <h:column>
+                                    <div class="event lunch">
+                                        <div class="lunchName">
+                                            <h:outputText value="#{lunchItem.menuItem.name}" />
+                                        </div>
+                                        <div class="lunchPrice">
+                                            <h:outputText value="#{lunchItem.menuItem.price} kr" />
+                                        </div>
+                                        <div class="lunchDescr">
+                                            <h:outputText value="#{lunchItem.menuItem.descr}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{menuItemsBean.deleteLunch(lunchItem)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                        <!-- Repeat for other days -->
+                    </div>
+
+                    <div class="day" id="saturday">
+                        <h3>Saturday</h3>
+                        <h:form>
+                            <h:dataTable value="#{menuItemsBean.getLunchesBy('Saturday')}" var="lunchItem" styleClass="lunch-table">
+                                <h:column>
+                                    <div class="event lunch">
+                                        <div class="lunchName">
+                                            <h:outputText value="#{lunchItem.menuItem.name}" />
+                                        </div>
+                                        <div class="lunchPrice">
+                                            <h:outputText value="#{lunchItem.menuItem.price} kr" />
+                                        </div>
+                                        <div class="lunchDescr">
+                                            <h:outputText value="#{lunchItem.menuItem.descr}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{menuItemsBean.deleteLunch(lunchItem)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                        <!-- Repeat for other days -->
+                    </div>
+
+                    <div class="day" id="sunday">
+                        <h3>Sunday</h3>
+                        <h:form>
+                            <h:dataTable value="#{menuItemsBean.getLunchesBy('Sunday')}" var="lunchItem" styleClass="lunch-table">
+                                <h:column>
+                                    <div class="event lunch">
+                                        <div class="lunchName">
+                                            <h:outputText value="#{lunchItem.menuItem.name}" />
+                                        </div>
+                                        <div class="lunchPrice">
+                                            <h:outputText value="#{lunchItem.menuItem.price} kr" />
+                                        </div>
+                                        <div class="lunchDescr">
+                                            <h:outputText value="#{lunchItem.menuItem.descr}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{menuItemsBean.deleteLunch(lunchItem)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                        <!-- Repeat for other days -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADD LUNCH FORM -->
+            <h2>Add Lunch</h2>
+            <div id="add_lunch_form">
+                <h:form>
+                    <h:panelGrid>
+                        <h:outputLabel for="lunchName" value="Name:" />
+                        <h:inputText id="lunchName" value="#{menuItemsBean.menuItem.name}" required="true" />
+
+                        <h:outputLabel for="lunchPrice" value="Price:" />
+                        <h:inputText id="lunchPrice" value="#{menuItemsBean.menuItem.price}" required="true" />
+
+                        <h:outputLabel for="lunchDescr" value="Description:" />
+                        <h:inputTextarea id="lunchDescr" value="#{menuItemsBean.menuItem.descr}" required="true" />
+
+                        <h:selectOneMenu id="dayOfWeek" value="#{menuItemsBean.lunchItem.day}" required="true" styleClass="chooseDay">
+                            <f:selectItem itemValue="" itemLabel="Select Day" noSelectionOption="true"/>
+                            <f:selectItems value="#{menuItemsBean.weekDays}" />
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                    <h:commandButton value="Add Lunch" action="#{menuItemsBean.addLunch}" />
+                </h:form>
+            </div>
+        </section>
 
         <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
         <!--xxxxxxxxxxxxxxxxxx A La Carte Menu Items xxxxxxxxxxxxxxxx-->
         <!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
-        <h2>A La Carte</h2>
-        <!-- ******************* FETCHING STARTERS ******************* -->
-        <h2>Starters</h2>
-        <h:dataTable value="#{menuItemsBean.startersList}" var="starterItem">
-            <h:column>#{starterItem.menuItem.name}</h:column>
-            <h:column>#{starterItem.menuItem.price}</h:column>
-            <h:column>#{starterItem.menuItem.descr}</h:column>
-        </h:dataTable>
-        <!-- ******************* ADDING STARTERS ******************* -->
-        <h2>Add Starter</h2>
-        <h:form>
-            <h:outputLabel for="starterName" value="Name:" />
-            <h:inputText id="starterName" value="#{menuItemsBean.menuItem.name}" required="true" />
+        <section id="a-la-carte" class="menu-section">
+            <h2>A La Carte</h2>
+            <!-- ******************* FETCHING STARTERS ******************* -->
+            <div class="aLaCarteSubMenu">
+                <h2>Starters</h2>
+                <div class="getALaCarteItems">
+                    <h:form>
+                        <h:dataTable value="#{menuItemsBean.startersList}" var="starterItem" styleClass="alacarte-table">
+                            <h:column>
+                                <div class="menu-item">
+                                    <span class="menu-name">#{starterItem.menuItem.name}</span>
+                                    <span class="menu-price">#{starterItem.menuItem.price} kr</span>
+                                    <span class="menu-descr">#{starterItem.menuItem.descr}</span>
+                                    <h:commandButton value="Delete" action="#{menuItemsBean.deleteALaCarteItem(starterItem)}" styleClass="delete-button" />
+                                </div>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <!-- Add Starter Form -->
+                <h2>Add Starter</h2>
+                <div class="addALaCarteItem">
+                    <h:form class="alacarte-form">
+                        <h:panelGrid columns="2" styleClass="alacarte-form-grid">
+                            <h:outputLabel for="starterName" value="Name:" styleClass="output-label" />
+                            <h:inputText id="starterName" value="#{menuItemsBean.menuItem.name}" required="true" styleClass="input-text" />
 
-            <h:outputLabel for="starterPrice" value="Price:" />
-            <h:inputText id="starterPrice" value="#{menuItemsBean.menuItem.price}" required="true" />
+                            <h:outputLabel for="starterPrice" value="Price:" styleClass="output-label" />
+                            <h:inputText id="starterPrice" value="#{menuItemsBean.menuItem.price}" required="true" styleClass="input-text" />
 
-            <h:outputLabel for="starterDescr" value="Description:" />
-            <h:inputTextarea id="starterDescr" value="#{menuItemsBean.menuItem.descr}" required="true" />
+                            <h:outputLabel for="starterDescr" value="Description:" styleClass="output-label" />
+                            <h:inputTextarea id="starterDescr" value="#{menuItemsBean.menuItem.descr}" required="true" styleClass="input-textarea" />
+                        </h:panelGrid>
+                        <h:commandButton value="Add Starter" action="#{menuItemsBean.addStarter()}" styleClass="command-button" />
+                    </h:form>
+                </div>
+            </div>
 
-            <h:commandButton value="Add Starter" action="#{menuItemsBean.addStarter()}" />
-        </h:form>
+            <!-- ******************* FETCHING MAIN COURSES ******************* -->
+            <div class="aLaCarteSubMenu">
+                <h2>Main Courses</h2>
+                <div class="getALaCarteItems">
+                    <h:form>
+                        <h:dataTable value="#{menuItemsBean.mainsList}" var="mainItem" styleClass="alacarte-table">
+                            <h:column>
+                                <div class="menu-item">
+                                    <span class="menu-name">#{mainItem.menuItem.name}</span>
+                                    <span class="menu-price">#{mainItem.menuItem.price} kr</span>
+                                    <span class="menu-descr">#{mainItem.menuItem.descr}</span>
+                                    <h:commandButton value="Delete" action="#{menuItemsBean.deleteALaCarteItem(mainItem)}" styleClass="delete-button" />
+                                </div>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <!-- ******************* ADDING MAIN COURSES ******************* -->
+                <h2>Add Main Course</h2>
+                <div class="addALaCarteItem">
+                    <h:form class="alacarte-form">
+                        <h:panelGrid columns="2" styleClass="alacarte-form-grid">
+                            <h:outputLabel for="mainCourseName" value="Name:" styleClass="output-label" />
+                            <h:inputText id="mainCourseName" value="#{menuItemsBean.menuItem.name}" required="true" styleClass="input-text" />
 
+                            <h:outputLabel for="mainCoursePrice" value="Price:" styleClass="output-label" />
+                            <h:inputText id="mainCoursePrice" value="#{menuItemsBean.menuItem.price}" required="true" styleClass="input-text" />
 
-        <!-- ******************* FETCHING MAIN COURSES ******************* -->
-        <h2>Main Courses</h2>
-        <h:dataTable value="#{menuItemsBean.mainsList}" var="mainItem">
-            <h:column>#{mainItem.menuItem.name}</h:column>
-            <h:column>#{mainItem.menuItem.price}</h:column>
-            <h:column>#{mainItem.menuItem.descr}</h:column>
-        </h:dataTable>
-        <!-- ******************* ADDING MAIN COURSES ******************* -->
-        <h2>Add Main Course</h2>
-        <h:form>
-            <h:outputLabel for="mainCourseName" value="Name:" />
-            <h:inputText id="mainCourseName" value="#{menuItemsBean.menuItem.name}" required="true" />
-
-            <h:outputLabel for="mainCoursePrice" value="Price:" />
-            <h:inputText id="mainCoursePrice" value="#{menuItemsBean.menuItem.price}" required="true" />
-
-            <h:outputLabel for="mainCourseDescr" value="Description:" />
-            <h:inputTextarea id="mainCourseDescr" value="#{menuItemsBean.menuItem.descr}" required="true" />
-
-            <h:commandButton value="Add Main Course" action="#{menuItemsBean.addMain()}" />
-        </h:form>
-
-
-        <!-- ******************* FETCHING DESSERTS ******************* -->
-        <h2>Desserts</h2>
-        <h:dataTable value="#{menuItemsBean.dessertsList}" var="dessertItem">
-            <h:column>#{dessertItem.menuItem.name}</h:column>
-            <h:column>#{dessertItem.menuItem.price}</h:column>
-            <h:column>#{dessertItem.menuItem.descr}</h:column>
-        </h:dataTable>
-        <!-- ******************* ADDING DESSERTS ******************* -->
-        <h2>Add Dessert</h2>
-        <h:form>
-            <h:outputLabel for="dessertName" value="Name:" />
-            <h:inputText id="dessertName" value="#{menuItemsBean.menuItem.name}" required="true" />
-
-            <h:outputLabel for="dessertPrice" value="Price:" />
-            <h:inputText id="dessertPrice" value="#{menuItemsBean.menuItem.price}" required="true" />
-
-            <h:outputLabel for="dessertDescr" value="Description:" />
-            <h:inputTextarea id="dessertDescr" value="#{menuItemsBean.menuItem.descr}" required="true" />
-
-            <h:commandButton value="Add Dessert" action="#{menuItemsBean.addDessert()}" />
-        </h:form>
-
-        <!-- ******************* FETCHING DRINKS ******************* -->
-        <h2>Drinks</h2>
-        <h:dataTable value="#{menuItemsBean.drinksList}" var="drinkItem">
-            <h:column>#{drinkItem.menuItem.name}</h:column>
-            <h:column>#{drinkItem.menuItem.price}</h:column>
-            <h:column>#{drinkItem.menuItem.descr}</h:column>
-        </h:dataTable>
-        <!-- ******************* ADDING DRINKS ******************* -->
-        <h2>Add Drink</h2>
-        <h:form>
-            <h:outputLabel for="drinkName" value="Name:" />
-            <h:inputText id="drinkName" value="#{menuItemsBean.menuItem.name}" required="true" />
-
-            <h:outputLabel for="drinkPrice" value="Price:" />
-            <h:inputText id="drinkPrice" value="#{menuItemsBean.menuItem.price}" required="true" />
-
-            <h:outputLabel for="drinkDescr" value="Description:" />
-            <h:inputTextarea id="drinkDescr" value="#{menuItemsBean.menuItem.descr}" required="true" />
-
-            <h:commandButton value="Add Drink" action="#{menuItemsBean.addDrink()}" />
-        </h:form>
-        <h2>Events</h2>
-        <h:dataTable value="#{eventsBean.events}" var="events">
-            <h:column>#{events.name}</h:column>
-            <h:column>#{events.price}</h:column>
-
-            <h:column>#{events.descr}</h:column>
-            <h:column>#{events.eventDay}</h:column>
-            <h:column>#{events.eventMonth}</h:column>
-            <h:column>#{events.eventYear}</h:column>
-        </h:dataTable>
-        <!-- Form to Add Events -->
-        <h:form id="addEventForm">
-            <h2>Add Event</h2>
-            <h:panelGrid columns="2">
-                <h:outputLabel for="eventName" value="Name:" />
-                <h:inputText id="eventName" value="#{eventsBean.event.name}" required="true" />
-
-                <h:outputLabel for="eventPrice" value="Price:" />
-                <h:inputText id="eventPrice" value="#{eventsBean.event.price}" required="false" />
-
-                <h:outputLabel for="eventDescr" value="Description:" />
-                <h:inputTextarea id="eventDescr" value="#{eventsBean.event.descr}" required="false" />
-
-                <h:outputLabel for="eventDay" value="Day:" />
-                <h:inputTextarea id="eventDay" value="#{eventsBean.event.eventDay}" required="false"/>
-                <h:outputLabel for="eventMonth" value="Month:" />
-                <h:inputTextarea id="eventMonth" value="#{eventsBean.event.eventMonth}" required="false" />
-
-                <h:outputLabel for="eventYear" value="Year:" />
-                <h:inputTextarea id="eventYear" value="#{eventsBean.event.eventYear}" required="false" />
+                            <h:outputLabel for="mainCourseDescr" value="Description:" styleClass="output-label" />
+                            <h:inputTextarea id="mainCourseDescr" value="#{menuItemsBean.menuItem.descr}" required="true" styleClass="input-textarea" />
+                        </h:panelGrid>
+                        <h:commandButton value="Add Main Course" action="#{menuItemsBean.addMain()}" styleClass="command-button" />
+                    </h:form>
+                </div>
+            </div>
 
 
-            </h:panelGrid>
-            <h:commandButton value="Add Event" action="#{eventsBean.addEvent()}" />
+            <!-- ******************* FETCHING DESSERTS ******************* -->
+            <div class="aLaCarteSubMenu">
+                <h2>Desserts</h2>
+                <div class="getALaCarteItems">
+                    <h:form>
+                        <h:dataTable value="#{menuItemsBean.dessertsList}" var="dessertItem" styleClass="alacarte-table">
+                            <h:column>
+                                <div class="menu-item">
+                                    <span class="menu-name">#{dessertItem.menuItem.name}</span>
+                                    <span class="menu-price">#{dessertItem.menuItem.price} kr</span>
+                                    <span class="menu-descr">#{dessertItem.menuItem.descr}</span>
+                                    <h:commandButton value="Delete" action="#{menuItemsBean.deleteALaCarteItem(dessertItem)}" styleClass="delete-button" />
+                                </div>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <!-- ******************* ADDING DESSERTS ******************* -->
+                <h2>Add Dessert</h2>
+                <div class="addALaCarteItem">
+                    <h:form class="alacarte-form">
+                        <h:panelGrid columns="2" styleClass="alacarte-form-grid">
+                            <h:outputLabel for="dessertName" value="Name:" styleClass="output-label" />
+                            <h:inputText id="dessertName" value="#{menuItemsBean.menuItem.name}" required="true" styleClass="input-text" />
+
+                            <h:outputLabel for="dessertPrice" value="Price:" styleClass="output-label" />
+                            <h:inputText id="dessertPrice" value="#{menuItemsBean.menuItem.price}" required="true" styleClass="input-text" />
+
+                            <h:outputLabel for="dessertDescr" value="Description:" styleClass="output-label" />
+                            <h:inputTextarea id="dessertDescr" value="#{menuItemsBean.menuItem.descr}" required="true" styleClass="input-textarea" />
+                        </h:panelGrid>
+                        <h:commandButton value="Add Dessert" action="#{menuItemsBean.addDessert()}" styleClass="command-button" />
+                    </h:form>
+                </div>
+            </div>
+
+            <!-- ******************* FETCHING DRINKS ******************* -->
+            <div class="aLaCarteSubMenu">
+                <h2>Drinks</h2>
+                <div class="getALaCarteItems">
+                    <h:form>
+                        <h:dataTable value="#{menuItemsBean.drinksList}" var="drinkItem" styleClass="alacarte-table">
+                            <h:column>
+                                <div class="menu-item">
+                                    <span class="menu-name">#{drinkItem.menuItem.name}</span>
+                                    <span class="menu-price">#{drinkItem.menuItem.price} kr</span>
+                                    <span class="menu-descr">#{drinkItem.menuItem.descr}</span>
+                                    <h:commandButton value="Delete" action="#{menuItemsBean.deleteALaCarteItem(drinkItem)}" styleClass="delete-button" />
+                                </div>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <!-- ******************* ADDING DRINKS ******************* -->
+                <h2>Add Drink</h2>
+                <div class="addALaCarteItem">
+                    <h:form class="alacarte-form">
+                        <h:panelGrid columns="2" styleClass="alacarte-form-grid">
+                            <h:outputLabel for="drinkName" value="Name:" styleClass="output-label" />
+                            <h:inputText id="drinkName" value="#{menuItemsBean.menuItem.name}" required="true" styleClass="input-text" />
+
+                            <h:outputLabel for="drinkPrice" value="Price:" styleClass="output-label" />
+                            <h:inputText id="drinkPrice" value="#{menuItemsBean.menuItem.price}" required="true" styleClass="input-text" />
+
+                            <h:outputLabel for="drinkDescr" value="Description:" styleClass="output-label" />
+                            <h:inputTextarea id="drinkDescr" value="#{menuItemsBean.menuItem.descr}" required="true" styleClass="input-textarea" />
+                        </h:panelGrid>
+                        <h:commandButton value="Add Dessert" action="#{menuItemsBean.addDrink()}" styleClass="command-button" />
+                    </h:form>
+                </div>
+            </div>
+        </section>
+
+        <!-- **************** GET EMPLOYEE WORK SHIFTS ***************** -->
+        <section id="schema" class="menu-section">
+            <h2>Our Schema</h2>
+            <h2>Employee Shifts</h2>
+            <div class="weekly-calendar" id="workshift-calendar">
+                <div class="week">
+                    <!-- Repeat this div block for each day of the week -->
+                    <div class="day" id="monday-shifts">
+                        <h3>Monday</h3>
+                        <h:form>
+                            <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('Monday')}" var="workShift" styleClass="workshift-table">
+                                <h:column>
+                                    <div class="event workshift">
+                                        <div class="employeeName">
+                                            <h:outputText value="#{workShift.employee.firstName} #{workShift.employee.lastName}" />
+                                        </div>
+                                        <div class="shiftType">
+                                            <h:outputText value="#{workShift.shiftType}" />
+                                        </div>
+                                        <div class="shiftDate">
+                                            <!-- Assuming you have a method that formats the date into a readable form -->
+                                            <h:outputText value="#{workShift.day}/#{workShift.month}/#{workShift.year}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{employeeWorkShiftsBean.deleteWorkShift(workShift)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                    <!-- Repeat for Tuesday, -->
+                    <div class="day" id="tuesday-shifts">
+                        <h3>Tuesday</h3>
+                        <h:form>
+                            <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('TUESDAY')}" var="workShift" styleClass="workshift-table">
+                                <h:column>
+                                    <div class="event workshift">
+                                        <div class="employeeName">
+                                            <h:outputText value="#{workShift.employee.firstName} #{workShift.employee.lastName}" />
+                                        </div>
+                                        <div class="shiftType">
+                                            <h:outputText value="#{workShift.shiftType}" />
+                                        </div>
+                                        <div class="shiftDate">
+                                            <!-- Assuming you have a method that formats the date into a readable form -->
+                                            <h:outputText value="#{workShift.day}/#{workShift.month}/#{workShift.year}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{employeeWorkShiftsBean.deleteWorkShift(workShift)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                    <!-- Wednesday-->
+                    <div class="day" id="wednsday-shifts">
+                        <h3>Wedsnsday</h3>
+                        <h:form>
+                            <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('WEDNESDAY')}" var="workShift" styleClass="workshift-table">
+                                <h:column>
+                                    <div class="event workshift">
+                                        <div class="employeeName">
+                                            <h:outputText value="#{workShift.employee.firstName} #{workShift.employee.lastName}" />
+                                        </div>
+                                        <div class="shiftType">
+                                            <h:outputText value="#{workShift.shiftType}" />
+                                        </div>
+                                        <div class="shiftDate">
+                                            <!-- Assuming you have a method that formats the date into a readable form -->
+                                            <h:outputText value="#{workShift.day}/#{workShift.month}/#{workShift.year}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{employeeWorkShiftsBean.deleteWorkShift(workShift)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                    <!--Thursday-->
+                    <div class="day" id="thursday-shifts">
+                        <h3>Thursday</h3>
+                        <h:form>
+                            <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('THURSDAY')}" var="workShift" styleClass="workshift-table">
+                                <h:column>
+                                    <div class="event workshift">
+                                        <div class="employeeName">
+                                            <h:outputText value="#{workShift.employee.firstName} #{workShift.employee.lastName}" />
+                                        </div>
+                                        <div class="shiftType">
+                                            <h:outputText value="#{workShift.shiftType}" />
+                                        </div>
+                                        <div class="shiftDate">
+                                            <!-- Assuming you have a method that formats the date into a readable form -->
+                                            <h:outputText value="#{workShift.day}/#{workShift.month}/#{workShift.year}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{employeeWorkShiftsBean.deleteWorkShift(workShift)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                    <!--Firday-->
+                    <div class="day" id="friday-shifts">
+                        <h3>Friday</h3>
+                        <h:form>
+                            <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('FRIDAY')}" var="workShift" styleClass="workshift-table">
+                                <h:column>
+                                    <div class="event workshift">
+                                        <div class="employeeName">
+                                            <h:outputText value="#{workShift.employee.firstName} #{workShift.employee.lastName}" />
+                                        </div>
+                                        <div class="shiftType">
+                                            <h:outputText value="#{workShift.shiftType}" />
+                                        </div>
+                                        <div class="shiftDate">
+                                            <!-- Assuming you have a method that formats the date into a readable form -->
+                                            <h:outputText value="#{workShift.day}/#{workShift.month}/#{workShift.year}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{employeeWorkShiftsBean.deleteWorkShift(workShift)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                    <!--SATURDAY-->
+                    <div class="day" id="saturday-shifts">
+                        <h3>Saturday</h3>
+                        <h:form>
+                            <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('SATURDAY')}" var="workShift" styleClass="workshift-table">
+                                <h:column>
+                                    <div class="event workshift">
+                                        <div class="employeeName">
+                                            <h:outputText value="#{workShift.employee.firstName} #{workShift.employee.lastName}" />
+                                        </div>
+                                        <div class="shiftType">
+                                            <h:outputText value="#{workShift.shiftType}" />
+                                        </div>
+                                        <div class="shiftDate">
+                                            <!-- Assuming you have a method that formats the date into a readable form -->
+                                            <h:outputText value="#{workShift.day}/#{workShift.month}/#{workShift.year}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{employeeWorkShiftsBean.deleteWorkShift(workShift)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                    <!--Sunday-->
+                    <div class="day" id="sunday-shifts">
+                        <h3>Sundsay</h3>
+                        <h:form>
+                            <h:dataTable value="#{employeeWorkShiftsBean.getShiftsByDay('SUNDAY')}" var="workShift" styleClass="workshift-table">
+                                <h:column>
+                                    <div class="event workshift">
+                                        <div class="employeeName">
+                                            <h:outputText value="#{workShift.employee.firstName} #{workShift.employee.lastName}" />
+                                        </div>
+                                        <div class="shiftType">
+                                            <h:outputText value="#{workShift.shiftType}" />
+                                        </div>
+                                        <div class="shiftDate">
+                                            <!-- Assuming you have a method that formats the date into a readable form -->
+                                            <h:outputText value="#{workShift.day}/#{workShift.month}/#{workShift.year}" />
+                                        </div>
+                                        <!-- Delete Button -->
+                                        <div class="deleteButton">
+                                            <h:commandButton styleClass="commandButton" value="Delete" action="#{employeeWorkShiftsBean.deleteWorkShift(workShift)}" />
+                                        </div>
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
 
 
-        </h:form>
-        <h2>orders </h2>
-        <h:dataTable value="#{ordersBean.orders}" var="orders">
-            <h:column>#{orders.orderId}</h:column>
-            <h:column>#{orders.empId}</h:column>
-            <h:column>#{orders.tableNum}</h:column>
-        </h:dataTable>
-        <h2>orders finsihs </h2>
-        <!-- Form to Add Events -->
-        <h:form id="addOrders">
-            <h2>Add orders</h2>
-            <h:panelGrid columns="3">
-                <!--  <h:outputLabel for="orderId" value="ordeid:" />
-                  <h:inputText id="orderId" value="#{ordersBean.order.orderId}" required="true" />
-  -->
-                <h:outputLabel for="orderEmpId" value="orderEmp:" />
-                <h:inputText id="orderEmpId" value="#{ordersBean.order.empId}" required="false" />
-                <h:outputLabel for="orderTable" value="orderTable:" />
-                <h:inputText id="orderTable" value="#{ordersBean.order.tableNum}" required="false" />
-            </h:panelGrid>
-            <h:commandButton value="Add Order" action="#{ordersBean.addOrder()}" />
-        </h:form>
-        <h2>Menu items </h2>
-        <h:dataTable value="#{menuItemsBean.menuItem}" var="menuItems">
-            <h:column>#{menuItems.name}</h:column>
-            <h:column>#{menuItems.price}</h:column>
-            <h:column>#{menuItems.descr}</h:column>
-            <h:column>#{menuItems.id}</h:column>
-        </h:dataTable>
-    </div>
-</h:body>
+            <h2>Add Work Shift</h2>
+            <div id="add_work_shift_form">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel for="employeeId" value="Employee:" />
+                        <h:selectOneMenu id="employeeId" value="#{employeeWorkShiftsBean.employee.empId}" required="true">
+                            <f:selectItem itemValue="" itemLabel="Select Employee" noSelectionOption="true"/>
+                            <f:selectItems value="#{employeeWorkShiftsBean.employees}" var="emp"
+                                           itemValue="#{emp.empId}" itemLabel="#{emp.firstName} #{emp.lastName}" />
+                        </h:selectOneMenu>
+
+                        <h:outputLabel for="shiftType" value="Shift Type:" />
+                        <h:selectOneMenu id="shiftType" value="#{employeeWorkShiftsBean.workShift.shiftType}" required="true">
+                            <f:selectItem itemValue="Morning" itemLabel="Morning"/>
+                            <f:selectItem itemValue="Evening" itemLabel="Evening"/>
+                        </h:selectOneMenu>
+
+                        <h:selectOneMenu id="WorkshiftDay" value="#{employeeWorkShiftsBean.selectedDay}" required="true" styleClass="chooseDay">
+                            <f:selectItem itemValue="" itemLabel="Select Day" noSelectionOption="true"/>
+                            <f:selectItems value="#{employeeWorkShiftsBean.weekDays.entrySet()}" var="entry"
+                                           itemValue="#{entry.value}" itemLabel="#{entry.key}" />
+                        </h:selectOneMenu>
+
+                        <!-- Include additional fields for month and year if necessary -->
+                    </h:panelGrid>
+                    <h:commandButton value="Add Work Shift" action="#{employeeWorkShiftsBean.addWorkShift}" />
+                </h:form>
+            </div>
+
+        </section>
+
+
+
+        <!-- *********************** EVENT SECTION ************************* -->
+        <section id="events" class="menu-section">
+            <div class="EventsSection">
+                <h2>Upcoming Events</h2>
+                <div class="getEvents">
+                    <h:form>
+                        <h:dataTable value="#{eventsBean.events}" var="event" styleClass="event-table">
+                            <h:column>
+                                <div class="event_attributes">
+                                    <div class="eventName">
+                                        <h:outputText value="#{event.name}" />
+                                    </div>
+                                    <div class="eventPrice">
+                                        <h:outputText value="#{event.price} kr" />
+                                    </div>
+                                    <div class="eventDescr">
+                                        <h:outputText value="#{event.descr}" />
+                                    </div>
+                                    <div class="eventMonth">
+                                        <h:outputText value="#{event.eventMonth}" />
+                                    </div>
+                                    <div class="eventDay">
+                                        <h:outputText value="#{event.eventDay}" />
+                                    </div>
+                                    <!-- Delete Button -->
+                                    <div class="deleteButton">
+                                        <h:commandButton styleClass="commandButton" value="Delete" action="#{eventsBean.deleteEvent(event)}" />
+                                    </div>
+                                </div>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </div>
+                <!-- Form to Add Events -->
+                <h2>Add Event</h2>
+                <div class="addEvent">
+                    <h:form id="addEventForm">
+                        <h:panelGrid columns="2">
+                            <h:outputLabel for="eventName" value="Name:" />
+                            <h:inputText id="eventName" value="#{eventsBean.event.name}" required="true" />
+
+                            <h:outputLabel for="eventPrice" value="Price:" />
+                            <h:inputText id="eventPrice" value="#{eventsBean.event.price}" required="false" />
+
+                            <h:outputLabel for="eventDescr" value="Description:" />
+                            <h:inputTextarea id="eventDescr" value="#{eventsBean.event.descr}" required="false" />
+
+                            <h:outputLabel for="eventDay" value="Day:" />
+                            <h:inputTextarea id="eventDay" value="#{eventsBean.event.eventDay}" required="false" />
+                            <h:outputLabel for="eventMonth" value="Month:" />
+                            <h:inputTextarea id="eventMonth" value="#{eventsBean.event.eventMonth}" required="false" />
+
+                        </h:panelGrid>
+                        <h:commandButton value="Add Event" action="#{eventsBean.addEvent()}" />
+                    </h:form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <!-- Footer content -->
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./resources/js/main.js"></script>
+
+</body>
 </html>

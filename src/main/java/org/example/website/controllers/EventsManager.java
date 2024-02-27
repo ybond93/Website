@@ -8,6 +8,10 @@ import jakarta.ws.rs.core.Response;
 import org.example.website.entities.EventsEntity;
 
 import java.util.List;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+
 
 @Path("/events")
 public class EventsManager {
