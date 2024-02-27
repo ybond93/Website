@@ -79,8 +79,8 @@ CREATE TABLE WORK_SHIFTS (
     EMP_ID INT NOT NULL,
     SHIFT_TYPE VARCHAR(20) NOT NULL, -- morning or evening shift?
     YEAR INT,
-    MONTH INT,
-    DAY INT
+    MONTH VARCHAR(30),
+    DAY VARCHAR(30)
 );
 
 CREATE TABLE TABLES (
@@ -271,14 +271,14 @@ INSERT INTO EMPLOYEES (F_NAME, L_NAME) VALUES ('Collin', 'Jones');
 INSERT INTO EMPLOYEES (F_NAME, L_NAME) VALUES ('Maurice', 'Harris');
 
 INSERT INTO WORK_SHIFTS (EMP_ID, SHIFT_TYPE, YEAR, MONTH, DAY) VALUES
-(1, 'Morning', 2024, 3, 1),
-(3, 'Evening', 2024, 3, 1),
-(5, 'Morning', 2024, 3, 2),
-(7, 'Evening', 2024, 3, 2),
-(9, 'Morning', 2024, 3, 3),
-(11, 'Evening', 2024, 3, 3),
-(13, 'Morning', 2024, 3, 4),
-(15, 'Evening', 2024, 3, 4);
+(1, 'Morning', 2024, 'March', 'Monday'),
+(3, 'Evening', 2024, 'March', 'Monday'),
+(5, 'Morning', 2024, 'March', 'Tuesday'),
+(7, 'Evening', 2024, 'March', 'Tuesday'),
+(9, 'Morning', 2024, 'March', 'Wednesday'),
+(11, 'Evening', 2024, 'March', 'Wednesday'),
+(13, 'Morning', 2024, 'March', 'Thursday'),
+(15, 'Evening', 2024, 'March', 'Thursday');
 
 /***************************** Queries *******************************/
 -- Get all lunches
