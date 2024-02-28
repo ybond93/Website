@@ -1,8 +1,5 @@
 package org.example.website.dto;
 
-import jakarta.persistence.*;
-import org.example.website.entities.MenuItemsEntity;
-import org.example.website.entities.TablesEntity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -46,5 +46,11 @@ public class OrdersEntity {
         this.tableNum = tableNum;
     }
 
+    public List<MenuItemsEntity> getMenuItems() {
+        return menuItems;
+    }
 
+    public void setMenuItems(List<MenuItemsEntity> menuItems) {
+        this.menuItems = menuItems;
+    }
 }
