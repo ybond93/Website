@@ -1,11 +1,13 @@
 package org.example.website.entities;
 
 import jakarta.persistence.*;
-import org.testng.internal.ListenerOrderDeterminer;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@NamedQuery(
+        name = "TablesEntity.findAll",
+        query = "SELECT l from  TablesEntity l"
+)
 @Entity
 @Table(name = "TABLES", schema = "restaurang", catalog = "")
 public class TablesEntity {
