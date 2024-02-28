@@ -13,6 +13,7 @@ import java.util.List;
 @Path("/tables")
 public class TablesManager {
 
+    //
     @PersistenceContext
     private EntityManager em;
     @GET
