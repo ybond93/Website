@@ -90,20 +90,24 @@ CREATE TABLE TABLES (
 
 CREATE TABLE ORDERS (
     ORDER_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    EMP_ID INT NOT NULL,
     TABLE_NUM INT NOT NULL -- dont need to always have number?
 );
 
 CREATE TABLE MENU_ITEM_ORDERS (
-    MENU_ITEM_ID INT NOT NULL,
-    ORDER_ID INT NOT NULL,
-    ORDER_DATE DATE NOT NULL,
-    ORDER_QUANTITY INT NOT NULL
+                                  MENU_ITEM_ID INT NOT NULL,
+                                  ORDER_ID INT NOT NULL,
+                                  PRIMARY KEY ( ORDER_ID ,  MENU_ITEM_ID ),
+                                  CONSTRAINT fk_order
+                                      FOREIGN KEY (ORDER_ID)
+                                          REFERENCES ORDERS(ORDER_ID),
+                                  CONSTRAINT fk_menu_item
+                                      FOREIGN KEY (MENU_ITEM_ID)
+                                          REFERENCES MENU_ITEMS(MENU_ITEM_ID)
+
+
 );
 
 -- Primary Key Constraints
-ALTER TABLE MENU_ITEM_ORDERS
-    ADD CONSTRAINT menu_item_orders_pk PRIMARY KEY (MENU_ITEM_ID, ORDER_ID, ORDER_DATE); -- item and orderid and date
 
 -- Foreign Key Constraints
 ALTER TABLE LUNCHES
@@ -114,9 +118,6 @@ ALTER TABLE ALACARTE_MENU_ITEMS
 
 ALTER TABLE WORK_SHIFTS
     ADD CONSTRAINT work_shifts_fk FOREIGN KEY (EMP_ID) REFERENCES EMPLOYEES(EMP_ID) ON UPDATE CASCADE ON DELETE CASCADE;
-
-ALTER TABLE ORDERS
-    ADD CONSTRAINT orders_fk_1 FOREIGN KEY (EMP_ID) REFERENCES EMPLOYEES(EMP_ID) ON UPDATE CASCADE ON DELETE CASCADE;
 
 ALTER TABLE ORDERS
     ADD CONSTRAINT orders_fk_2 FOREIGN KEY (TABLE_NUM) REFERENCES TABLES(TABLE_NUM) ON UPDATE CASCADE ON DELETE CASCADE;

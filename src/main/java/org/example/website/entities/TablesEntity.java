@@ -1,6 +1,10 @@
 package org.example.website.entities;
 
 import jakarta.persistence.*;
+import org.testng.internal.ListenerOrderDeterminer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "TABLES", schema = "restaurang", catalog = "")
@@ -13,6 +17,13 @@ public class TablesEntity {
     @Basic
     @Column(name = "STATUS")
     private String status;
+    @OneToMany (mappedBy = "orders")
+    private List<OrdersEntity> orders = new ArrayList<>();
+    public List<OrdersEntity> getOrders(){return  orders;}
+    public void setOrders(List<OrdersEntity> orders){
+        this.orders = orders;
+    }
+
 
     public int getTableNum() {
         return tableNum;

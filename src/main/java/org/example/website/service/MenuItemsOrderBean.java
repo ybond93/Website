@@ -36,6 +36,7 @@ public class MenuItemsOrderBean implements Serializable  {
     }
     public OrdersEntity getOrder(){ return  order;}
     public List<OrdersEntity> getOrdeList(){ return ordeList;}
+    /*
     @Transactional
     public void addItemToOrder(int menuItemId, int orderId) {
         MenuItemOrdersEntityPK pk = new MenuItemOrdersEntityPK(menuItemId, orderId);
@@ -52,4 +53,5 @@ public class MenuItemsOrderBean implements Serializable  {
             // For example, update quantities or other relevant fields.
         }
     }
+     */
 }

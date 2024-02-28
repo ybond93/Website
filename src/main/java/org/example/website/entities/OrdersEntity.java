@@ -15,12 +15,9 @@ public class OrdersEntity {
     @Id
     @Column(name = "ORDER_ID")
     private int orderId;
-    @Basic
-    @Column(name = "EMP_ID")
-    private int empId;
-    @Basic
-    @Column(name = "TABLE_NUM")
-    private int tableNum;
+    @ManyToOne
+    @JoinColumn(name = "TABLE_NUM")
+    private TablesEntity tableNum;
     @ManyToMany
     @JoinTable(
             name = "MENU_ITEM_ORDERS",
@@ -41,19 +38,11 @@ public class OrdersEntity {
         this.orderId = orderId;
     }
 
-    public int getEmpId() {
-        return empId;
-    }
-
-    public void setEmpId(int empId) {
-        this.empId = empId;
-    }
-
-    public int getTableNum() {
+    public TablesEntity getTableNum() {
         return tableNum;
     }
 
-    public void setTableNum(int tableNum) {
+    public void setTableNum(TablesEntity tableNum) {
         this.tableNum = tableNum;
     }
 
