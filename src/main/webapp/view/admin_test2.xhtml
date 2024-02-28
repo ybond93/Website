@@ -197,7 +197,6 @@
         <h2>orders </h2>
         <h:dataTable value="#{ordersBean.orders}" var="orders">
             <h:column>#{orders.orderId}</h:column>
-            <h:column>#{orders.empId}</h:column>
             <h:column>#{orders.tableNum}</h:column>
         </h:dataTable>
         <h2>orders finsihs </h2>
@@ -208,19 +207,17 @@
               <!--  <h:outputLabel for="orderId" value="ordeid:" />
                 <h:inputText id="orderId" value="#{ordersBean.order.orderId}" required="true" />
 -->
-                <h:outputLabel for="orderEmpId" value="orderEmp:" />
-                <h:inputText id="orderEmpId" value="#{ordersBean.order.empId}" required="false" />
                 <h:outputLabel for="orderTable" value="orderTable:" />
                 <h:inputText id="orderTable" value="#{ordersBean.order.tableNum}" required="false" />
             </h:panelGrid>
             <h:commandButton value="Add Order" action="#{ordersBean.addOrder()}" />
         </h:form>
-        <h:form id="additemOrders">
+        <!-- <h:form id="additemOrders">
             <h2>Add orders</h2>
             <h:panelGrid columns="3">
-                <!--  <h:outputLabel for="orderId" value="ordeid:" />
+                 <h:outputLabel for="orderId" value="ordeid:" />
                   <h:inputText id="orderId" value="#{ordersBean.order.orderId}" required="true" />
-  -->
+
                 <h:outputLabel for="orderID" value="orderiID:" />
                 <h:inputText id="orderID" value="#{menuItemsOrderBean.menuItemOrder}" required="false" />
                 <h:outputLabel for="orderTable" value="orderTable:" />
@@ -229,7 +226,7 @@
             <h:commandButton value="Add Order" action="#{menuItemsOrderBean.addItemToOrder()}" />
         </h:form>
 
-
+        -->
 
         <h2>Menu items </h2>
         <h:dataTable value="#{menuItemsBean.menuItemList}" var="menuItems">

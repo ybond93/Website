@@ -697,10 +697,29 @@
                 <h2>Menu items </h2>
                 <h:dataTable value="#{menuItemsBean.menuItemList}" var="menuItems">
                     <h:column>#{menuItems.name}</h:column>
-                    <h:column>#{menuItems.price}</h:column>//
+                    <h:column>#{menuItems.price}</h:column>
                     <h:column>#{menuItems.descr}</h:column>
                     <h:column>#{menuItems.id}</h:column>
                 </h:dataTable>
+               <h2>  menu item orders </h2>
+                <h:dataTable value="#{menuItemsOrderBean.menuItemOrders}" var="menuItemsOrder">
+                <h:column>#{menuItemsOrder.orderId}</h:column>
+
+                <h:column>#{menuItemsOrder.menuItemId}</h:column>
+
+            </h:dataTable>
+                <h:form id="additemOrders">
+                    <h2>Add orders</h2>
+                    <h:panelGrid columns="3">
+                        <h:outputLabel for="menuorderId" value="ordeid:" />
+                        <h:inputText id="menuorderId" value="#{ordersBean.order.orderId}" required="true" />
+
+                        <h:outputLabel for="menuorderId2" value="orderid2:" />
+                        <h:inputText id="menuorderId2" value="#{menuItemsOrderBean.menuItemOrder}" required="false" />
+                        </h:panelGrid>
+                    <!--int menuItemId, int orderId-->
+                    <h:commandButton value="Add Order" action="#{menuItemsOrderBean.addItemToOrder()}" />
+                </h:form>
             </div>
         </section>
     </main>

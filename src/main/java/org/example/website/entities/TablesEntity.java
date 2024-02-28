@@ -9,7 +9,6 @@ import java.util.List;
 @Entity
 @Table(name = "TABLES", schema = "restaurang", catalog = "")
 public class TablesEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "TABLE_NUM")
     private int tableNum;
@@ -17,7 +16,7 @@ public class TablesEntity {
     @Basic
     @Column(name = "STATUS")
     private String status;
-    @OneToMany (mappedBy = "orders")
+    @OneToMany (mappedBy = "tableNum")
     private List<OrdersEntity> orders = new ArrayList<>();
     public List<OrdersEntity> getOrders(){return  orders;}
     public void setOrders(List<OrdersEntity> orders){

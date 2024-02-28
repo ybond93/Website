@@ -19,6 +19,24 @@ import java.util.List;
 public class MenuItemsOrderBean implements Serializable  {
     @PersistenceContext
     private EntityManager em;
+    private int menuItemId;
+    private int orderId;
+    // Getters and Setters for menuItemId and orderId
+    public int getMenuItemId() {
+        return menuItemId;
+    }
+
+    public void setMenuItemId(int menuItemId) {
+        this.menuItemId = menuItemId;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
     private List<MenuItemOrdersEntity> menuItemOrdersList;
     private MenuItemOrdersEntity menuItemOrder;
     private List<OrdersEntity> ordeList;
@@ -36,9 +54,9 @@ public class MenuItemsOrderBean implements Serializable  {
     }
     public OrdersEntity getOrder(){ return  order;}
     public List<OrdersEntity> getOrdeList(){ return ordeList;}
-    /*
+    /* int menuItemId, int orderId */
     @Transactional
-    public void addItemToOrder(int menuItemId, int orderId) {
+    public void addItemToOrder() {
         MenuItemOrdersEntityPK pk = new MenuItemOrdersEntityPK(menuItemId, orderId);
         MenuItemOrdersEntity menuItemOrder = em.find(MenuItemOrdersEntity.class, pk);
 
@@ -53,5 +71,5 @@ public class MenuItemsOrderBean implements Serializable  {
             // For example, update quantities or other relevant fields.
         }
     }
-     */
+
 }
