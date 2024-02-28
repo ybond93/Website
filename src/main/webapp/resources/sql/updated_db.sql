@@ -96,6 +96,8 @@ CREATE TABLE ORDERS (
 CREATE TABLE MENU_ITEM_ORDERS (
                                   MENU_ITEM_ID INT NOT NULL,
                                   ORDER_ID INT NOT NULL,
+                                  AMOUNT INT,
+
                                   PRIMARY KEY ( ORDER_ID ,  MENU_ITEM_ID ),
                                   CONSTRAINT fk_order
                                       FOREIGN KEY (ORDER_ID)
