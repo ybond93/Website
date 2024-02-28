@@ -29,9 +29,8 @@ public class MenuItemsEntity {
     @Column(name = "DESCR", length = 200)
     private String descr;
 
-    @ManyToMany(mappedBy = "menuItems")
-    private List<OrdersEntity> orders = new ArrayList<>();
-
+    @OneToMany(mappedBy = "menuItem")
+    private List<MenuItemOrdersEntity> menuItemOrders;
     // Getters and Setters
     public int getId() {
         return id;
@@ -49,6 +48,16 @@ public class MenuItemsEntity {
 
     public void setDescr(final String descr) { this.descr = descr; }
 
+    public List<MenuItemOrdersEntity> getMenuItemOrders() {
+        return menuItemOrders;
+    }
 
+    public void setMenuItemOrders(List<MenuItemOrdersEntity> menuItemOrders) {
+        this.menuItemOrders = menuItemOrders;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 }

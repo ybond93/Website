@@ -18,14 +18,8 @@ public class OrdersEntity {
     @ManyToOne
     @JoinColumn(name = "TABLE_NUM")
     private TablesEntity tableNum;
-    @ManyToMany
-    @JoinTable(
-            name = "MENU_ITEM_ORDERS",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "menu_item_id")
-    )
-    private List<MenuItemsEntity> menuItems = new ArrayList<>();
-
+    @OneToMany(mappedBy = "order")
+    private List<MenuItemOrdersEntity> menuItemOrders;
     // Constructors, getters, and setters
 
 
@@ -46,11 +40,11 @@ public class OrdersEntity {
         this.tableNum = tableNum;
     }
 
-    public List<MenuItemsEntity> getMenuItems() {
-        return menuItems;
+    public void setMenuItemOrders(List<MenuItemOrdersEntity> menuItemOrders) {
+        this.menuItemOrders = menuItemOrders;
     }
 
-    public void setMenuItems(List<MenuItemsEntity> menuItems) {
-        this.menuItems = menuItems;
+    public List<MenuItemOrdersEntity> getMenuItemOrders() {
+        return menuItemOrders;
     }
 }

@@ -10,15 +10,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OrdersMapper {
+
     public static OrdersDTO toDTO(OrdersEntity entity) {
         OrdersDTO dto = new OrdersDTO();
         dto.setOrderId(entity.getOrderId());
-        if (entity.getTableNum() != null) {
-            dto.setTableNum(entity.getTableNum().getTableNum());
-        }
-        dto.setMenuItems(entity.getMenuItems().stream()
-                .map(MenuItemsEntity::getId) // Assuming MenuItemsEntity has getId()
-                .collect(Collectors.toList()));
+
+        List<OrdersDTO.MenuItemQuantityDTO> menuItemQuantities = entity.getMenuItemOrders().stream()
+                .map(menuItemOrderEntity -> {
+                    OrdersDTO.MenuItemQuantityDTO mqDto = new OrdersDTO.MenuItemQuantityDTO();
+                    mqDto.setMenuItemId(menuItemOrderEntity.getMenuItem().getId());
+                    mqDto.setAmount(menuItemOrderEntity.getAmount());
+                    return mqDto;
+                })
+                .collect(Collectors.toList());
+
+        dto.setMenuItemQuantities(menuItemQuantities);
+
+
         return dto;
     }
 }

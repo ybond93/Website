@@ -6,8 +6,8 @@ import jakarta.persistence.*;
         query = "SELECT l FROM MenuItemOrdersEntity l"
 )
 @Entity
-@jakarta.persistence.Table(name = "MENU_ITEM_ORDERS", schema = "restaurang", catalog = "")
-@jakarta.persistence.IdClass(org.example.website.entities.MenuItemOrdersEntityPK.class)
+@Table(name = "MENU_ITEM_ORDERS", schema = "restaurang", catalog = "")
+@IdClass(org.example.website.entities.MenuItemOrdersEntityPK.class)
 public class MenuItemOrdersEntity {
     @Id
     @Column(name = "MENU_ITEM_ID")
@@ -16,8 +16,17 @@ public class MenuItemOrdersEntity {
     @Id
     @Column(name = "ORDER_ID")
     private int orderId;
-
+    @Column(name = "AMOUNT")
+    private int amount; // Added quantity field
     // Getters and setters
+    @ManyToOne
+    @JoinColumn(name = "ORDER_ID", insertable = false, updatable = false)
+    private OrdersEntity order;
+
+    // Bidirectional @ManyToOne association back to MenuItemsEntity
+    @ManyToOne
+    @JoinColumn(name = "MENU_ITEM_ID", insertable = false, updatable = false)
+    private MenuItemsEntity menuItem;
 
     public int getMenuItemId() {
         return menuItemId;
@@ -33,6 +42,30 @@ public class MenuItemOrdersEntity {
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public MenuItemsEntity getMenuItem() {
+        return menuItem;
+    }
+
+    public OrdersEntity getOrder() {
+        return order;
+    }
+
+    public void setMenuItem(MenuItemsEntity menuItem) {
+        this.menuItem = menuItem;
+    }
+
+    public void setOrder(OrdersEntity order) {
+        this.order = order;
     }
 
 }
