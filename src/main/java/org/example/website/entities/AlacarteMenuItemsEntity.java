@@ -10,7 +10,9 @@ import jakarta.persistence.*;
         @NamedQuery(name = "ALaCarteMenuItems.findDesserts",
                 query = "SELECT a FROM AlacarteMenuItemsEntity a JOIN FETCH a.menuItem WHERE a.category = 'Dessert'"),
         @NamedQuery(name = "ALaCarteMenuItems.findDrinks",
-                query = "SELECT a FROM AlacarteMenuItemsEntity a JOIN FETCH a.menuItem WHERE a.category = 'Drink'")
+                query = "SELECT a FROM AlacarteMenuItemsEntity a JOIN FETCH a.menuItem WHERE a.category = 'Drink'"),
+        @NamedQuery(name = "ALaCarteMenuItems.findAll",
+                query = "SELECT a FROM AlacarteMenuItemsEntity a JOIN FETCH a.menuItem")
 })
 @Entity
 @Table(name = "ALACARTE_MENU_ITEMS", schema = "restaurang", catalog = "")
