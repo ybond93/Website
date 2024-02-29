@@ -14,6 +14,7 @@ public class OrdersMapper {
     public static OrdersDTO toDTO(OrdersEntity entity) {
         OrdersDTO dto = new OrdersDTO();
         dto.setOrderId(entity.getOrderId());
+        dto.setTableNum(entity.getTableNum().getTableNum());
 
         List<OrdersDTO.MenuItemQuantityDTO> menuItemQuantities = entity.getMenuItemOrders().stream()
                 .map(menuItemOrderEntity -> {
