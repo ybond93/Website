@@ -5,6 +5,7 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.example.website.entities.EmployeesEntity;
 import org.example.website.entities.LunchesEntity;
@@ -25,16 +26,21 @@ public class EmployeeWorkShiftsBean implements Serializable {
     private WorkShiftsEntity workShift = new WorkShiftsEntity();
     private EmployeesEntity employee = new EmployeesEntity();
     private List<EmployeesEntity> employeesList;
+    // container for all employees work shifts
     private List<EmployeesEntity> employeesWorkshiftList;
+    // container for all work shifts for a specific employee
+    private List<WorkShiftsEntity> empWorkShifts;
     private String selectedDay; // Added for selecting day in addWorkShift form
 
     // Initialize this in @PostConstruct
     private Map<String, String> weekDays;
+
     @PostConstruct
     public void init() {
         prepareWeekDays();
         employeesWorkshiftList= em.createQuery("SELECT e FROM EmployeesEntity e JOIN FETCH e.workShifts", EmployeesEntity.class).getResultList();
         employeesList = em.createNamedQuery("EmployeesEntity.findEmployees", EmployeesEntity.class).getResultList();
+        empWorkShifts = em.createNamedQuery("WorkShiftsEntity.findWorkShiftsForEmployee", WorkShiftsEntity.class).getResultList();
     }
 
     private void prepareWeekDays() {
@@ -79,7 +85,7 @@ public class EmployeeWorkShiftsBean implements Serializable {
 
     @Transactional
     public void deleteWorkShift(WorkShiftsEntity ws) {
-        WorkShiftsEntity toDelete = em.find(WorkShiftsEntity.class, ws.getId());
+        WorkShiftsEntity toDelete = em.find(WorkShiftsEntity.class, ws.getShiftId());
         if (toDelete != null) { em.remove(toDelete); }
         // Refresh the list of lunches to reflect the deletion
         // init(); // Assuming init() method populates the list of lunches
@@ -91,10 +97,10 @@ public class EmployeeWorkShiftsBean implements Serializable {
                 .getResultList();
     }
 
-    public List<WorkShiftsEntity> getWorkShiftsList(int empId) {
-        return em.createQuery("SELECT ws FROM WorkShiftsEntity ws WHERE ws.employee.empId = :empId", WorkShiftsEntity.class)
-                .setParameter("empId", empId)
-                .getResultList();
+    public List<WorkShiftsEntity> getWorkShiftsFor(int employee) {
+        TypedQuery<WorkShiftsEntity> query = em.createNamedQuery("WorkShiftsEntity.findWorkShiftsForEmployee", WorkShiftsEntity.class);
+        query.setParameter("employee", employee);
+        return query.getResultList();
     }
 
     // Getters and Setters

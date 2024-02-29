@@ -29,4 +29,6 @@ public class MenuItemsEntity {
 
     public String getDescr() { return descr; }
     public void setDescr(final String descr) { this.descr = descr; }
+
+    public int getId() { return id; }
 }

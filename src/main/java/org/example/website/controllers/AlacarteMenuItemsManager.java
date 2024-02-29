@@ -21,7 +21,6 @@ public class AlacarteMenuItemsManager {
         List<AlacarteMenuItemsEntity> startersList;
         startersList = em.createNamedQuery("ALaCarteMenuItems.findStarters", AlacarteMenuItemsEntity.class).getResultList();
         return Response.ok(startersList).build();
-
     }
     @Path("/mains")
     @GET
@@ -48,6 +47,4 @@ public class AlacarteMenuItemsManager {
         return Response.ok(drinksList).build();
     }
 }
-
-
 

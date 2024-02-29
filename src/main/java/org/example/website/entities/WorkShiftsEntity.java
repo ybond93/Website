@@ -3,13 +3,18 @@ package org.example.website.entities;
 import jakarta.persistence.*;
 
 @NamedQueries({
-        @NamedQuery(
+        @NamedQuery(    // fetches ALL work shifts
                 name = "WorkShiftsEntity.findEmployeeShifts",
                 query = "SELECT ws FROM WorkShiftsEntity ws JOIN FETCH ws.employee"
         ),
         @NamedQuery(
                 name = "WorkShiftsEntity.findWorkShiftsByDay",
                 query = "SELECT ws FROM WorkShiftsEntity ws JOIN FETCH ws.employee WHERE ws.day = :dayOfWeek"
+        ),
+        // fetches the work shifts for a specific employee
+        @NamedQuery(
+                name = "WorkShiftsEntity.findWorkShiftsForEmployee",
+                query = "SELECT ws FROM WorkShiftsEntity ws JOIN FETCH ws.employee WHERE ws.employee = :employee"
         )
 })
 @Entity
@@ -76,7 +81,7 @@ public class WorkShiftsEntity {
         this.day = day;
     }
 
-    public Integer getId() {
+    public int getShiftId() {
         return shiftId;
     }
 }
