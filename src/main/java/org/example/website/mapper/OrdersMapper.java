@@ -21,10 +21,12 @@ public class OrdersMapper {
         return dto;
     }
 
-    public static OrdersEntity toEntity(OrdersDTO dto, TablesEntity table) { //anta vi måste skicka table också?
+    public static OrdersEntity toEntity(OrdersDTO dto) { //anta vi måste skicka table också?
         OrdersEntity entity = new OrdersEntity();
 
         entity.setOrderId(dto.getOrderId());
+        TablesEntity table = new TablesEntity();
+        table.setTableNum(dto.getTableNum()); // Set only the ID for the table
         entity.setTableNum(table);
         return entity;
     }
