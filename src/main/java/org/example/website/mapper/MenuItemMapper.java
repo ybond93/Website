@@ -1,9 +1,6 @@
 package org.example.website.mapper;
 
-import org.example.website.dto.EmployeesDTO;
-import org.example.website.dto.MenuItemQuantityDTO;
 import org.example.website.dto.MenuItemsDTO;
-import org.example.website.entities.EmployeesEntity;
 
 public class MenuItemMapper {
     public static MenuItemsDTO toDTO(MenuItemsDTO employee) {
