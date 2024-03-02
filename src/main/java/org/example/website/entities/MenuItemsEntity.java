@@ -59,5 +59,4 @@ public class MenuItemsEntity {
     public void setId(int id) {
         this.id = id;
     }
-
 }

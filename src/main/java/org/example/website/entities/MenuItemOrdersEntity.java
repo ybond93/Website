@@ -19,6 +19,7 @@ public class MenuItemOrdersEntity {
     @Column(name = "AMOUNT")
     private int amount; // Added quantity field
     // Getters and setters
+
     @ManyToOne
     @JoinColumn(name = "ORDER_ID", insertable = false, updatable = false)
     private OrdersEntity order;

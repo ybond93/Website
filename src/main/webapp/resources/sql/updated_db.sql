@@ -91,26 +91,22 @@ CREATE TABLE ORDERS (
     ORDER_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     TABLE_NUM INT NOT NULL, -- dont need to always have number?
     ORDER_DATE DATE,
-    TIMESTAMP TIME
+    TIMESTAMP TIME,
+    COMPLETED BOOLEAN
 );
 
 CREATE TABLE MENU_ITEM_ORDERS (
     MENU_ITEM_ID INT NOT NULL,
     ORDER_ID INT NOT NULL,
     AMOUNT INT,
-
-    PRIMARY KEY ( ORDER_ID ,  MENU_ITEM_ID ),
-    CONSTRAINT fk_order
-    FOREIGN KEY (ORDER_ID)
-    REFERENCES ORDERS(ORDER_ID),
-    CONSTRAINT fk_menu_item
-    FOREIGN KEY (MENU_ITEM_ID)
-    REFERENCES MENU_ITEMS(MENU_ITEM_ID)
+    PRIMARY KEY ( ORDER_ID ,  MENU_ITEM_ID )
 );
 
 -- Primary Key Constraints
 
 -- Foreign Key Constraints
+
+
 ALTER TABLE LUNCHES
     ADD CONSTRAINT lunches_fk FOREIGN KEY (MENU_ITEM_ID) REFERENCES MENU_ITEMS(MENU_ITEM_ID) ON UPDATE CASCADE ON DELETE CASCADE;
 
@@ -295,7 +291,6 @@ VALUES
 (9, 'In Progress'),
 (10, 'Idle');
 
-
 -- Assume we have 10 menu items already, with IDs from 1 to 10
 -- Insert orders for the 10 tables
 INSERT INTO ORDERS (TABLE_NUM, ORDER_DATE, TIMESTAMP)
@@ -311,21 +306,20 @@ VALUES
 (9, '2024-02-21', '16:53:36'),
 (10, '2024-02-20', '17:25:36');
 
-
 -- Insert menu item orders
 -- This will assign 2 menu items to each order
 -- We're using a simple loop pattern for this example, but you might have specific requirements for each order
 INSERT INTO MENU_ITEM_ORDERS (MENU_ITEM_ID, ORDER_ID, AMOUNT) VALUES
-(1, 1, 2), (2, 1, 3),
-(3, 2, 1), (4, 2, 2),
-(5, 3, 2), (6, 3, 1),
-(7, 4, 1), (8, 4, 2),
-(9, 5, 1), (10, 5, 3),
-(1, 6, 2), (2, 6, 1),
-(3, 7, 1), (4, 7, 1),
-(5, 8, 2), (6, 8, 2),
-(7, 9, 3), (8, 9, 1),
-(9, 10, 2), (10, 10, 2);
+(32, 1, 2), (33, 1, 3),
+(34, 2, 1), (35, 2, 2),
+(36, 3, 2), (37, 3, 1),
+(38, 4, 1), (39, 4, 2),
+(42, 5, 1), (43, 5, 3),
+(42, 6, 2), (44, 6, 1),
+(45, 7, 1), (46, 7, 1),
+(45, 8, 2), (47, 8, 2),
+(42, 9, 3), (47, 9, 1),
+(50, 10, 2), (51, 10, 2);
 
 INSERT INTO RESERVATIONS (NUM_OF_GUESTS, RES_YEAR, RES_MONTH, RES_DAY, RES_TIME, CUST_NAME)
 VALUES
@@ -376,12 +370,11 @@ VALUES
 /*
  SELECT
     o.ORDER_ID,
-    o.order_date,
     o.timestamp,
     t.TABLE_NUM,
     t.STATUS AS order_status,
     mi.NAME AS menu_item_name,
-    mi.PRICE AS menu_item_price,
+    ami.CATEGORY,
     mio.AMOUNT
 FROM
     ORDERS o
@@ -390,5 +383,9 @@ JOIN
 JOIN
     MENU_ITEM_ORDERS mio ON o.ORDER_ID = mio.ORDER_ID
 JOIN
-    MENU_ITEMS mi ON mio.MENU_ITEM_ID = mi.MENU_ITEM_ID;
+    MENU_ITEMS mi ON mio.MENU_ITEM_ID = mi.MENU_ITEM_ID
+JOIN
+    ALACARTE_MENU_ITEMS ami ON ami.MENU_ITEM_ID = mi.MENU_ITEM_ID
+ ORDER BY o.TIMESTAMP ASC;
+----------------------------------------------------------
  */

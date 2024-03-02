@@ -22,8 +22,6 @@ public class OrdersEntity {
     private List<MenuItemOrdersEntity> menuItemOrders;
     // Constructors, getters, and setters
 
-
-
     public int getOrderId() {
         return orderId;
     }

@@ -14,7 +14,6 @@ public class OrdersDTO {
         private int amount;
         public MenuItemQuantityDTO() {}
 
-
         public MenuItemQuantityDTO(int menuItemId, int amount) {
             this.menuItemId = menuItemId;
             this.amount = amount;

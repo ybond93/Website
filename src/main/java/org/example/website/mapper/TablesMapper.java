@@ -22,7 +22,7 @@ public class TablesMapper {
         return dto;
     }
 
-    //Will be used for updating and inserting data later on
+     //Will be used for updating and inserting data later on
     public static TablesEntity toEntity(TablesDTO dto) {
         TablesEntity entity = new TablesEntity();
         entity.setStatus(dto.getStatus());

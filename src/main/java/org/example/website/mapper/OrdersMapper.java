@@ -46,6 +46,7 @@ public class OrdersMapper {
                     MenuItemOrdersEntity menuItemOrderEntity = new MenuItemOrdersEntity();
                     menuItemOrderEntity.setMenuItemId(mqDto.getMenuItemId());
                     menuItemOrderEntity.setAmount(mqDto.getAmount());
+                    menuItemOrderEntity.setOrder(entity);
                     return menuItemOrderEntity;
                 })
                 .collect(Collectors.toList());
