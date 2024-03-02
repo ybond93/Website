@@ -5,7 +5,7 @@ import java.util.List;
 public class TablesDTO {
     private int tableNum;
     private String Status;
-    private List<Integer> orderIds;
+    private List<OrdersDTO> orders;
 
 
 
@@ -13,16 +13,17 @@ public class TablesDTO {
         return tableNum;
     }
 
-    public List<Integer> getOrderIds() {
-        return orderIds;
-    }
 
     public String getStatus() {
         return Status;
     }
 
-    public void setOrderIds(List<Integer> orderIds) {
-        this.orderIds = orderIds;
+    public void setOrders(List<OrdersDTO> orders) {
+        this.orders = orders;
+    }
+
+    public List<OrdersDTO> getOrders() {
+            return orders;
     }
 
     public void setStatus(String status) {

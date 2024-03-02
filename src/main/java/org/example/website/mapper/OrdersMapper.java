@@ -1,16 +1,12 @@
 package org.example.website.mapper;
 
 
-import jakarta.persistence.Entity;
-import org.example.website.dto.MenuItemQuantityDTO;
 import org.example.website.dto.OrdersDTO;
 import org.example.website.dto.TablesDTO;
 import org.example.website.entities.MenuItemOrdersEntity;
-import org.example.website.entities.MenuItemsEntity;
 import org.example.website.entities.OrdersEntity;
 import org.example.website.entities.TablesEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,38 +17,15 @@ public class OrdersMapper {
         dto.setOrderId(entity.getOrderId());
         dto.setTableNum(entity.getTableNum().getTableNum());
 
-        List<MenuItemQuantityDTO> menuItemQuantities = entity.getMenuItemOrders().stream()
-                .map(menuItemOrderEntity -> {
-                    MenuItemQuantityDTO mqDto = new MenuItemQuantityDTO();
-                    mqDto.setMenuItemId(menuItemOrderEntity.getMenuItem().getId());
-                    mqDto.setAmount(menuItemOrderEntity.getAmount());
-                    return mqDto;
-                })
-                .collect(Collectors.toList());
-        dto.setMenuItemQuantities(menuItemQuantities);
+
         return dto;
     }
 
-    public static OrdersEntity toEntity(OrdersDTO dto) {
+    public static OrdersEntity toEntity(OrdersDTO dto, TablesEntity table) { //anta vi måste skicka table också?
         OrdersEntity entity = new OrdersEntity();
-        TablesDTO tablesDTO = new TablesDTO();
-        entity.setOrderId(dto.getOrderId());
-        tablesDTO.setTableNum(dto.getTableNum());
-        TablesEntity tableEntity = TablesMapper.toEntity(tablesDTO);
-        entity.setTableNum(tableEntity);
-    if(!dto.getMenuItemQuantities().isEmpty()) {
-    // Map MenuItemQuantityDTO list to MenuItemOrderEntity list
-    List<MenuItemOrdersEntity> menuItemOrders = dto.getMenuItemQuantities().stream()
-            .map(mqDto -> {
-                MenuItemOrdersEntity menuItemOrderEntity = new MenuItemOrdersEntity();
-                menuItemOrderEntity.setMenuItemId(mqDto.getMenuItemId());
-                menuItemOrderEntity.setAmount(mqDto.getAmount());
 
-                return menuItemOrderEntity;
-            })
-            .collect(Collectors.toList());
-        entity.setMenuItemOrders(menuItemOrders);
-    }
+        entity.setOrderId(dto.getOrderId());
+        entity.setTableNum(table);
         return entity;
     }
 
