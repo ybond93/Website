@@ -29,5 +29,4 @@ public class TablesMapper {
         entity.setTableNum(dto.getTableNum());
         return entity;
     }
-
 }
