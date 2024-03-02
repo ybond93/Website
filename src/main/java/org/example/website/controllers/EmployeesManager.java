@@ -2,15 +2,14 @@ package org.example.website.controllers;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.example.website.dto.EmployeesDTO;
 import org.example.website.entities.EmployeesEntity;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
 import org.example.website.mapper.EmployeesMapper;
 
 @Path("/employees")
@@ -29,4 +28,22 @@ public class EmployeesManager {
                 .collect(Collectors.toList());
         return Response.ok(employeeDTOs).build();
     }
+
+    @POST
+    @Consumes("application/json")
+    @Transactional
+    public Response createEmployee(EmployeesDTO employeesDTO) {
+        EmployeesEntity employeesEntity = EmployeesMapper.toEntity(employeesDTO);
+        em.persist(employeesEntity);
+        return Response.created(URI.create("/employees/" + employeesEntity.getId())).build();
+    }
+
+    // will be used for inserting and updating data from the API
+    /*@POST
+    @Consumes("application/json")
+    public Response createEmployee(EmployeeDTO employeeDTO) {
+        EmployeesEntity employeeEntity = EmployeeMapper.toEntity(employeeDTO);
+        em.persist(employeeEntity);
+        return Response.ok().build();
+    }*/
 }

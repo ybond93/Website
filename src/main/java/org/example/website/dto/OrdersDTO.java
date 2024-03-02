@@ -7,10 +7,9 @@ import java.util.List;
 public class OrdersDTO {
 
     private int orderId;
-
     private int tableNum;
     private List<MenuItemQuantityDTO> menuItemQuantities;
-    public static class MenuItemQuantityDTO {
+    /*public static class MenuItemQuantityDTO {
         private int menuItemId;
         private int amount;
         public MenuItemQuantityDTO() {}
@@ -35,9 +34,9 @@ public class OrdersDTO {
         public void setAmount(int amount) {
             this.amount = amount;
         }
-        // Getters and setters
-        // ...
-    }
+    }*/
+
+
     public int getTableNum() {
         return tableNum;
     }
@@ -46,12 +45,9 @@ public class OrdersDTO {
         return orderId;
     }
 
-
     public void setTableNum(int tableNum) {
         this.tableNum = tableNum;
     }
-
-
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;

@@ -39,6 +39,15 @@ public class AlacarteMenuItemsManager {
         alacarteCategoryList = em.createNamedQuery(typeQuery, AlacarteMenuItemsEntity.class).getResultList();
         return Response.ok(alacarteCategoryList).build();
     }
+
+    // will be used for inserting and updating data from the API
+    /*@POST
+    @Consumes("application/json")
+    public Response createEmployee(EmployeeDTO employeeDTO) {
+        EmployeesEntity employeeEntity = EmployeeMapper.toEntity(employeeDTO);
+        em.persist(employeeEntity);
+        return Response.ok().build();
+    }*/
 }
 
 

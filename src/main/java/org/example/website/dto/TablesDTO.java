@@ -7,6 +7,8 @@ public class TablesDTO {
     private String Status;
     private List<Integer> orderIds;
 
+
+
     public int getTableNum() {
         return tableNum;
     }
