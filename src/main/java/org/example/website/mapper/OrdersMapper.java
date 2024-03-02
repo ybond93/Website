@@ -1,6 +1,7 @@
 package org.example.website.mapper;
 
 
+import jakarta.persistence.Entity;
 import org.example.website.dto.MenuItemQuantityDTO;
 import org.example.website.dto.OrdersDTO;
 import org.example.website.dto.TablesDTO;
@@ -39,18 +40,19 @@ public class OrdersMapper {
         tablesDTO.setTableNum(dto.getTableNum());
         TablesEntity tableEntity = TablesMapper.toEntity(tablesDTO);
         entity.setTableNum(tableEntity);
+    if(!dto.getMenuItemQuantities().isEmpty()) {
+    // Map MenuItemQuantityDTO list to MenuItemOrderEntity list
+    List<MenuItemOrdersEntity> menuItemOrders = dto.getMenuItemQuantities().stream()
+            .map(mqDto -> {
+                MenuItemOrdersEntity menuItemOrderEntity = new MenuItemOrdersEntity();
+                menuItemOrderEntity.setMenuItemId(mqDto.getMenuItemId());
+                menuItemOrderEntity.setAmount(mqDto.getAmount());
 
-        // Map MenuItemQuantityDTO list to MenuItemOrderEntity list
-        List<MenuItemOrdersEntity> menuItemOrders = dto.getMenuItemQuantities().stream()
-                .map(mqDto -> {
-                    MenuItemOrdersEntity menuItemOrderEntity = new MenuItemOrdersEntity();
-                    menuItemOrderEntity.setMenuItemId(mqDto.getMenuItemId());
-                    menuItemOrderEntity.setAmount(mqDto.getAmount());
-                    return menuItemOrderEntity;
-                })
-                .collect(Collectors.toList());
+                return menuItemOrderEntity;
+            })
+            .collect(Collectors.toList());
         entity.setMenuItemOrders(menuItemOrders);
-
+    }
         return entity;
     }
 
