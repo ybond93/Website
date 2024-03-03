@@ -46,5 +46,9 @@ public class AlacarteMenuItemsEntity {
         this.category = category;
     }
 
+    public void setCarteItemId(int carteItemId) {
+        this.carteItemId = carteItemId;
+    }
+
     public int getId() { return carteItemId; }
 }
