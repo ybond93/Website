@@ -51,6 +51,7 @@ public class MenuItemsOrdersManager {
     @Consumes("application/json")
     @Transactional
     public  Response creat(MenuItemOrdersDTO menuItemOrdersDTO){
+        //borde använda mapper men funkar just nu /jakob
         MenuItemOrdersEntity menuItemOrdersEntity = new MenuItemOrdersEntity();
         menuItemOrdersEntity.setMenuItemId(menuItemOrdersDTO.getItemId());
         menuItemOrdersEntity.setOrderId(menuItemOrdersDTO.getOrderId());
