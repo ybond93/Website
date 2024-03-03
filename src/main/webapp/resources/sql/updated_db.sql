@@ -84,7 +84,7 @@ CREATE TABLE WORK_SHIFTS (
 
 CREATE TABLE TABLES (
     TABLE_NUM INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    STATUS VARCHAR(20)
+    STATUS VARCHAR(30)
 );
 
 CREATE TABLE ORDERS (
@@ -92,7 +92,7 @@ CREATE TABLE ORDERS (
     TABLE_NUM INT NOT NULL, -- dont need to always have number?
     ORDER_DATE DATE,
     TIMESTAMP TIME,
-    COMPLETED BOOLEAN
+    ORDER_COMPLETED BOOLEAN
 );
 
 CREATE TABLE MENU_ITEM_ORDERS (
@@ -279,31 +279,31 @@ INSERT INTO WORK_SHIFTS (EMP_ID, SHIFT_TYPE, YEAR, MONTH, DAY) VALUES
 -- Insert tables
 INSERT INTO TABLES (TABLE_NUM, STATUS)
 VALUES
-(1, 'In Progress'),
-(2, 'In Progress'),
+(1, 'Awaiting Food'),
+(2, 'Awaiting Food'),
 (3, 'Idle'),
 (4, 'Idle'),
 (5, 'Idle'),
-(6, 'In Progress'),
-(7, 'In Progress'),
-(8, 'In Progress'),
-(9, 'In Progress'),
+(6, 'Awaiting Food'),
+(7, 'Awaiting Food'),
+(8, 'Awaiting Food'),
+(9, 'Awaiting Food'),
 (10, 'Idle');
 
 -- Assume we have 10 menu items already, with IDs from 1 to 10
 -- Insert orders for the 10 tables
-INSERT INTO ORDERS (TABLE_NUM, ORDER_DATE, TIMESTAMP)
+INSERT INTO ORDERS (TABLE_NUM, ORDER_DATE, TIMESTAMP, ORDER_COMPLETED)
 VALUES
-(1, '2024-02-29', '17:29:36'),
-(2, '2024-02-28', '17:18:36'),
-(3, '2024-02-27', '17:31:36'),
-(4, '2024-02-26', '17:08:36'),
-(5, '2024-02-25', '17:31:36'),
-(6, '2024-02-24', '17:35:36'),
-(7, '2024-02-23', '16:54:36'),
-(8, '2024-02-22', '16:57:36'),
-(9, '2024-02-21', '16:53:36'),
-(10, '2024-02-20', '17:25:36');
+(1, '2024-02-29', '17:29:36', FALSE),
+(2, '2024-02-28', '17:18:36', FALSE),
+(3, '2024-02-27', '17:31:36', TRUE),
+(4, '2024-02-26', '17:08:36', TRUE),
+(5, '2024-02-25', '17:31:36', TRUE),
+(6, '2024-02-24', '17:35:36', FALSE),
+(7, '2024-02-23', '16:54:36', FALSE),
+(8, '2024-02-22', '16:57:36', FALSE),
+(9, '2024-02-21', '16:53:36', FALSE),
+(10, '2024-02-20', '17:25:36', TRUE);
 
 -- Insert menu item orders
 -- This will assign 2 menu items to each order
@@ -371,7 +371,7 @@ VALUES
     o.ORDER_ID,
     o.timestamp,
     t.TABLE_NUM,
-    t.STATUS AS order_status,
+    t.STATUS AS table_food_status,
     mi.NAME AS menu_item_name,
     ami.CATEGORY,
     mio.AMOUNT
@@ -387,4 +387,61 @@ JOIN
     ALACARTE_MENU_ITEMS ami ON ami.MENU_ITEM_ID = mi.MENU_ITEM_ID
  ORDER BY o.TIMESTAMP ASC;
 ----------------------------------------------------------
+ */
+
+-- *********************** GET ALL TABLES WITH PENDING ORDERS *********************
+/*
+ SELECT
+ tables.table_num,
+ tables.status,
+ menu_items.name,
+ orders.order_completed,
+ orders.order_id
+ FROM orders
+ JOIN
+ tables ON orders.table_num=tables.table_num
+ JOIN
+ menu_item_orders ON orders.order_id=menu_item_orders.order_id
+ JOIN
+ menu_items ON menu_item_orders.menu_item_id=menu_items.menu_item_id
+ WHERE tables.status='Awaiting Food';
+ */
+
+/*
+ SELECT
+    mi.NAME AS menu_item_name
+FROM
+    ORDERS o
+JOIN
+    TABLES t ON o.TABLE_NUM = t.TABLE_NUM
+JOIN
+    MENU_ITEM_ORDERS mio ON o.ORDER_ID = mio.ORDER_ID
+JOIN
+    MENU_ITEMS mi ON mio.MENU_ITEM_ID = mi.MENU_ITEM_ID
+WHERE
+    t.STATUS = 'Awaiting Food'
+    AND o.ORDER_COMPLETED = FALSE
+    AND t.table_num=1;
+ */
+
+/*
+ SELECT
+    t.table_num,
+    mi.NAME AS menu_item_name,
+    ami.CATEGORY
+FROM
+    ORDERS o
+JOIN
+    TABLES t ON t.table_num = o.table_num
+JOIN
+    MENU_ITEM_ORDERS mio ON o.ORDER_ID = mio.ORDER_ID
+JOIN
+    MENU_ITEMS mi ON mio.MENU_ITEM_ID = mi.MENU_ITEM_ID
+JOIN
+    ALACARTE_MENU_ITEMS ami ON mi.MENU_ITEM_ID = ami.MENU_ITEM_ID
+WHERE
+    o.ORDER_COMPLETED = FALSE
+AND
+    t.STATUS = 'Awaiting Food';
+
  */
