@@ -443,5 +443,4 @@ WHERE
     o.ORDER_COMPLETED = FALSE
 AND
     t.STATUS = 'Awaiting Food';
-
  */

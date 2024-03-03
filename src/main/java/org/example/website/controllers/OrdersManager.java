@@ -47,7 +47,7 @@ public class OrdersManager {
     // test solution, tailored for our ER-model
     @POST
     @Consumes("application/json")
-    @Produces("application/json")
+    // @Produces("application/json")
     @Transactional
     public Response createOrder(OrdersDTO orderDTO) {
         // Convert DTO to Entity
