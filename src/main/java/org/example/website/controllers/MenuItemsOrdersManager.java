@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class MenuItemsOrdersManager {
     @PersistenceContext
     private EntityManager em;
+
     @GET
     @Produces("application/json")
     public Response getMenuItemsOrders() {
@@ -28,6 +29,24 @@ public class MenuItemsOrdersManager {
         return Response.ok(menuItemOrdersDTOs).build();
 
     }
+ //http://localhost:8080/Website-1.0-SNAPSHOT/api/menuitemorders/order?orderId=1
+    @GET
+    @Path("/order")
+    @Produces("application/json")
+    public Response getMenuItemsOrderFromOrder(@QueryParam("orderId") int orderId){
+        List<MenuItemOrdersEntity> menuItemOrdersList;
+        menuItemOrdersList = em.createNamedQuery("MenuItemOrdersEntity.getAllFromOrder", MenuItemOrdersEntity.class)
+                .setParameter("order", orderId)
+                .getResultList();
+        List<MenuItemOrdersDTO> menuItemOrdersDTOs = menuItemOrdersList.stream()
+                .map(MenuItemOrderMapper::entityToDTO)
+                .collect(Collectors.toList());
+        return Response.ok(menuItemOrdersDTOs).build();
+
+    }
+
+
+
     @POST
     @Consumes("application/json")
     @Transactional
