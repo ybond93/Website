@@ -43,13 +43,15 @@ public class OrdersManager {
         return Response.ok(ordersDTOs).build();
     }
     // will be used for inserting and updating data from the API
-    /*
+
     @POST
     @Consumes("application/json")
     @Transactional
-    public Response createOrder(OrdersDTO orderDTO, TablesEntity tablesDto) {
-        OrdersEntity newOrderEntity = OrdersMapper.toEntity(orderDTO, tablesDto);
+    public Response createOrder(OrdersDTO orderDTO) {
+        TablesEntity tables = new TablesEntity();
+        tables.setTableNum(orderDTO.getTableNum());
+        OrdersEntity newOrderEntity = OrdersMapper.toEntity(orderDTO);
         em.persist(newOrderEntity);
         return Response.created(URI.create("/orders/" + newOrderEntity.getOrderId())).build();
-    }*/
+    }
 }
