@@ -7,6 +7,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.example.website.dto.OrdersDTO;
 import org.example.website.entities.OrdersEntity;
+import org.example.website.entities.TablesEntity;
 import org.example.website.mapper.OrdersMapper;
 import java.net.URI;
 import java.util.List;
@@ -29,12 +30,13 @@ public class OrdersManager {
     }
 
     // will be used for inserting and updating data from the API
+    /*
     @POST
     @Consumes("application/json")
     @Transactional
-    public Response createOrder(OrdersDTO orderDTO) {
-        OrdersEntity newOrderEntity = OrdersMapper.toEntity(orderDTO);
+    public Response createOrder(OrdersDTO orderDTO, TablesEntity tablesDto) {
+        OrdersEntity newOrderEntity = OrdersMapper.toEntity(orderDTO, tablesDto);
         em.persist(newOrderEntity);
         return Response.created(URI.create("/orders/" + newOrderEntity.getOrderId())).build();
-    }
+    }*/
 }
