@@ -28,7 +28,20 @@ public class OrdersManager {
                 .collect(Collectors.toList());
         return Response.ok(ordersDTOs).build();
     }
+    @GET
+    @Path("/table")
+    @Produces("application/json")
+    public Response getOrdersFromTable(@QueryParam("tableNr") int tableNr) {
 
+        List<OrdersEntity> ordersList;
+        ordersList = em.createNamedQuery("OrdersEntity.getAllFromTable", OrdersEntity.class)
+                .setParameter("table", tableNr)
+                .getResultList();
+        List<OrdersDTO> ordersDTOs = ordersList.stream()
+                .map(OrdersMapper::toDTO)
+                .collect(Collectors.toList());
+        return Response.ok(ordersDTOs).build();
+    }
     // will be used for inserting and updating data from the API
     /*
     @POST
