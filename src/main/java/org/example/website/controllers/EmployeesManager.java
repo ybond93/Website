@@ -38,34 +38,26 @@ public class EmployeesManager {
         return Response.created(URI.create("/employees/" + employeesEntity.getId())).build();
     }
 
-    @PUT
-    @Path("/{id}")
-    @Consumes("application/json")
-    @Transactional
-    public Response updateEmployee(@PathParam("id") int id, EmployeesDTO employeesDTO) {
-        EmployeesEntity existingEmployee = em.find(EmployeesEntity.class, id);
-        if (existingEmployee == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-
-        // Update the existing employee entity with data from the DTO
-        EmployeesEntity updatedEmployee = EmployeesMapper.toEntity(employeesDTO);
-        updatedEmployee.setEmpId(existingEmployee.getId()); // Ensure the ID remains unchanged
-
-        // Merge the updated employee entity into the persistence context
-        em.merge(updatedEmployee);
-
-        return Response.ok().build();
-    }
-
-
-
     // will be used for inserting and updating data from the API
     /*@POST
     @Consumes("application/json")
     public Response createEmployee(EmployeeDTO employeeDTO) {
         EmployeesEntity employeeEntity = EmployeeMapper.toEntity(employeeDTO);
         em.persist(employeeEntity);
+        return Response.ok().build();
+    }*/
+
+     /*@PUT
+    @Path("/{id}")
+    @Consumes("application/json")
+    @Transactional
+    public Response updateEmployee(@PathParam("id") int id, EmployeesDTO employeesDTO) {
+        EmployeesEntity existingEmployee = em.find(EmployeesEntity.class, id);
+        if (existingEmployee == null) { return Response.status(Response.Status.NOT_FOUND).build(); }
+       EmployeesEntity updatedEmployee = EmployeesMapper.toEntity(employeesDTO);
+        updatedEmployee.setEmpId(existingEmployee.getId());
+        em.merge(updatedEmployee);
+
         return Response.ok().build();
     }*/
 }
