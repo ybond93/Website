@@ -12,7 +12,6 @@ import java.util.List;
                 name = "OrdersEntity.getAllFromTable",
                 query = "SELECT o FROM OrdersEntity o WHERE o.tableNum.tableNum = :table"
         )
-
 })
 @Entity
 @Table(name = "ORDERS", schema = "restaurang", catalog = "")

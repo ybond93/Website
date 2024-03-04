@@ -28,11 +28,12 @@ public class OrdersManager {
                 .collect(Collectors.toList());
         return Response.ok(ordersDTOs).build();
     }
+
+    // fetches all orders for a specific table number
     @GET
     @Path("/table")
     @Produces("application/json")
     public Response getOrdersFromTable(@QueryParam("tableNr") int tableNr) {
-
         List<OrdersEntity> ordersList;
         ordersList = em.createNamedQuery("OrdersEntity.getAllFromTable", OrdersEntity.class)
                 .setParameter("table", tableNr)

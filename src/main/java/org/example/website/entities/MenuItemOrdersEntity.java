@@ -1,6 +1,6 @@
 package org.example.website.entities;
-
 import jakarta.persistence.*;
+
 @NamedQueries({
         @NamedQuery(
                 name = "MenuItemOrdersEntity.findAll",
@@ -24,6 +24,7 @@ public class MenuItemOrdersEntity {
     private int orderId;
     @Column(name = "AMOUNT")
     private int amount; // Added quantity field
+
     // Getters and setters
     @ManyToOne
     @JoinColumn(name = "ORDER_ID", insertable = false, updatable = false)

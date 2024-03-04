@@ -25,7 +25,6 @@ public class TablesEntity {
         this.orders = orders;
     }
 
-
     public int getTableNum() {
         return tableNum;
     }
