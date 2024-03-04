@@ -1,11 +1,11 @@
 package org.example.website.dto;
 
 public class MenuItemOrdersDTO {
-    private int itemId;
-    private  int orderId;
+    private MenuItemsDTO itemId;
+    private OrdersDTO orderId;
     private  int amount;
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(OrdersDTO orderId) {
         this.orderId = orderId;
     }
 
@@ -13,11 +13,11 @@ public class MenuItemOrdersDTO {
         this.amount = amount;
     }
 
-    public void setItemId(int itemId) {
+    public void setItemId(MenuItemsDTO itemId) {
         this.itemId = itemId;
     }
 
-    public int getOrderId() {
+    public OrdersDTO getOrderId() {
         return orderId;
     }
 
@@ -25,7 +25,7 @@ public class MenuItemOrdersDTO {
         return amount;
     }
 
-    public int getItemId() {
+    public MenuItemsDTO getItemId() {
         return itemId;
     }
 }

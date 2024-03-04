@@ -49,7 +49,7 @@ public class OrdersManager {
     @Transactional
     public Response createOrder(OrdersDTO orderDTO) {
         TablesEntity tables = new TablesEntity();
-        tables.setTableNum(orderDTO.getTableNum());
+        tables.setTableNum(orderDTO.getTableNum().getTableNum());
         OrdersEntity newOrderEntity = OrdersMapper.toEntity(orderDTO);
         em.persist(newOrderEntity);
         return Response.created(URI.create("/orders/" + newOrderEntity.getOrderId())).build();

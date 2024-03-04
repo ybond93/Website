@@ -24,6 +24,7 @@ public class TablesManager {
         List<TablesDTO> employeeDTOs = tablesList.stream()
                 .map(TablesMapper::toDTO)
                 .collect(Collectors.toList());
+
         return Response.ok(employeeDTOs).build();
     }
 }

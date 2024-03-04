@@ -53,8 +53,8 @@ public class MenuItemsOrdersManager {
     public  Response creat(MenuItemOrdersDTO menuItemOrdersDTO){
         //borde använda mapper men funkar just nu /jakob
         MenuItemOrdersEntity menuItemOrdersEntity = new MenuItemOrdersEntity();
-        menuItemOrdersEntity.setMenuItemId(menuItemOrdersDTO.getItemId());
-        menuItemOrdersEntity.setOrderId(menuItemOrdersDTO.getOrderId());
+        menuItemOrdersEntity.setMenuItemId(menuItemOrdersDTO.getItemId().getId());
+        menuItemOrdersEntity.setOrderId(menuItemOrdersDTO.getOrderId().getOrderId());
         menuItemOrdersEntity.setAmount(menuItemOrdersDTO.getAmount());
 
 

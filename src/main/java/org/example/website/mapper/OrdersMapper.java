@@ -15,7 +15,8 @@ public class OrdersMapper {
     public static OrdersDTO toDTO(OrdersEntity entity) {
         OrdersDTO dto = new OrdersDTO();
         dto.setOrderId(entity.getOrderId());
-        dto.setTableNum(entity.getTableNum().getTableNum());
+
+        dto.setTableNum(TablesMapper.toDTO(entity.getTableNum())) ;
 
 
         return dto;
@@ -26,7 +27,7 @@ public class OrdersMapper {
 
         entity.setOrderId(dto.getOrderId());
         TablesEntity table = new TablesEntity();
-        table.setTableNum(dto.getTableNum()); // Set only the ID for the table
+        table.setTableNum(dto.getTableNum().getTableNum()); // Set only the ID for the table
         entity.setTableNum(table);
         return entity;
     }
