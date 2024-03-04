@@ -23,10 +23,33 @@ import org.example.website.mapper.*;
 public class KitchenOrderManager {
 
 
-
     @PersistenceContext
     private EntityManager em;
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getKitchenOrders() {
+        // Fetch data using EntityManager and named query
+        String typeQuery = "ALaCarteMenuItems.findAll";
+        List<AlacarteMenuItemsEntity> alacarteMenuItemsEntities = em.createNamedQuery(typeQuery, AlacarteMenuItemsEntity.class).getResultList();
+
+        // Mapping AlacarteMenuItemsEntity to AlacarteMenuItemsDTO
+        List<AlacarteMenuItemsDTO> alacarteMenuItemsDTOs = alacarteMenuItemsEntities.stream()
+                .map(AlacarteMenuItemsMapper::toDTO)
+                .collect(Collectors.toList());
+
+
+        // Create the combined DTO object
+        KitchenOrdersDTO kitchenOrdersDTO = new KitchenOrdersDTO();
+        kitchenOrdersDTO.setAlacarteMenuItemsDTOs(alacarteMenuItemsDTOs); // Update the setter method name
+
+        // Return the combined DTO as a response
+        return Response.ok(kitchenOrdersDTO).build();
+
+    }
+}
+
+/*
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getKitchenOrders() {
@@ -80,10 +103,11 @@ public class KitchenOrderManager {
         //kitchenOrdersDTO.setAlacarteMenuItemsDTOs(alacarteMenuItemsDTOs);
 
         return Response.ok(alacarteMenuItemDTOs).build();
-    }
+*/
 
-    /*
 
+
+/* the most completed version!!!!
 
     List<AlacarteMenuItemsEntity> alacarteMenuItemsEntities = em.createQuery(
                     "SELECT a FROM AlacarteMenuItemsEntity a JOIN FETCH a.menuItem m " +
@@ -95,26 +119,5 @@ public class KitchenOrderManager {
     List<AlacarteMenuItemsDTO> alacarteMenuItemDTOs = alacarteMenuItemsEntities.stream()
             .map(entity -> new AlacarteMenuItemsDTO(entity.getCategory(), entity.getMenuItem().getName()))
             .collect(Collectors.toList());
-    */
 
-    /*@GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getKitchenOrders() {
-        // Fetch data using EntityManager and named query
-        String typeQuery = "ALaCarteMenuItems.findAll";
-        List<AlacarteMenuItemsEntity> alacarteMenuItemsEntities = em.createNamedQuery(typeQuery, AlacarteMenuItemsEntity.class).getResultList();
-
-        // Mapping AlacarteMenuItemsEntity to AlacarteMenuItemsDTO
-        List<AlacarteMenuItemsDTO> alacarteMenuItemsDTOs = alacarteMenuItemsEntities.stream()
-                .map(AlacarteMenuItemsMapper::toDTO)
-                .collect(Collectors.toList());
-
-
-        // Create the combined DTO object
-        KitchenOrdersDTO kitchenOrdersDTO = new KitchenOrdersDTO();
-        kitchenOrdersDTO.setAlacarteMenuItemsDTOs(alacarteMenuItemsDTOs); // Update the setter method name
-
-        // Return the combined DTO as a response
-        return Response.ok(kitchenOrdersDTO).build();
-    }*/
-}
+*/
