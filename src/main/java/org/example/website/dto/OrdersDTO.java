@@ -8,34 +8,23 @@ public class OrdersDTO {
 
     private int orderId;
     private int tableNum;
-    private List<MenuItemQuantityDTO> menuItemQuantities;
-    /*public static class MenuItemQuantityDTO {
-        private int menuItemId;
-        private int amount;
-        public MenuItemQuantityDTO() {}
+    private String status;
+    //private List<MenuItemQuantityDTO> menuItemQuantities;
+    public OrdersDTO(){};
+    public OrdersDTO(int orderId, int tableNum, String status) {
+        this.orderId = orderId;
+        this.tableNum = tableNum;
+        this.status = status;
+        //this.menuItemQuantities = menuItemQuantities;
+    }
 
+    public String getStatus() {
+        return status;
+    }
 
-        public MenuItemQuantityDTO(int menuItemId, int amount) {
-            this.menuItemId = menuItemId;
-            this.amount = amount;
-        }
-        public int getMenuItemId() {
-            return menuItemId;
-        }
-
-        public int getAmount() {
-            return amount;
-        }
-
-        public void setMenuItemId(int menuItemId) {
-            this.menuItemId = menuItemId;
-        }
-
-        public void setAmount(int amount) {
-            this.amount = amount;
-        }
-    }*/
-
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public int getTableNum() {
         return tableNum;
@@ -53,11 +42,11 @@ public class OrdersDTO {
         this.orderId = orderId;
     }
 
-    public List<MenuItemQuantityDTO> getMenuItemQuantities() {
+    /*public List<MenuItemQuantityDTO> getMenuItemQuantities() {
         return menuItemQuantities;
     }
 
     public void setMenuItemQuantities(List<MenuItemQuantityDTO> menuItemQuantities) {
         this.menuItemQuantities = menuItemQuantities;
-    }
+    }*/
 }

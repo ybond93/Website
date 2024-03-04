@@ -1,22 +1,13 @@
 package org.example.website.dto;
 
-public class AlacarteMenuItemsDTO {
-    private int carteItemId;
+public class AlacarteMenuItemDTO {
     private String category;
     private String menuItemName;
-    public AlacarteMenuItemsDTO (){};
-    public AlacarteMenuItemsDTO(int carteItemId, String category, String menuItemName) {
-        this.carteItemId = carteItemId;
+
+    // Constructors, getters, and setters
+    public AlacarteMenuItemDTO(String category, String menuItemName) {
         this.category = category;
         this.menuItemName = menuItemName;
-    }
-
-    public int getCarteItemId() {
-        return carteItemId;
-    }
-
-    public void setCarteItemId(int carteItemId) {
-        this.carteItemId = carteItemId;
     }
 
     public String getCategory() {

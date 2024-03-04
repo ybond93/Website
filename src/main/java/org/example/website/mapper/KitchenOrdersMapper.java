@@ -6,12 +6,12 @@ import java.util.List;
 
 public class KitchenOrdersMapper {
 
-    public static KitchenOrdersDTO toKitchenOrdersDTO(List<OrdersDTO> ordersDTO, List<TablesDTO> tablesDTO, List<AlacarteMenuItemsDTO> alacarteMenuItemsDTOs, List<MenuItemDTO> menuItemDTO) {
+    public static KitchenOrdersDTO toKitchenOrdersDTO(List<OrdersDTO> ordersDTO, List<TablesDTO> tablesDTO, List<AlacarteMenuItemsDTO> alacarteMenuItemsDTO, List<MenuItemOrderDTO> menuItemOrderDTO) {
         KitchenOrdersDTO kitchenOrdersDTO = new KitchenOrdersDTO();
         kitchenOrdersDTO.setOrdersDTO(ordersDTO);
         kitchenOrdersDTO.setTablesDTO(tablesDTO);
-        kitchenOrdersDTO.setAlacarteMenuItemsDTOs(alacarteMenuItemsDTOs);
-        kitchenOrdersDTO.setMenuItemDTO(menuItemDTO);
+        kitchenOrdersDTO.setAlacarteMenuItemsDTOs(alacarteMenuItemsDTO);
+        kitchenOrdersDTO.setMenuItemOrderDTO(menuItemOrderDTO);
         return kitchenOrdersDTO;
     }
 }

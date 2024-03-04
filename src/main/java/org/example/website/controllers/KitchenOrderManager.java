@@ -17,9 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.example.website.entities.OrdersEntity;
-import org.example.website.mapper.AlacarteMenuItemsMapper;
-import org.example.website.mapper.EmployeesMapper;
-import org.example.website.mapper.OrdersMapper;
+import org.example.website.mapper.*;
 
 @Path("/KitchenOrder")
 public class KitchenOrderManager {
@@ -27,68 +25,79 @@ public class KitchenOrderManager {
 
 
     @PersistenceContext
-    private EntityManager em; // Injecting EntityManager
-
-    /*@GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getKitchenOrders() {
-        // Fetch data using EntityManager and named query for OrdersEntity
-        String ordersQuery = "OrdersEntity.findAll"; // Replace with your named query
-        List<OrdersEntity> ordersEntities = em.createNamedQuery(ordersQuery, OrdersEntity.class).getResultList();
-
-        // Extract order IDs
-        List<Integer> orderIds = ordersEntities.stream()
-                .map(OrdersEntity::getOrderId)
-                .collect(Collectors.toList());
-
-        // Fetch MenuItemOrders based on order IDs
-        List<MenuItemOrdersEntity> menuItemOrderEntities = fetchMenuItemOrdersByOrderIds(orderIds);
-
-        // Extract menuItemIds from MenuItemOrders
-        List<Integer> menuItemIds = menuItemOrderEntities.stream()
-                .map(MenuItemOrdersEntity::getMenuItemId)
-                .collect(Collectors.toList());
-
-        // Fetch AlacarteMenuItemsDTO and MenuItemDTO based on the extracted menuItemIds
-        List<AlacarteMenuItemsDTO> alacarteMenuItemsDTOs = fetchAlacarteMenuItemsByMenuIds(menuItemIds);
-        List<MenuItemDTO> menuItemDTOs = fetchMenuItemsByIds(menuItemIds);
-
-        // For simplicity, assume you have fetched ordersDTO and tablesDTO from somewhere
-
-        // Create the combined DTO object
-        KitchenOrdersDTO kitchenOrdersDTO = new KitchenOrdersDTO();
-        kitchenOrdersDTO.setOrdersDTO(OrdersDTO);
-        kitchenOrdersDTO.setTablesDTO(TablesDTO);
-        kitchenOrdersDTO.setAlacarteMenuItemsDTOs(alacarteMenuItemsDTOs);
-        kitchenOrdersDTO.setMenuItemDTO(menuItemDTOs);
-
-        // Return the combined DTO as a response
-        return Response.ok(kitchenOrdersDTO).build();
-    }
-
-    // Method to fetch MenuItemOrderEntity based on order IDs
-    private List<MenuItemOrdersEntity> fetchMenuItemOrdersByOrderIds(List<Integer> orderIds) {
-        // Fetch MenuItemOrders based on orderIds
-        // Write your logic to fetch MenuItemOrderEntity using orderIds
-        return null;
-    }
-
-    // Method to fetch AlacarteMenuItemsDTO based on menu item IDs
-    private List<AlacarteMenuItemsDTO> fetchAlacarteMenuItemsByMenuIds(List<Integer> menuItemIds) {
-        // Fetch AlacarteMenuItems based on menuItemIds
-        // Write your logic to fetch AlacarteMenuItemsDTO using menuItemIds
-        return null;
-    }
-
-    // Method to fetch MenuItemDTO based on menu item IDs
-    private List<MenuItemDTO> fetchMenuItemsByIds(List<Integer> menuItemIds) {
-        // Fetch MenuItems based on menuItemIds
-        // Write your logic to fetch MenuItemDTO using menuItemIds
-        return null;
-    }*/
-
+    private EntityManager em;
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getKitchenOrders() {
+        List<MenuItemOrdersEntity> menuItemOrderEntities = em.createNamedQuery("MenuItemOrdersEntity.findInProgress", MenuItemOrdersEntity.class)
+                .getResultList();
+
+        // Map MenuItemOrdersEntity to DTO using the toDTO method
+        List<MenuItemOrderDTO> menuItemOrderDTOs = menuItemOrderEntities.stream()
+                .map(MenuItemOrderMapper::toDTO)
+                .collect(Collectors.toList());
+
+        // Extract order IDs from MenuItemOrderDTOs
+        List<Integer> orderIds = menuItemOrderDTOs.stream()
+                .map(MenuItemOrderDTO::getOrderId)
+                .collect(Collectors.toList());
+
+        // Fetch orders based on order IDs
+        String ordersQuery = "SELECT o FROM OrdersEntity o WHERE o.orderId IN :orderIds";
+        List<OrdersEntity> ordersEntities = em.createQuery(ordersQuery, OrdersEntity.class)
+                .setParameter("orderIds", orderIds)
+                .getResultList();
+
+
+        List<OrdersDTO> orderDTOs = ordersEntities.stream()
+                .map(OrdersMapper::toDTO)
+                .collect(Collectors.toList());
+
+
+
+        List<Integer> menuItemIds = menuItemOrderDTOs.stream()
+                .map(MenuItemOrderDTO::getMenuItemId)
+                .collect(Collectors.toList());
+
+        // First step: Fetch AlacarteMenuItemsEntity instances based on menuItemIds
+        List<AlacarteMenuItemsEntity> alacarteMenuItemsEntities = em.createQuery(
+                        "SELECT a FROM AlacarteMenuItemsEntity a JOIN FETCH a.menuItem " +
+                                "WHERE a.menuItem.id IN :menuItemIds", AlacarteMenuItemsEntity.class)
+                .setParameter("menuItemIds", menuItemIds)
+                .getResultList();
+
+
+        List<AlacarteMenuItemsDTO> alacarteMenuItemDTOs = alacarteMenuItemsEntities.stream()
+                .map(AlacarteMenuItemsMapper::toDTO)
+                .collect(Collectors.toList());
+
+
+        // Set the mapped DTOs to kitchenOrdersDTO
+        KitchenOrdersDTO kitchenOrdersDTO = new KitchenOrdersDTO();
+        kitchenOrdersDTO.setMenuItemOrderDTO(menuItemOrderDTOs);
+        kitchenOrdersDTO.setOrdersDTO(orderDTOs);
+        //kitchenOrdersDTO.setAlacarteMenuItemsDTOs(alacarteMenuItemsDTOs);
+
+        return Response.ok(alacarteMenuItemDTOs).build();
+    }
+
+    /*
+
+
+    List<AlacarteMenuItemsEntity> alacarteMenuItemsEntities = em.createQuery(
+                    "SELECT a FROM AlacarteMenuItemsEntity a JOIN FETCH a.menuItem m " +
+                            "WHERE a.menuItem.id IN :menuItemIds", AlacarteMenuItemsEntity.class)
+            .setParameter("menuItemIds", menuItemIds)
+            .getResultList();
+
+
+    List<AlacarteMenuItemsDTO> alacarteMenuItemDTOs = alacarteMenuItemsEntities.stream()
+            .map(entity -> new AlacarteMenuItemsDTO(entity.getCategory(), entity.getMenuItem().getName()))
+            .collect(Collectors.toList());
+    */
+
+    /*@GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getKitchenOrders() {
         // Fetch data using EntityManager and named query
@@ -107,5 +116,5 @@ public class KitchenOrderManager {
 
         // Return the combined DTO as a response
         return Response.ok(kitchenOrdersDTO).build();
-    }
+    }*/
 }

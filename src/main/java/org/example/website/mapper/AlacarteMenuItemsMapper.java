@@ -8,7 +8,7 @@ public class AlacarteMenuItemsMapper {
         AlacarteMenuItemsDTO dto = new AlacarteMenuItemsDTO();
         dto.setCarteItemId(entity.getId());
         dto.setCategory(entity.getCategory());
-        dto.setMenuItem(MenuItemsMapper.toDTO(entity.getMenuItem()));
+        dto.setMenuItemName(entity.getMenuItem().getName());
         return dto;
     }
 
@@ -16,7 +16,6 @@ public class AlacarteMenuItemsMapper {
         AlacarteMenuItemsEntity entity = new AlacarteMenuItemsEntity();
         entity.setCarteItemId(dto.getCarteItemId());
         entity.setCategory(dto.getCategory());
-        entity.setMenuItem(MenuItemsMapper.toEntity(dto.getMenuItem()));
         return entity;
     }
 }

@@ -8,14 +8,14 @@ public class KitchenOrdersDTO {
     private List<OrdersDTO> ordersDTO;
     private List<TablesDTO> tablesDTO;
     private List<AlacarteMenuItemsDTO> alacarteMenuItemsDTOs;
-    private List<MenuItemDTO> menuItemDTO;
+    private List<MenuItemOrderDTO> menuItemOrderDTOList;
     public KitchenOrdersDTO(){};
 
-    public KitchenOrdersDTO(List<OrdersDTO> ordersDTO, List<TablesDTO> tablesDTO, List<AlacarteMenuItemsDTO> alacarteMenuItemsDTOs, List<MenuItemDTO> menuItemDTO) {
+    public KitchenOrdersDTO(List<OrdersDTO> ordersDTO, List<TablesDTO> tablesDTO, List<AlacarteMenuItemsDTO> alacarteMenuItemsDTOs, List<MenuItemOrderDTO> menuItemOrderDTOList) {
         this.ordersDTO = ordersDTO;
         this.tablesDTO = tablesDTO;
         this.alacarteMenuItemsDTOs = alacarteMenuItemsDTOs;
-        this.menuItemDTO = menuItemDTO;
+        this.menuItemOrderDTOList = menuItemOrderDTOList;
     }
 
     public List<OrdersDTO> getOrdersDTO() {
@@ -42,11 +42,11 @@ public class KitchenOrdersDTO {
         this.alacarteMenuItemsDTOs = alacarteMenuItemsDTOs;
     }
 
-    public List<MenuItemDTO> getMenuItemDTO() {
-        return menuItemDTO;
+    public List<MenuItemOrderDTO> getMenuItemOrderDTO() {
+        return menuItemOrderDTOList;
     }
 
-    public void setMenuItemDTO(List<MenuItemDTO> menuItemDTO) {
-        this.menuItemDTO = menuItemDTO;
+    public void setMenuItemOrderDTO(List<MenuItemOrderDTO> menuItemOrderDTOList) {
+        this.menuItemOrderDTOList = menuItemOrderDTOList;
     }
 }
