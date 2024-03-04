@@ -1,20 +1,19 @@
 package org.example.website.entities;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+@NamedQuery(name = "KitchenEntity.findAll", query = "SELECT l FROM KitchenEntity l")
 @Entity
+@IdClass(MenuItemOrdersEntityPK.class)
 @Table(name = "Kitchen", schema = "restaurang", catalog = "")
 public class KitchenEntity {
     @Basic
     @Column(name = "TABLE_NUM")
     private int tableNum;
-    @Basic
+    @Id
     @Column(name = "MENU_ITEM_ID")
     private int menuItemId;
-    @Basic
+    @Id
     @Column(name = "ORDER_ID")
     private int orderId;
     @Basic
