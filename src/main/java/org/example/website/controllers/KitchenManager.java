@@ -35,8 +35,13 @@ public class KitchenManager {
                     .setParameter("id", kitchenView.getMenuItemId())
                     .getResultList();
             //String save = cat.get(0).getCategory();
-            kitchenView.setCategory(cat.get(0));
+            //vet inte varför men mains och starter verkar den veta
+            if (cat.isEmpty()){
 
+            }
+            else {
+                kitchenView.setCategory(cat.get(0));
+            }
         } );
         List<KitchenViewDTO> kitchenVievList = kitchenList.stream()
                 .map(KitchenViewMapper::toDTO)
