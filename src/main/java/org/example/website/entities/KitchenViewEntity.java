@@ -2,6 +2,8 @@ package org.example.website.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @NamedQuery(name = "Kitchen_ViewEntity.findAll", query = "SELECT l FROM KitchenViewEntity l WHERE l.statusOrder = FALSE")
 @Entity
 @Table(name = "KITCHEN_VIEW", schema = "restaurang", catalog = "")
@@ -34,6 +36,7 @@ public class KitchenViewEntity {
     @Basic
     @Column(name = "CATEGORY")
     private String category;
+
 
     public int getOrderId() {
         return orderId;
@@ -140,4 +143,6 @@ public class KitchenViewEntity {
         result = 31 * result + (category != null ? category.hashCode() : 0);
         return result;
     }
+
+
 }

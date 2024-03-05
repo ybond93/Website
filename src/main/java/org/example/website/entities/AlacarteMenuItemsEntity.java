@@ -12,7 +12,9 @@ import jakarta.persistence.*;
         @NamedQuery(name = "ALaCarteMenuItems.findDrinks",
                 query = "SELECT a FROM AlacarteMenuItemsEntity a JOIN FETCH a.menuItem WHERE a.category = 'Drink'"),
         @NamedQuery(name = "ALaCarteMenuItems.findAll",
-                query = "SELECT a FROM AlacarteMenuItemsEntity a JOIN FETCH a.menuItem")
+                query = "SELECT a FROM AlacarteMenuItemsEntity a JOIN FETCH a.menuItem"),
+        @NamedQuery(name = "ALaCarteMenuItems.findByID",
+                query = "SELECT a.category FROM AlacarteMenuItemsEntity a WHERE a.carteItemId = :id")
 })
 @Entity
 @Table(name = "ALACARTE_MENU_ITEMS", schema = "restaurang", catalog = "")
@@ -25,7 +27,7 @@ public class AlacarteMenuItemsEntity {
     @Column(name = "CATEGORY")
     private String category;
     @OneToOne
-    @JoinColumn(name = "menu_item_id", referencedColumnName = "menu_item_id")
+    @JoinColumn(name = "MENU_ITEM_ID", referencedColumnName = "MENU_ITEM_ID")
     private MenuItemsEntity menuItem;   // Foreign Key
 
     // getting the FK
