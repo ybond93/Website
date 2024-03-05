@@ -148,7 +148,7 @@ select `o`.`ORDER_ID`       AS `ORDER_ID`,
 FROM `restaurang`.`ORDERS` o
          JOIN `restaurang`.`MENU_ITEM_ORDERS` MIO ON o.`ORDER_ID` = MIO.`ORDER_ID`
          JOIN `restaurang`.`MENU_ITEMS` MI ON MIO.`MENU_ITEM_ID` = MI.`MENU_ITEM_ID`
-         Left JOIN `restaurang`.`ALACARTE_MENU_ITEMS` AMI ON MI.`MENU_ITEM_ID` = AMI.`MENU_ITEM_ID`;
+        JOIN `restaurang`.`ALACARTE_MENU_ITEMS` AMI ON MI.`MENU_ITEM_ID` = AMI.`MENU_ITEM_ID`;
 
 /************************** Inserts for testing purposes ****************************/
 -- -------------------------------------------------------
