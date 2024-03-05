@@ -4,11 +4,11 @@ import java.util.List;
 
 public class TablesDTO {
     private int tableNum;
-    private String Status;
+    private Boolean Status;
     //private List<Integer> orderIds;
 
     public TablesDTO(){};
-    public TablesDTO(int tableNum, String status) {
+    public TablesDTO(int tableNum, Boolean status) {
         this.tableNum = tableNum;
         Status = status;
         //this.orderIds = orderIds;
@@ -19,12 +19,12 @@ public class TablesDTO {
     }
 
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return Status;
     }
 
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         Status = status;
     }
 

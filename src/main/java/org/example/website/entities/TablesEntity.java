@@ -20,7 +20,7 @@ public class TablesEntity {
 
     @Basic
     @Column(name = "STATUS")
-    private String status;
+    private Boolean status;
     @OneToMany (mappedBy = "tableNum")
     private List<OrdersEntity> orders = new ArrayList<>();
     public List<OrdersEntity> getOrders(){return  orders;}
@@ -37,11 +37,11 @@ public class TablesEntity {
         this.tableNum = tableNum;
     }
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 

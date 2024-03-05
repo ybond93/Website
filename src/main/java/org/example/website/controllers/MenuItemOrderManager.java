@@ -38,7 +38,22 @@ public class MenuItemOrderManager {
     @Transactional
     public Response createOrder(MenuItemOrderDTO menuItemOrderDTO) {
         System.out.println("Received menuItemOrderDTO: " + menuItemOrderDTO);
-        MenuItemOrdersEntity menuItemOrdersEntity = MenuItemOrderMapper.toEntity(menuItemOrderDTO);
+
+        OrdersEntity existingOrder = em.find(OrdersEntity.class, menuItemOrderDTO.getOrder().getOrderId());
+        Integer maxOrderId;
+        MenuItemOrdersEntity menuItemOrdersEntity = new MenuItemOrdersEntity();
+        if (existingOrder == null) {
+            maxOrderId = (Integer) em.createQuery("SELECT MAX(o.orderId) FROM OrdersEntity o").getSingleResult();
+
+            OrdersEntity ordersEntity = OrdersMapper.toEntity(menuItemOrderDTO.getOrder());
+            em.persist(ordersEntity);
+            menuItemOrderDTO.getOrder().setOrderId(maxOrderId + 1);
+             menuItemOrdersEntity = MenuItemOrderMapper.toEntity(menuItemOrderDTO);
+        } else {
+             menuItemOrdersEntity = MenuItemOrderMapper.toEntity(menuItemOrderDTO);
+        }
+
+        //MenuItemOrdersEntity menuItemOrdersEntity = MenuItemOrderMapper.toEntity(menuItemOrderDTO);
         //OrdersEntity ordersEntity = OrdersMapper.toEntity(menuItemOrderDTO.getOrder());
         //em.persist(ordersEntity);
         em.persist(menuItemOrdersEntity);

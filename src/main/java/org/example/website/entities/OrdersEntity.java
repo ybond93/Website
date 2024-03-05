@@ -17,8 +17,14 @@ public class OrdersEntity {
     @Column(name = "ORDER_ID")
     private int orderId;
     @Basic
-    @Column(name = "STATUS")
-    private String status;
+    @Column(name = "STATUS_ORDER")
+    private Boolean statusOrder;
+    @Basic
+    @Column(name = "STATUS_MAINS")
+    private Boolean statusMains;
+    @Basic
+    @Column(name = "STATUS_START")
+    private Boolean statusStart;
     @ManyToOne
     @JoinColumn(name = "TABLE_NUM")
     private TablesEntity tableNum;
@@ -27,12 +33,28 @@ public class OrdersEntity {
     // Constructors, getters, and setters
 
 
-    public String getStatus() {
-        return status;
+    public Boolean getStatusOrder() {
+        return statusOrder;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatusOrder(Boolean statusOrder) {
+        this.statusOrder = statusOrder;
+    }
+
+    public Boolean getStatusMains() {
+        return statusMains;
+    }
+
+    public void setStatusMains(Boolean statusMains) {
+        this.statusMains = statusMains;
+    }
+
+    public Boolean getStatusStart() {
+        return statusStart;
+    }
+
+    public void setStatusStart(Boolean statusStart) {
+        this.statusStart = statusStart;
     }
 
     public int getOrderId() {

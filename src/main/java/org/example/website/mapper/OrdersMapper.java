@@ -19,7 +19,7 @@ public class OrdersMapper {
     public static OrdersDTO toDTO(OrdersEntity entity) {
         OrdersDTO dto = new OrdersDTO();
         dto.setOrderId(entity.getOrderId());
-        dto.setStatus(entity.getStatus());
+        dto.setStatusOrder(entity.getStatusOrder());
         dto.setTable(TablesMapper.toDTO(entity.getTableNum()));
 
 
@@ -42,7 +42,7 @@ public class OrdersMapper {
         tablesDTO.setTableNum(dto.getTable().getTableNum());
 
         orderEntity.setOrderId(dto.getOrderId());
-        orderEntity.setStatus(dto.getStatus());
+        orderEntity.setStatusOrder(dto.getStatusOrder());
         orderEntity.setTableNum(TablesMapper.toEntity(tablesDTO));
 
         //TablesEntity tableEntity = TablesMapper.toEntity(tablesDTO);
