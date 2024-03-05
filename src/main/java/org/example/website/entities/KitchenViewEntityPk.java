@@ -3,10 +3,10 @@ package org.example.website.entities;
 import java.io.Serializable;
 
 
-public class KitchenEntityPk implements Serializable {
+public class KitchenViewEntityPk implements Serializable {
     private int orderId;
     private int menuItemId;
-    public KitchenEntityPk(int orderId, int menuItemId){
+    public KitchenViewEntityPk(int orderId, int menuItemId){
         this.orderId = orderId;
         this.menuItemId = menuItemId;
     }
@@ -25,11 +25,5 @@ public class KitchenEntityPk implements Serializable {
     public int getOrderId() {
         return orderId;
     }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof KitchenEntityPk)) return false;
-        KitchenEntityPk that = (KitchenEntityPk) o;
-        return menuItemId == that.menuItemId && orderId == that.orderId;
-    }
+
 }
