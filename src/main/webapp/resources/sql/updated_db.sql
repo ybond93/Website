@@ -342,10 +342,13 @@ INSERT INTO MENU_ITEM_ORDERS (MENU_ITEM_ID, ORDER_ID, AMOUNT) VALUES
 (7, 4, 1), (8, 4, 2),
 (9, 5, 1), (10, 5, 3),
 (1, 6, 2), (2, 6, 1),
-(3, 7, 1), (4, 7, 1),
+(32, 4, 1), (46, 7, 1),
 (5, 8, 2), (6, 8, 2),
 (7, 9, 3), (8, 9, 1),
-(9, 10, 2), (10, 10, 2);
+(47, 7, 1), (4, 7, 1),
+(22, 1, 2), (41, 8, 2),
+(36, 4, 3), (42, 9, 1),
+(45, 10, 2), (56, 10, 2);
 
 INSERT INTO RESERVATIONS (NUM_OF_GUESTS, RES_YEAR, RES_MONTH, RES_DAY, RES_TIME, CUST_NAME)
 VALUES
