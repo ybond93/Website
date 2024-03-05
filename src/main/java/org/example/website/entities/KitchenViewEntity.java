@@ -1,7 +1,8 @@
 package org.example.website.entities;
 
 import jakarta.persistence.*;
-@NamedQuery(name = "Kitchen_ViewEntity.findAll", query = "SELECT l FROM KitchenViewEntity l")
+
+@NamedQuery(name = "Kitchen_ViewEntity.findAll", query = "SELECT l FROM KitchenViewEntity l WHERE l.statusOrder = FALSE")
 @Entity
 @Table(name = "KITCHEN_VIEW", schema = "restaurang", catalog = "")
 @IdClass(org.example.website.entities.KitchenViewEntityPk.class)
