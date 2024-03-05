@@ -2,33 +2,34 @@ package org.example.website.dto;
 
 public class MenuItemOrderDTO {
 
-    private int menuItemId;
+    private MenuItemDTO menuItem;
 
-    private int orderId;
+    private OrdersDTO order;
 
     private int amount;
 
     public MenuItemOrderDTO(){};
-    public MenuItemOrderDTO(int menuItemId, int orderId, int amount) {
-        this.menuItemId = menuItemId;
-        this.orderId = orderId;
+
+    public MenuItemOrderDTO(MenuItemDTO menuItem, OrdersDTO order, int amount) {
+        this.menuItem = menuItem;
+        this.order = order;
         this.amount = amount;
     }
 
-    public int getMenuItemId() {
-        return menuItemId;
+    public MenuItemDTO getMenuItem() {
+        return menuItem;
     }
 
-    public void setMenuItemId(int menuItemId) {
-        this.menuItemId = menuItemId;
+    public void setMenuItem(MenuItemDTO menuItem) {
+        this.menuItem = menuItem;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public OrdersDTO getOrder() {
+        return order;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setOrder(OrdersDTO order) {
+        this.order = order;
     }
 
     public int getAmount() {

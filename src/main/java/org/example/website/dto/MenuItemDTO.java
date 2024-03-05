@@ -7,13 +7,13 @@ public class MenuItemDTO {
 
     private Double price;
 
-    private String descr;
+
     public MenuItemDTO(){};
-    public MenuItemDTO(int id, String name, Double price, String descr) {
+    public MenuItemDTO(int id, String name, Double price) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.descr = descr;
+
     }
 
     public int getId() {
@@ -40,11 +40,4 @@ public class MenuItemDTO {
         this.price = price;
     }
 
-    public String getDescr() {
-        return descr;
-    }
-
-    public void setDescr(String descr) {
-        this.descr = descr;
-    }
 }

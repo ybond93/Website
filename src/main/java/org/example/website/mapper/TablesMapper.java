@@ -15,10 +15,10 @@ public class TablesMapper {
         TablesDTO dto = new TablesDTO();
         dto.setTableNum(t.getTableNum());
         dto.setStatus(t.getStatus());
-        List<Integer> orderIds = t.getOrders().stream()
+        /*List<Integer> orderIds = t.getOrders().stream()
                 .map(OrdersEntity::getOrderId)
                 .collect(Collectors.toList());
-        dto.setOrderIds(orderIds);
+        dto.setOrderIds(orderIds);*/
         return dto;
     }
 

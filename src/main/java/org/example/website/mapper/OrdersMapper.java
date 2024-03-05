@@ -20,7 +20,8 @@ public class OrdersMapper {
         OrdersDTO dto = new OrdersDTO();
         dto.setOrderId(entity.getOrderId());
         dto.setStatus(entity.getStatus());
-        dto.setTableNum(entity.getTableNum().getTableNum());
+        dto.setTable(TablesMapper.toDTO(entity.getTableNum()));
+
 
         /*List<MenuItemQuantityDTO> menuItemQuantities = entity.getMenuItemOrders().stream()
                 .map(menuItemOrderEntity -> {
@@ -35,12 +36,17 @@ public class OrdersMapper {
     }
 
     public static OrdersEntity toEntity(OrdersDTO dto) {
-        OrdersEntity entity = new OrdersEntity();
+        OrdersEntity orderEntity = new OrdersEntity();
         TablesDTO tablesDTO = new TablesDTO();
-        entity.setOrderId(dto.getOrderId());
-        tablesDTO.setTableNum(dto.getTableNum());
-        TablesEntity tableEntity = TablesMapper.toEntity(tablesDTO);
-        entity.setTableNum(tableEntity);
+        tablesDTO.setStatus(dto.getTable().getStatus());
+        tablesDTO.setTableNum(dto.getTable().getTableNum());
+
+        orderEntity.setOrderId(dto.getOrderId());
+        orderEntity.setStatus(dto.getStatus());
+        orderEntity.setTableNum(TablesMapper.toEntity(tablesDTO));
+
+        //TablesEntity tableEntity = TablesMapper.toEntity(tablesDTO);
+        //orderEntity.setTableNum(tableEntity);
     /*if(!dto.getMenuItemQuantities().isEmpty()) {
         // Map MenuItemQuantityDTO list to MenuItemOrderEntity list
         List<MenuItemOrdersEntity> menuItemOrders = dto.getMenuItemQuantities().stream()
@@ -54,7 +60,7 @@ public class OrdersMapper {
                 .collect(Collectors.toList());
         entity.setMenuItemOrders(menuItemOrders);
     }*/
-        return entity;
+        return orderEntity;
     }
 
     /*public static OrdersEntity toEntity(OrdersDTO dto) {

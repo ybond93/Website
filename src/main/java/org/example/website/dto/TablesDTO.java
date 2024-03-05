@@ -5,25 +5,24 @@ import java.util.List;
 public class TablesDTO {
     private int tableNum;
     private String Status;
-    private List<Integer> orderIds;
+    //private List<Integer> orderIds;
 
-
+    public TablesDTO(){};
+    public TablesDTO(int tableNum, String status) {
+        this.tableNum = tableNum;
+        Status = status;
+        //this.orderIds = orderIds;
+    }
 
     public int getTableNum() {
         return tableNum;
     }
 
-    public List<Integer> getOrderIds() {
-        return orderIds;
-    }
 
     public String getStatus() {
         return Status;
     }
 
-    public void setOrderIds(List<Integer> orderIds) {
-        this.orderIds = orderIds;
-    }
 
     public void setStatus(String status) {
         Status = status;

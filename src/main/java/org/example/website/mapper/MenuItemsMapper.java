@@ -12,7 +12,7 @@ public class MenuItemsMapper {
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setPrice(entity.getPrice());
-        dto.setDescr(entity.getDescr());
+
         // You can map other fields here if needed
         return dto;
     }
@@ -22,7 +22,7 @@ public class MenuItemsMapper {
         entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setPrice(dto.getPrice());
-        entity.setDescr(dto.getDescr());
+
         // You can map other fields here if needed
         return entity;
     }
