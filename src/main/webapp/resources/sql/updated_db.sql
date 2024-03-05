@@ -84,14 +84,18 @@ CREATE TABLE WORK_SHIFTS (
 
 CREATE TABLE TABLES (
     TABLE_NUM INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    STATUS VARCHAR(20)
+    STATUS BOOL
 );
 
 CREATE TABLE ORDERS (
     ORDER_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     TABLE_NUM INT NOT NULL, -- dont need to always have number?
     ORDER_DATE DATE,
-    TIMESTAMP TIME
+    TIMESTAMP TIME,
+    STATUS_ORDER BOOL,
+    STATUS_MAINS BOOL,
+    STATUS_START BOOL
+
 );
 
 CREATE TABLE MENU_ITEM_ORDERS (
@@ -284,16 +288,16 @@ INSERT INTO WORK_SHIFTS (EMP_ID, SHIFT_TYPE, YEAR, MONTH, DAY) VALUES
 -- Insert tables
 INSERT INTO TABLES (TABLE_NUM, STATUS)
 VALUES
-(1, 'In Progress'),
-(2, 'In Progress'),
-(3, 'Idle'),
-(4, 'Idle'),
-(5, 'Idle'),
-(6, 'In Progress'),
-(7, 'In Progress'),
-(8, 'In Progress'),
-(9, 'In Progress'),
-(10, 'Idle');
+(1, 0),
+(2, 1),
+(3, 0),
+(4, 0),
+(5, 1),
+(6, 0),
+(7, 1),
+(8, 0),
+(9, 1),
+(10, TRUE);
 
 
 -- Assume we have 10 menu items already, with IDs from 1 to 10
