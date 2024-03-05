@@ -37,7 +37,7 @@ public class MenuItemOrderManager {
     @Consumes("application/json")
     @Transactional
     public Response createOrder(MenuItemOrderDTO menuItemOrderDTO) {
-        System.out.println("Received menuItemOrderDTO: " + menuItemOrderDTO);
+        //System.out.println("Received menuItemOrderDTO: " + menuItemOrderDTO);
 
         OrdersEntity existingOrder = em.find(OrdersEntity.class, menuItemOrderDTO.getOrder().getOrderId());
         Integer maxOrderId;
