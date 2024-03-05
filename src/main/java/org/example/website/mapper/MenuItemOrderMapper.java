@@ -21,25 +21,21 @@ public class MenuItemOrderMapper {
 
     public static MenuItemOrdersEntity toEntity(MenuItemOrderDTO dto) {
         MenuItemOrdersEntity menuItemOrdersEntity = new MenuItemOrdersEntity();
-        TablesDTO tablesDTO = new TablesDTO();
-        OrdersDTO ordersDTO = new OrdersDTO();
+        //TablesDTO tablesDTO = new TablesDTO();
+        //OrdersDTO ordersDTO = new OrdersDTO();
         MenuItemDTO menuItemDTO = new MenuItemDTO();
 
-        tablesDTO.setStatus(dto.getOrder().getTable().getStatus());
+        /*tablesDTO.setStatus(dto.getOrder().getTable().getStatus());
         tablesDTO.setTableNum(dto.getOrder().getTable().getTableNum());
-
-        ordersDTO.setOrderId(dto.getOrder().getOrderId());
-        ordersDTO.setStatus(dto.getOrder().getStatus());
-        ordersDTO.setTable(tablesDTO);
 
         menuItemDTO.setId(dto.getMenuItem().getId());
         menuItemDTO.setName(dto.getMenuItem().getName());
-        menuItemDTO.setPrice(dto.getMenuItem().getPrice());
+        menuItemDTO.setPrice(dto.getMenuItem().getPrice());*/
 
-        menuItemOrdersEntity.setId(0);
-        menuItemOrdersEntity.setOrder(OrdersMapper.toEntity(ordersDTO));
-        menuItemOrdersEntity.setMenuItem(MenuItemsMapper.toEntity(menuItemDTO));
-        menuItemOrdersEntity.setAmount(dto.getAmount());
+        menuItemOrdersEntity.setOrderId(dto.getOrder().getOrderId());
+        //menuItemOrdersEntity.setOrder(OrdersMapper.toEntity(ordersDTO));
+        menuItemOrdersEntity.setMenuItemId(dto.getMenuItem().getId());
+        menuItemOrdersEntity.setAmount(21);
 
         return menuItemOrdersEntity;
 

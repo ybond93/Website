@@ -4,10 +4,13 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
-@NamedQuery(
-        name = "TablesEntity.findAll",
-        query = "SELECT l from  TablesEntity l"
-)
+
+@NamedQueries({
+        @NamedQuery(name = "TablesEntity.findAll",
+                query = "SELECT l from  TablesEntity l"),
+        @NamedQuery(name = "TablesEntity.findTableByNum",
+                query = "SELECT t FROM TablesEntity t WHERE t.tableNum = :tableNum")
+})
 @Entity
 @Table(name = "TABLES", schema = "restaurang", catalog = "")
 public class TablesEntity {
