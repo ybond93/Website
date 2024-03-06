@@ -29,7 +29,7 @@ public class KitchenManager {
     public Response getKitchen() {
         List<KitchenViewEntity> kitchenList;
         kitchenList= em.createNamedQuery("Kitchen_ViewEntity.findAll", KitchenViewEntity.class).getResultList();
-
+        /*
         kitchenList.forEach(kitchenView-> {
             List<String> cat = em.createNamedQuery("ALaCarteMenuItems.findByID", String.class)
                     .setParameter("id", kitchenView.getMenuItemId())
@@ -42,13 +42,17 @@ public class KitchenManager {
             else {
                 kitchenView.setCategory(cat.get(0));
             }
-        } );
+        } );*/
+        /*
         List<KitchenViewDTO> kitchenVievList = kitchenList.stream()
                 .map(KitchenViewMapper::toDTO)
                 .collect(Collectors.toList());
-        List<OrdersEntity> ordersList;
-        ordersList = em.createNamedQuery("OrdersEntity.findAll", OrdersEntity.class).getResultList();
+        */
         /*
+        List<OrdersEntity> ordersList;
+
+        ordersList = em.createNamedQuery("OrdersEntity.findAll", OrdersEntity.class).getResultList();
+
         List<OrdersDTO> ordersDTOs = ordersList.stream()
                 .map(OrdersMapper::toDTO)
                 .collect(Collectors.toList());

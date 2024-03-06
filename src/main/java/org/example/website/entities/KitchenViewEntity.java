@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@NamedQuery(name = "Kitchen_ViewEntity.findAll", query = "SELECT l FROM KitchenViewEntity l WHERE l.statusOrder = FALSE")
+@NamedQuery(name = "Kitchen_ViewEntity.findAll", query = "SELECT l FROM KitchenViewEntity l WHERE l.statusOrder = FALSE AND l.category = 'Starter' OR l.statusOrder = FALSE AND l.category= 'Main' ")
 @Entity
 @Table(name = "KITCHEN_VIEW", schema = "restaurang", catalog = "")
 @IdClass(org.example.website.entities.KitchenViewEntityPk.class)
