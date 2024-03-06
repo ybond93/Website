@@ -39,11 +39,22 @@ public class MenuItemOrderManager {
     public Response createOrder(MenuItemOrderDTO menuItemOrderDTO) {
         //System.out.println("Received menuItemOrderDTO: " + menuItemOrderDTO);
 
+
         OrdersEntity existingOrder = em.find(OrdersEntity.class, menuItemOrderDTO.getOrder().getOrderId());
         Integer maxOrderId;
         MenuItemOrdersEntity menuItemOrdersEntity = new MenuItemOrdersEntity();
         if (existingOrder == null) {
             maxOrderId = (Integer) em.createQuery("SELECT MAX(o.orderId) FROM OrdersEntity o").getSingleResult();
+
+            // get the correct menu item based on the clicked a la carte item id
+            Integer carteItemId = menuItemOrderDTO.getMenuItem().getId();
+            Integer correspondingMenuItemId = em.createQuery(
+                            "SELECT ami.menuItem.id FROM AlacarteMenuItemsEntity ami WHERE ami.carteItemId = :carteItemId", Integer.class)
+                    .setParameter("carteItemId", carteItemId)
+                    .getSingleResult();
+
+            // assign the correct menu item id
+           menuItemOrderDTO.getMenuItem().setId(correspondingMenuItemId);
 
             OrdersEntity ordersEntity = OrdersMapper.toEntity(menuItemOrderDTO.getOrder());
             em.persist(ordersEntity);
