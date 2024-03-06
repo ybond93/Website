@@ -50,5 +50,7 @@ public class AlacarteMenuItemsEntity {
         this.carteItemId = carteItemId;
     }
 
-    public int getId() { return carteItemId; }
+    public int getCarteItemId() { return carteItemId; }
+
+
 }

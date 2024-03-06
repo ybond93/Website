@@ -12,7 +12,6 @@ import org.example.website.entities.LunchesEntity;
 import org.example.website.entities.MenuItemsEntity;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.*;
@@ -115,7 +114,7 @@ public class MenuItemsBean implements Serializable {
 
     @Transactional
     public void deleteALaCarteItem(AlacarteMenuItemsEntity item) {
-        AlacarteMenuItemsEntity toDelete = em.find(AlacarteMenuItemsEntity.class, item.getId());
+        AlacarteMenuItemsEntity toDelete = em.find(AlacarteMenuItemsEntity.class, item.getCarteItemId());
         if (!em.contains(item)) { item = em.merge(item);}
         em.remove(item);
         // Refresh the list of lunches to reflect the deletion

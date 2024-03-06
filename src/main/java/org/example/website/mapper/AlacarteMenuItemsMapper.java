@@ -6,7 +6,7 @@ import org.example.website.entities.AlacarteMenuItemsEntity;
 public class AlacarteMenuItemsMapper {
     public static AlacarteMenuItemsDTO toDTO(AlacarteMenuItemsEntity entity) {
         AlacarteMenuItemsDTO dto = new AlacarteMenuItemsDTO();
-        dto.setCarteItemId(entity.getId());
+        dto.setCarteItemId(entity.getCarteItemId());
         dto.setCategory(entity.getCategory());
         dto.setMenuItemName(entity.getMenuItem().getName());
         return dto;
