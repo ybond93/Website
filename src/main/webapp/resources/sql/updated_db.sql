@@ -112,6 +112,8 @@ CREATE TABLE MENU_ITEM_ORDERS (
                                           REFERENCES MENU_ITEMS(MENU_ITEM_ID)
 );
 
+
+
 -- Primary Key Constraints
 
 -- Foreign Key Constraints
@@ -133,6 +135,20 @@ ALTER TABLE MENU_ITEM_ORDERS
 ALTER TABLE MENU_ITEM_ORDERS
     ADD CONSTRAINT menu_item_orders_fk_2 FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID) ON UPDATE CASCADE ON DELETE CASCADE;
 
+create view KITCHEN_VIEW as
+select `o`.`ORDER_ID`       AS `ORDER_ID`,
+       `o`.`TABLE_NUM`      AS `TABLE_NUM`,
+       `o`.`STATUS_ORDER`   AS `STATUS_ORDER`,
+       `o`.`STATUS_MAINS`   AS `STATUS_MAINS`,
+       `o`.`STATUS_START`   AS `STATUS_START`,
+       `MIO`.`MENU_ITEM_ID` AS `MENU_ITEM_ID`,
+       `MIO`.`AMOUNT`       AS `AMOUNT`,
+       `MI`.`NAME`          AS `NAME`,
+       `AMI`.`CATEGORY`     AS `CATEGORY`
+FROM `restaurang`.`ORDERS` o
+         JOIN `restaurang`.`MENU_ITEM_ORDERS` MIO ON o.`ORDER_ID` = MIO.`ORDER_ID`
+         JOIN `restaurang`.`MENU_ITEMS` MI ON MIO.`MENU_ITEM_ID` = MI.`MENU_ITEM_ID`
+         JOIN `restaurang`.`ALACARTE_MENU_ITEMS` AMI ON MI.`MENU_ITEM_ID` = AMI.`CARTE_ITEM_ID`;
 
 /************************** Inserts for testing purposes ****************************/
 -- -------------------------------------------------------
@@ -302,18 +318,18 @@ VALUES
 
 -- Assume we have 10 menu items already, with IDs from 1 to 10
 -- Insert orders for the 10 tables
-INSERT INTO ORDERS (TABLE_NUM, ORDER_DATE, TIMESTAMP)
+INSERT INTO ORDERS (TABLE_NUM, ORDER_DATE, TIMESTAMP, STATUS_ORDER, STATUS_START, STATUS_MAINS)
 VALUES
-    (1, '2024-02-29', '17:29:36'),
-    (2, '2024-02-28', '17:18:36'),
-    (3, '2024-02-27', '17:31:36'),
-    (4, '2024-02-26', '17:08:36'),
-    (5, '2024-02-25', '17:31:36'),
-    (6, '2024-02-24', '17:35:36'),
-    (7, '2024-02-23', '16:54:36'),
-    (8, '2024-02-22', '16:57:36'),
-    (9, '2024-02-21', '16:53:36'),
-    (10, '2024-02-20', '17:25:36');
+    (1, '2024-02-29', '17:29:36',0 ,0,0),
+    (2, '2024-02-28', '17:18:36', 1,1,1),
+    (3, '2024-02-27', '17:31:36', 0, 0 ,1),
+    (4, '2024-02-26', '17:08:36', 1,1,1),
+    (5, '2024-02-25', '17:31:36', 0, 0,0),
+    (6, '2024-02-24', '17:35:36', 1,1,1),
+    (7, '2024-02-23', '16:54:36', 1,0 ,0),
+    (8, '2024-02-22', '16:57:36', 0, 1,0),
+    (9, '2024-02-21', '16:53:36', 0,0 ,0),
+    (10, '2024-02-20', '17:25:36', 1, 1,1);
 
 
 -- Insert menu item orders

@@ -47,7 +47,12 @@ public class MenuItemOrderManager {
 
             OrdersEntity ordersEntity = OrdersMapper.toEntity(menuItemOrderDTO.getOrder());
             em.persist(ordersEntity);
-            menuItemOrderDTO.getOrder().setOrderId(maxOrderId + 1);
+            em.flush(); // forces the order ID to be automatically generated
+
+            Integer orderId = ordersEntity.getOrderId(); // This should now contain the generated ID.
+
+            menuItemOrderDTO.getOrder().setOrderId(orderId);   // previously: maxOrderId + 1
+
              menuItemOrdersEntity = MenuItemOrderMapper.toEntity(menuItemOrderDTO);
         } else {
              menuItemOrdersEntity = MenuItemOrderMapper.toEntity(menuItemOrderDTO);
