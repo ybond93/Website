@@ -396,6 +396,7 @@ VALUES
 /*
  SELECT
     o.ORDER_ID,
+    mi.menu_item_id,
     o.order_date,
     o.timestamp,
     t.TABLE_NUM,

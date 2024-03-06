@@ -39,7 +39,6 @@ public class MenuItemOrderManager {
     public Response createOrder(MenuItemOrderDTO menuItemOrderDTO) {
         //System.out.println("Received menuItemOrderDTO: " + menuItemOrderDTO);
 
-
         OrdersEntity existingOrder = em.find(OrdersEntity.class, menuItemOrderDTO.getOrder().getOrderId());
         Integer maxOrderId;
         MenuItemOrdersEntity menuItemOrdersEntity = new MenuItemOrdersEntity();
@@ -54,7 +53,7 @@ public class MenuItemOrderManager {
                     .getSingleResult();
 
             // assign the correct menu item id
-           menuItemOrderDTO.getMenuItem().setId(correspondingMenuItemId);
+            menuItemOrderDTO.getMenuItem().setId(correspondingMenuItemId);
 
             OrdersEntity ordersEntity = OrdersMapper.toEntity(menuItemOrderDTO.getOrder());
             em.persist(ordersEntity);

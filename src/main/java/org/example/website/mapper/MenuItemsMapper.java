@@ -12,7 +12,6 @@ public class MenuItemsMapper {
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setPrice(entity.getPrice());
-
         // You can map other fields here if needed
         return dto;
     }
