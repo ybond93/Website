@@ -7,6 +7,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.example.website.dto.OrdersDTO;
 import org.example.website.entities.OrdersEntity;
+import org.example.website.entities.TablesEntity;
 import org.example.website.mapper.OrdersMapper;
 import java.net.URI;
 import java.util.List;
@@ -36,5 +37,27 @@ public class OrdersManager {
         OrdersEntity newOrderEntity = OrdersMapper.toEntity(orderDTO);
         em.persist(newOrderEntity);
         return Response.created(URI.create("/orders/" + newOrderEntity.getOrderId())).build();
+    }
+
+    @PUT
+    @Path("/{id}")
+    @Consumes("application/json")
+    @Transactional
+    public Response updateOrderStatus(@PathParam("id") int id, OrdersEntity status) {
+
+        OrdersEntity existingOrder = em.find(OrdersEntity.class, id);
+        if (existingOrder == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        //em.refresh(status);
+        existingOrder.setStatusMains(status.getStatusMains());
+        existingOrder.setStatusStart(status.getStatusStart());
+        existingOrder.setStatusOrder(status.getStatusOrder());
+
+
+        em.merge(existingOrder);
+        em.flush();
+        return Response.ok().build();
     }
 }
